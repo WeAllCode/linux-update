@@ -11,7 +11,10 @@ sudo apt-get update -qq
 sudo apt-get dist-upgrade -qq -y
 
 echo " - Remove zeitgeist, gnome online indicator and telepathy, and unused apps"
-zeitgeist-daemon --quit
+command -v zeitgeist-daemon &> /dev/null
+if [ $? -eq 0 ]; then
+    zeitgeist-daemon --quit
+fi
 sudo apt-get -qq --purge autoremove -y deja-dup
 sudo apt-get -qq --purge autoremove -y indicator-messages
 sudo apt-get -qq --purge autoremove -y empathy-*

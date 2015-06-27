@@ -4,19 +4,22 @@ if [[ ! -a /etc/apt/sources.list.d/google-chrome.list ]]; then
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 fi
 
+sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
+
 echo " - Running update"
 sudo apt-get update -qq
 sudo apt-get dist-upgrade -qq -y
 
 echo " - Removing unused apps"
-sudo apt-get remove -qq -y midori-granite
-sudo apt-get remove -qq -y scratch-text-editor
-# sudo apt-get remove -y steam-launcher
-# sudo apt-get remove -y virtualbox-4.3
-# sudo apt-get remove -y geary
+sudo apt-get purge -qq -y midori-granite
+sudo apt-get purge -qq -y scratch-text-editor
+# sudo apt-get purge -y steam-launcher
+# sudo apt-get purge -y virtualbox-4.3
+# sudo apt-get purge -y geary
 
 echo " - Installing apps"
 
+sudo apt-get install elementary-tweaks
 sudo apt-get install -qq -y gedit
 sudo apt-get install -qq -y vim
 sudo apt-get install -qq -y google-chrome-stable

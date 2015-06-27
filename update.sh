@@ -17,12 +17,14 @@ sudo apt-get remove -y scratch-text-editor
 
 echo " - Installing apps"
 
-sudo apt-get install -y gedit vim google-chrome-stable
+sudo apt-get install -y gedit
+sudo apt-get install -y vim
+sudo apt-get install -y google-chrome-stable
 
-# # echo " - Fix Google Chrome double icon bug"
-# sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-# sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-# sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# echo " - Fix Google Chrome double icon bug"
+sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
 # # echo " - Set up Google Chrome profile"
 # sudo rm -rf ~/.config/midori

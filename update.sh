@@ -17,50 +17,48 @@ sudo apt-get remove -y virtualbox-4.3
 
 echo " - Installing apps"
 
-sudo apt-get install -y gedit
-sudo apt-get install -y vim
-sudo apt-get install -y google-chrome-stable
+sudo apt-get install -y gedit vim google-chrome-stable
 
-# echo " - Fix Google Chrome double icon bug"
-sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# # echo " - Fix Google Chrome double icon bug"
+# sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
-# echo " - Set up Google Chrome profile"
-sudo rm -rf ~/.config/midori
+# # echo " - Set up Google Chrome profile"
+# sudo rm -rf ~/.config/midori
 
-echo " - Updating Dock."
+# echo " - Updating Dock."
 
-echo " -- Clear current Dock."
-rm ~/.config/plank/dock1/launchers/*.dockitem
+# echo " -- Clear current Dock."
+# rm ~/.config/plank/dock1/launchers/*.dockitem
 
-echo " -- Adding Files to dock."
-wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
+# echo " -- Adding Files to dock."
+# wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
 
-echo " -- Adding gedit to dock."
-wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
+# echo " -- Adding gedit to dock."
+# wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
 
-echo " -- Adding Chrome to dock."
-wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.dockitem"
+# echo " -- Adding Chrome to dock."
+# wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.dockitem"
 
-echo " -- Disable Dock Autohide"
-sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
+# echo " -- Disable Dock Autohide"
+# sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 
-echo " - Set background"
-sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
-gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
-gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
+# echo " - Set background"
+# sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
+# gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
+# gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
-echo " -- Restarting Dock"
-killall plank
+# echo " -- Restarting Dock"
+# killall plank
 
-# echo " - Make toolbar always transparent"
-# gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
-# gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
-# killall wingpanel
+# # echo " - Make toolbar always transparent"
+# # gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
+# # gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
+# # killall wingpanel
 
-echo " - Cleaning up."
-sudo apt-get -y autoremove
+# echo " - Cleaning up."
+# sudo apt-get -y autoremove
 
-# echo " - Restarting"
-# sudo shutdown -r now
+# # echo " - Restarting"
+# # sudo shutdown -r now

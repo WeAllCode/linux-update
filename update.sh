@@ -12,7 +12,21 @@ sudo apt-get dist-upgrade -qq -y
 
 echo " - Remove zeitgeist, gnome online indicator and telepathy, and unused apps"
 zeitgeist-daemon --quit
-sudo apt-get -qq --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
+sudo apt-get -qq --purge autoremove -y deja-dup
+sudo apt-get -qq --purge autoremove -y indicator-messages
+sudo apt-get -qq --purge autoremove -y empathy-*
+sudo apt-get -qq --purge autoremove -y gnome-online-accounts
+sudo apt-get -qq --purge autoremove -y activity-log-manager-common
+sudo apt-get -qq --purge autoremove -y activity-log-manager-control-center
+sudo apt-get -qq --purge autoremove -y zeitgeist
+sudo apt-get -qq --purge autoremove -y zeitgeist-core
+sudo apt-get -qq --purge autoremove -y zeitgeist-datahub
+sudo apt-get -qq --purge autoremove -y midori-granite
+sudo apt-get -qq --purge autoremove -y noise
+sudo apt-get -qq --purge autoremove -y software-center
+sudo apt-get -qq --purge autoremove -y update-manager
+sudo apt-get -qq --purge autoremove -y scratch-text-editor
+sudo apt-get -qq --purge autoremove -y modemmanager geary
 
 echo " - Installing apps"
 

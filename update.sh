@@ -12,7 +12,7 @@ command -v zeitgeist-daemon &> /dev/null ;
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit ;
 fi
-sudo apt-get -qq --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary ;
+sudo apt-get purge -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary ;
 
 sudo apt-get install -qq -y elementary-tweaks gedit vim google-chrome-stable ;
 

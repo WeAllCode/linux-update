@@ -6,7 +6,7 @@ fi
 
 echo " - Running update"
 sudo apt-get update -qq
-sudo apt-get upgrade -qq -y
+sudo apt-get dist-upgrade -qq -y
 
 echo " - Removing unused apps"
 sudo apt-get remove -qq -y midori-granite

@@ -46,6 +46,30 @@ sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nSt
 echo " - Set up Google Chrome profile"
 sudo rm -rf ~/.config/midori
 
+echo " -- Download extention preset"
+sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://gist.github.com/karbassi/db8cb739f86a6651c717/raw/external_extensions.json"
+
+google-chrome-stable --no-first-run > /dev/null 2>&1 &
+sleep 10
+killall chrome
+sleep 5
+
+echo " -- Updated settings"
+
+echo " --- Disable Password Manager"
+sudo sed -i 's/user",/user","password_manage_enabled":false,/' ~/.config/google-chrome/Default/Preferences
+
+echo " --- Make google.com the startup page"
+sudo sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:
+/\/google.com\/"],/' ~/.config/google-chrome/Default/Preferences
+
+echo " --- Disable Google's custome chrome"
+echo " --- Enable 'click to view plugin'"
+sudo sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' ~/.config/google-chrome/Default/Preferences
+
+echo " --- Hide ublock button"
+sudo sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' ~/.config/google-chrome/Default/Preferences
+
 echo " - Updating Dock."
 
 echo " -- Clear current Dock."

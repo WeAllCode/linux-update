@@ -95,10 +95,10 @@ gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 echo " -- Restarting Dock"
 killall plank
 
-echo " - Make toolbar always transparent"
-gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
-gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
-killall wingpanel
+# # echo " - Make toolbar always transparent"
+# # gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
+# # gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
+# # killall wingpanel
 
 echo " - Cleaning up."
 sudo apt-get autoremove -qq -y

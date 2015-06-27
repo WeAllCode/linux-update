@@ -4,7 +4,7 @@ if [[ ! -a /etc/apt/sources.list.d/google-chrome.list ]]; then
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 fi
 
-sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
+sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y -qq
 
 echo " - Running update"
 sudo apt-get update -qq
@@ -33,7 +33,7 @@ sudo apt-get -qq --purge autoremove -y modemmanager geary
 
 echo " - Installing apps"
 
-sudo apt-get install elementary-tweaks
+sudo apt-get install -qq -y elementary-tweaks
 sudo apt-get install -qq -y gedit
 sudo apt-get install -qq -y vim
 sudo apt-get install -qq -y google-chrome-stable

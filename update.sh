@@ -1,5 +1,5 @@
 if [[ ! -a /etc/apt/sources.list.d/google-chrome.list ]]; then
-  # echo " - Adding Chrome to sources list"
+  echo " - Adding Chrome to sources list"
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 fi
@@ -38,12 +38,12 @@ sudo apt-get install -qq -y gedit
 sudo apt-get install -qq -y vim
 sudo apt-get install -qq -y google-chrome-stable
 
-# echo " - Fix Google Chrome double icon bug"
+echo " - Fix Google Chrome double icon bug"
 sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
-# echo " - Set up Google Chrome profile"
+echo " - Set up Google Chrome profile"
 sudo rm -rf ~/.config/midori
 
 echo " - Updating Dock."
@@ -63,23 +63,23 @@ wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://raw.gi
 echo " -- Disable Dock Autohide"
 sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 
-# echo " - Set background"
-# sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
-# gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
-# gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
+echo " - Set background"
+sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
+gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
+gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
-# echo " -- Restarting Dock"
-# killall plank
+echo " -- Restarting Dock"
+killall plank
 
-# # echo " - Make toolbar always transparent"
-# # gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
-# # gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
-# # killall wingpanel
+echo " - Make toolbar always transparent"
+gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
+gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
+killall wingpanel
 
-# echo " - Cleaning up."
+echo " - Cleaning up."
 sudo apt-get autoremove -qq -y
 sudo apt-get autoclean -qq -y
 sudo rm -fr {/root,/home/*}/.local/share/zeitgeist
 
-# # echo " - Restarting"
+echo " - Restarting"
 # # sudo shutdown -r now

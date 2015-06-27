@@ -35,19 +35,19 @@ echo " -- Clear current Dock."
 rm ~/.config/plank/dock1/launchers/*.dockitem
 
 echo " -- Adding Files to dock."
-wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://gist.github.com/karbassi/db8cb739f86a6651c717/raw/pantheon-files.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
 
 echo " -- Adding gedit to dock."
-wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://gist.github.com/karbassi/db8cb739f86a6651c717/raw/gedit.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
 
 echo " -- Adding Chrome to dock."
-wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://gist.github.com/karbassi/db8cb739f86a6651c717/raw/google-chrome.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.dockitem"
 
 echo " -- Disable Dock Autohide"
 sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 
 echo " - Set background"
-sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "http://i.imgur.com/9ThnFU3.png"
+sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
 gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
 gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 

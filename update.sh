@@ -5,21 +5,21 @@ if [[ ! -a /etc/apt/sources.list.d/google-chrome.list ]]; then
 fi
 
 echo " - Running update"
-sudo apt-get update -qq
-sudo apt-get upgrade -qq -y
+sudo apt-get update
+sudo apt-get upgrade -y
 
 echo " - Removing unused apps"
-sudo apt-get remove -qq -y midori-granite
-sudo apt-get remove -qq -y scratch-text-editor
-sudo apt-get remove -qq -y steam-launcher
-sudo apt-get remove -qq -y virtualbox-4.3
-# sudo apt-get remove -qq -y geary
+sudo apt-get remove -y midori-granite
+sudo apt-get remove -y scratch-text-editor
+sudo apt-get remove -y steam-launcher
+sudo apt-get remove -y virtualbox-4.3
+# sudo apt-get remove -y geary
 
 echo " - Installing apps"
 
-sudo apt-get install -qq -y gedit
-sudo apt-get install -qq -y vim
-sudo apt-get install -qq -y google-chrome-stable
+sudo apt-get install -y gedit
+sudo apt-get install -y vim
+sudo apt-get install -y google-chrome-stable
 
 # echo " - Fix Google Chrome double icon bug"
 sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
@@ -60,7 +60,7 @@ killall plank
 # killall wingpanel
 
 echo " - Cleaning up."
-sudo apt-get -qq -y autoremove
+sudo apt-get -y autoremove
 
 # echo " - Restarting"
 # sudo shutdown -r now

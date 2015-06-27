@@ -11,8 +11,8 @@ sudo apt-get upgrade -y
 echo " - Removing unused apps"
 sudo apt-get remove -y midori-granite
 sudo apt-get remove -y scratch-text-editor
-sudo apt-get remove -y steam-launcher
-sudo apt-get remove -y virtualbox-4.3
+# sudo apt-get remove -y steam-launcher
+# sudo apt-get remove -y virtualbox-4.3
 # sudo apt-get remove -y geary
 
 echo " - Installing apps"

@@ -81,4 +81,4 @@ sudo apt-get autoremove -qq -y
 sudo apt-get autoclean -qq -y
 sudo rm -fr {/root,/home/*}/.local/share/zeitgeist
 
-# # sudo shutdown -r now
+sudo shutdown -r now

@@ -4,7 +4,7 @@ if [[ ! -a /etc/apt/sources.list.d/google-chrome.list ]]; then
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 fi
 
-sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y -qq
+sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
 
 echo " - Running update"
 sudo apt-get update -qq

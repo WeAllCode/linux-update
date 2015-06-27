@@ -10,9 +10,14 @@ echo " - Running update"
 sudo apt-get update -qq
 sudo apt-get dist-upgrade -qq -y
 
-echo " - Removing unused apps"
-sudo apt-get purge -qq -y midori-granite
-sudo apt-get purge -qq -y scratch-text-editor
+echo " - Remove zeitgeist, gnome online indicator and telepathy, and unused apps"
+zeitgeist-daemon --quit
+sudo apt-get --purge autoremove deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center scratch-text-editor modemmanager geary
+sudo apt-get autoremove
+sudo apt-get autoclean
+sudo rm -fr {/root,/home/*}/.local/share/zeitgeist
+# sudo apt-get purge -qq -y midori-granite
+# sudo apt-get purge -qq -y scratch-text-editor
 # sudo apt-get purge -y steam-launcher
 # sudo apt-get purge -y virtualbox-4.3
 # sudo apt-get purge -y geary

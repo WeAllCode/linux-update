@@ -12,27 +12,9 @@ sudo apt-get dist-upgrade -qq -y
 
 echo " - Remove zeitgeist, gnome online indicator and telepathy, and unused apps"
 zeitgeist-daemon --quit
-sudo apt-get --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center scratch-text-editor modemmanager geary
-sudo apt-get autoremove -y
-sudo apt-get autoclean -y
-sudo rm -fr {/root,/home/*}/.local/share/zeitgeist
-# sudo apt-get purge -qq -y midori-granite
-# sudo apt-get purge -qq -y scratch-text-editor
-# sudo apt-get purge -y steam-launcher
-# sudo apt-get purge -y virtualbox-4.3
-# sudo apt-get purge -y geary
+sudo apt-get -qq --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
 
 echo " - Installing apps"
-
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list';
-sudo add-apt-repository ppa:webupd8team/java;
-sudo apt-add-repository "deb http://archive.canonical.com/ubuntu/ precise partner";
-sudo add-apt-repository ppa:git-core/ppa;
-wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -;
-sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" >> /etc/apt/sources.list.d/virtualbox.list';
-sudo add-apt-repository ppa:otto-kesselgulasch/gimp;
-sudo apt-add-repository ppa:versable/elementary-update
-
 
 sudo apt-get install elementary-tweaks
 sudo apt-get install -qq -y gedit
@@ -78,7 +60,9 @@ sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 # # killall wingpanel
 
 # echo " - Cleaning up."
-# sudo apt-get -y autoremove
+sudo apt-get autoremove -qq -y
+sudo apt-get autoclean -qq -y
+sudo rm -fr {/root,/home/*}/.local/share/zeitgeist
 
 # # echo " - Restarting"
 # # sudo shutdown -r now

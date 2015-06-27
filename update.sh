@@ -60,8 +60,7 @@ echo " --- Disable Password Manager"
 sudo sed -i 's/user",/user","password_manage_enabled":false,/' ~/.config/google-chrome/Default/Preferences
 
 echo " --- Make google.com the startup page"
-sudo sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:
-/\/google.com\/"],/' ~/.config/google-chrome/Default/Preferences
+sudo sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' ~/.config/google-chrome/Default/Preferences
 
 echo " --- Disable Google's custome chrome"
 echo " --- Enable 'click to view plugin'"

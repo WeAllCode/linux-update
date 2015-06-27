@@ -38,9 +38,9 @@ sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-s
 sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
-sudo rm -rf ~/.config/midori
+sudo rm -rf ~/.config/midori ~/.config/google-chrome
 
-sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://gist.github.com/karbassi/db8cb739f86a6651c717/raw/external_extensions.json"
+sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
 
 google-chrome-stable --no-first-run > /dev/null 2>&1 &
 sleep 10
@@ -71,11 +71,11 @@ sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubuserco
 gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
 gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
-killall plank
+gsettings set 'org.gnome.desktop.screensaver' 'lock-delay' 3600
+gsettings set 'org.gnome.desktop.screensaver' 'lock-enabled' false
+gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
 
-# # gsettings set 'org.pantheon.desktop.wingpanel' 'auto-adjust-alpha' false
-# # gsettings set 'org.pantheon.desktop.wingpanel' 'background-alpha' 0.0
-# # killall wingpanel
+killall plank
 
 sudo apt-get autoremove -qq -y
 sudo apt-get autoclean -qq -y

@@ -12,26 +12,9 @@ command -v zeitgeist-daemon &> /dev/null ;
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit ;
 fi
-sudo apt-get -qq --purge autoremove -y deja-dup ;
-sudo apt-get -qq --purge autoremove -y indicator-messages ;
-sudo apt-get -qq --purge autoremove -y empathy-* ;
-sudo apt-get -qq --purge autoremove -y gnome-online-accounts ;
-sudo apt-get -qq --purge autoremove -y activity-log-manager-common ;
-sudo apt-get -qq --purge autoremove -y activity-log-manager-control-center ;
-sudo apt-get -qq --purge autoremove -y zeitgeist ;
-sudo apt-get -qq --purge autoremove -y zeitgeist-core ;
-sudo apt-get -qq --purge autoremove -y zeitgeist-datahub ;
-sudo apt-get -qq --purge autoremove -y midori-granite ;
-sudo apt-get -qq --purge autoremove -y noise ;
-sudo apt-get -qq --purge autoremove -y software-center ;
-sudo apt-get -qq --purge autoremove -y update-manager ;
-sudo apt-get -qq --purge autoremove -y scratch-text-editor ;
-sudo apt-get -qq --purge autoremove -y modemmanager geary ;
+sudo apt-get -qq --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary ;
 
-sudo apt-get install -qq -y elementary-tweaks ;
-sudo apt-get install -qq -y gedit ;
-sudo apt-get install -qq -y vim ;
-sudo apt-get install -qq -y google-chrome-stable ;
+sudo apt-get install -qq -y elementary-tweaks gedit vim google-chrome-stable ;
 
 sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop ;
 sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop ;

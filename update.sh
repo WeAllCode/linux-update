@@ -62,5 +62,5 @@ killall plank
 echo " - Cleaning up."
 sudo apt-get -qq -y autoremove
 
-echo " - Restarting"
-sudo shutdown -r now
+# echo " - Restarting"
+# sudo shutdown -r now

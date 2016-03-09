@@ -58,6 +58,8 @@ gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
 
 killall plank
 
+sudo wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
+
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 sudo rm -rf {/root,/home/*}/.local/share/zeitgeist

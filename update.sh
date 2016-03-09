@@ -62,4 +62,13 @@ sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 
+# Remove old files that students might of saved
+sudo rm -rf /home/coderdojochi/Downloads/*
+sudo rm -rf /home/coderdojochi/Documents/*
+sudo rm -rf /home/coderdojochi/Music/*
+sudo rm -rf /home/coderdojochi/Pictures/*
+sudo rm -rf /home/coderdojochi/Videos/*
+sudo rm -rf /home/coderdojochi/Public/*
+sudo rm -rf /home/coderdojochi/Templates/*
+
 sudo shutdown -r now

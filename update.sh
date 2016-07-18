@@ -93,14 +93,14 @@ sed -i 's/HideMode=3/HideMode=0/g' /home/coderdojochi/.config/plank/dock1/settin
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Changing desktop background"'
 wget -qLO /usr/share/backgrounds/coderdojochi.png \
      "$URL/usr/share/backgrounds/coderdojochi.png"
-gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
-gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
 
 # Setting screensaver settings
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Setting screensaver settings"'
-gsettings set 'org.gnome.desktop.screensaver' 'lock-delay' 3600
-gsettings set 'org.gnome.desktop.screensaver' 'lock-enabled' false
-gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
 
 killall plank
 

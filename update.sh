@@ -11,8 +11,8 @@ sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
 
 # Upgrading system
 notify-send --urgency=low "Upgrading system"
-sudo apt-get update -q=2
-sudo apt-get dist-upgrade -q=2 -y
+sudo apt-get -q=2 update
+sudo apt-get -q=2 dist-upgrade -y
 
 # Uninstalling unused packages
 notify-send --urgency=low "Uninstalling unused packages"
@@ -20,23 +20,23 @@ command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
-sudo apt-get --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
+sudo apt-get -q=2 --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
 
 # Installing elementary-tweaks
 notify-send --urgency=low "Installing elementary-tweaks"
-sudo apt-get install -y elementary-tweaks
+sudo apt-get -q=2 install -y elementary-tweaks
 
 # Installing gedit
 notify-send --urgency=low "Installing gedit"
-sudo apt-get install -y gedit
+sudo apt-get -q=2 install -y gedit
 
 # Installing vim
 notify-send --urgency=low "Installing vim"
-sudo apt-get install -y vim
+sudo apt-get -q=2 install -y vim
 
 # Installing google-chrome-stable
 notify-send --urgency=low "Installing google-chrome-beta"
-sudo apt-get install -y google-chrome-beta
+sudo apt-get -q=2 install -y google-chrome-beta
 
 # sudo sed -i '/Group\]\|Desktop Entry/a StartupWMClass=Google-chrome-stable' /usr/share/applications/google-chrome.desktop
 

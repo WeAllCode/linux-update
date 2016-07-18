@@ -51,7 +51,6 @@ apt-get autoremove --purge -y deja-dup indicator-messages empathy-* gnome-online
 output "Installing git"
 apt-get install -y git
 
-
 # Installing elementary-tweaks
 output "Installing elementary-tweaks"
 apt-get install -y elementary-tweaks
@@ -67,12 +66,6 @@ apt-get install -y vim
 # Installing google-chrome-stable
 output "Installing google-chrome-beta"
 apt-get install -y google-chrome-beta
-
-# sudo sed -i '/Group\]\|Desktop Entry/a StartupWMClass=Google-chrome-stable' /usr/share/applications/google-chrome.desktop
-
-# sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-# sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-# sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
 rm -rf /home/coderdojochi/.config/midori /home/coderdojochi/.config/google-chrome-beta
 

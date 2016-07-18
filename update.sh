@@ -11,8 +11,8 @@ sudo add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
 
 # Upgrading system
 notify-send --urgency=low "Upgrading system"
-sudo apt-get update
-sudo apt-get dist-upgrade -y
+sudo apt-get update -q=2
+sudo apt-get dist-upgrade -q=2 -y
 
 # Uninstalling unused packages
 notify-send --urgency=low "Uninstalling unused packages"

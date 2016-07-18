@@ -3,7 +3,7 @@ notify-send --urgency=critical "Updating System"
 # Adding Google to package manager
 notify-send --urgency=low "Adding Google to package manager"
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo wget -qLO /etc/apt/sources.list.d/google-chrome.list "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.list"
+sudo wget -qLP /etc/apt/sources.list.d/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.list"
 
 # Adding Elementary Tweaks to package manager
 notify-send --urgency=low "Adding Elementary Tweaks to package manager"
@@ -46,7 +46,7 @@ sudo apt-get install -y google-chrome-beta
 
 sudo rm -rf ~/.config/midori ~/.config/google-chrome-beta
 
-sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
+sudo wget -qLP /opt/google/chrome-beta/default_apps/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
 
 google-chrome-beta --no-first-run > /dev/null 2>&1 &
 sleep 10
@@ -79,7 +79,7 @@ sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 
 # Changing desktop background
 notify-send --urgency=low "Changing desktop background"
-sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
+sudo wget -qLP /usr/share/backgrounds/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
 gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
 gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
@@ -91,7 +91,7 @@ gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
 
 killall plank
 
-sudo wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
+sudo wget -qLP /usr/share/X11/xorg.conf.d/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
 
 # Cleanup
 notify-send --urgency=low "Cleanup"

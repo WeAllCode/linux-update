@@ -110,4 +110,4 @@ sudo rm -rf /home/coderdojochi/Templates/*
 
 # Restarting in 1 minute
 notify-send --urgency=low "Restarting in 1 minute"
-shutdown -r 1
+sudo shutdown -r 1

@@ -1,6 +1,20 @@
-sudo -H -u coderdojochi bash -c 'notify-send --urgency=critical "Updating System"'
-
 URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
+SCRIPTDIR=/etc/init.d
+SCRIPT=coderdojochi-phonehome
+CONFDIR=/etc/init
+CONF=$SCRIPT.conf
+
+# Install the coderdojochi-phone autoupdate script
+if [ ! -f $CONFDIR/$CONF ]; then
+  sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing CoderDojoChi phonehome config file"'
+  wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+fi
+if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
+  sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing CoderDojoChi phonehome script"'
+  wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
+fi
+
+sudo -H -u coderdojochi bash -c 'notify-send --urgency=critical "Updating System"'
 
 # Adding Google to package manager
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Adding Google to package manager"'

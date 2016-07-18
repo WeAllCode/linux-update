@@ -3,7 +3,7 @@ notify-send --urgency=critical "Updating System"
 # Adding Google to package manager
 notify-send --urgency=low "Adding Google to package manager"
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo wget -qLP /etc/apt/sources.list.d/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.list"
+sudo wget -qLO /etc/apt/sources.list.d/google-chrome.list "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.list"
 
 # Adding Elementary Tweaks to package manager
 notify-send --urgency=low "Adding Elementary Tweaks to package manager"
@@ -46,7 +46,7 @@ sudo apt-get install -y google-chrome-beta
 
 sudo rm -rf ~/.config/midori ~/.config/google-chrome-beta
 
-sudo wget -qLP /opt/google/chrome-beta/default_apps/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
+sudo wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
 
 google-chrome-beta --no-first-run > /dev/null 2>&1 &
 sleep 10
@@ -71,15 +71,15 @@ sudo sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbk
 notify-send --urgency=low "Setting up the dock"
 rm ~/.config/plank/dock1/launchers/*.dockitem
 
-wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
-wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
-wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome-beta.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
+wget -qLO ~/.config/plank/dock1/launchers/google-chrome-beta.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome-beta.dockitem"
 
 sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 
 # Changing desktop background
 notify-send --urgency=low "Changing desktop background"
-sudo wget -qLP /usr/share/backgrounds/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
+sudo wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
 gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
 gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
@@ -91,12 +91,12 @@ gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
 
 killall plank
 
-sudo wget -qLP /usr/share/X11/xorg.conf.d/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
+sudo wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
 
 # Cleanup
 notify-send --urgency=low "Cleanup"
-sudo apt-get autoremove -y
-sudo apt-get autoclean -y
+sudo apt-get -q=2 autoremove -y
+sudo apt-get -q=2 autoclean -y
 sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 # Remove old files that students might of saved

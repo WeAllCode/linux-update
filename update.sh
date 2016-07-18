@@ -44,7 +44,7 @@ sudo apt-get install -y google-chrome-beta
 # sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 # sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
-sudo rm -rf ~/.config/midori ~/.config/google-chrome
+sudo rm -rf ~/.config/midori ~/.config/google-chrome-beta
 
 sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
 
@@ -53,23 +53,27 @@ sleep 10
 killall chrome
 sleep 5
 
-sudo sed -i 's/user",/user","password_manage_enabled":false,/' ~/.config/google-chrome/Default/Preferences
+# Chrome: disable password manager
+notify-send --urgency=low "Chrome: disable password manager"
+sudo sed -i 's/user",/user","password_manage_enabled":false,/' ~/.config/google-chrome-beta/Default/Preferences
 
-sudo sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' ~/.config/google-chrome/Default/Preferences
+# Chrome: change startup URL to google.com
+notify-send --urgency=low "Chrome: change startup URL to google.com"
+sudo sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' ~/.config/google-chrome-beta/Default/Preferences
 
-sudo sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' ~/.config/google-chrome/Default/Preferences
+# Chrome: turn off custome frame
+notify-send --urgency=low "Chrome: turn off custome frame"
+sudo sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' ~/.config/google-chrome-beta/Default/Preferences
 
-sudo sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' ~/.config/google-chrome/Default/Preferences
+sudo sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' ~/.config/google-chrome-beta/Default/Preferences
 
 # Setting up the dock
 notify-send --urgency=low "Setting up the dock"
 rm ~/.config/plank/dock1/launchers/*.dockitem
 
-wget -qLO ~/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
-
-wget -qLO ~/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
-
-wget -qLO ~/.config/plank/dock1/launchers/google-chrome.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.dockitem"
+wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
+wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
+wget -qLP ~/.config/plank/dock1/launchers/ "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome-beta.dockitem"
 
 sed -i 's/HideMode=3/HideMode=0/g' ~/.config/plank/dock1/settings
 

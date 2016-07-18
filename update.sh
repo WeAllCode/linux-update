@@ -35,18 +35,20 @@ notify-send --urgency=low "Installing vim"
 sudo apt-get install -y vim
 
 # Installing google-chrome-stable
-notify-send --urgency=low "Installing google-chrome-stable"
-sudo apt-get install -y google-chrome-stable
+notify-send --urgency=low "Installing google-chrome-beta"
+sudo apt-get install -y google-chrome-beta
 
-sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
-sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# sudo sed -i '/Group\]\|Desktop Entry/a StartupWMClass=Google-chrome-stable' /usr/share/applications/google-chrome.desktop
+
+# sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# sudo sed -i 's/\[NewWindow Shortcut Group\]/[NewWindow Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
+# sudo sed -i 's/\[NewIncognito Shortcut Group\]/[NewIncognito Shortcut Group]\nStartupWMClass=Google-chrome-stable/g' /usr/share/applications/google-chrome.desktop
 
 sudo rm -rf ~/.config/midori ~/.config/google-chrome
 
 sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
 
-google-chrome-stable --no-first-run > /dev/null 2>&1 &
+google-chrome-beta --no-first-run > /dev/null 2>&1 &
 sleep 10
 killall chrome
 sleep 5

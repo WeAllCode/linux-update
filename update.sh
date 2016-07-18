@@ -25,6 +25,11 @@ if [ $? -eq 0 ]; then
 fi
 apt-get -q=2 --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
 
+# Installing git
+sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing git"'
+apt-get -q=2 install -y git
+
+
 # Installing elementary-tweaks
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing elementary-tweaks"'
 apt-get -q=2 install -y elementary-tweaks

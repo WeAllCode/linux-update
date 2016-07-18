@@ -14,8 +14,8 @@ add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
 
 # Upgrading system
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Upgrading system"'
-apt-get -q=2 update
-apt-get -q=2 dist-upgrade -y
+apt-get update
+apt-get dist-upgrade -y
 
 # Uninstalling unused packages
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Uninstalling unused packages"'
@@ -23,28 +23,28 @@ command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
-apt-get -q=2 --purge autoremove -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
+apt-get autoremove --purge -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
 
 # Installing git
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing git"'
-apt-get -q=2 install -y git
+apt-get install -y git
 
 
 # Installing elementary-tweaks
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing elementary-tweaks"'
-apt-get -q=2 install -y elementary-tweaks
+apt-get install -y elementary-tweaks
 
 # Installing gedit
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing gedit"'
-apt-get -q=2 install -y gedit
+apt-get install -y gedit
 
 # Installing vim
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing vim"'
-apt-get -q=2 install -y vim
+apt-get install -y vim
 
 # Installing google-chrome-stable
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Installing google-chrome-beta"'
-apt-get -q=2 install -y google-chrome-beta
+apt-get install -y google-chrome-beta
 
 # sudo sed -i '/Group\]\|Desktop Entry/a StartupWMClass=Google-chrome-stable' /usr/share/applications/google-chrome.desktop
 
@@ -109,8 +109,8 @@ wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
 
 # Cleanup
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Cleanup"'
-apt-get -q=2 autoremove -y
-apt-get -q=2 autoclean -y
+apt-get autoremove -y
+apt-get autoclean -y
 rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 # Remove old files that students might of saved

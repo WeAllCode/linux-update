@@ -102,6 +102,6 @@ sudo rm -rf /home/coderdojochi/Videos/*
 sudo rm -rf /home/coderdojochi/Public/*
 sudo rm -rf /home/coderdojochi/Templates/*
 
-# Restarting in 5 seconds
-notify-send --urgency=low "Restarting in 5 seconds"
-sudo shutdown -r 5
+# Restarting in 1 minute
+notify-send --urgency=low "Restarting in 1 minute"
+shutdown -r 1

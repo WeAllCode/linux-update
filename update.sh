@@ -63,6 +63,12 @@ apt-get install -y gedit
 output "Installing vim"
 apt-get install -y vim
 
+# Installing atom
+output "Installing atom"
+# https://github.com/atom/atom/releases/download/v1.8.0/atom-amd64.deb
+wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.8.0/atom-amd64.deb
+dpkg --install /tmp/atom-amd64.deb
+
 # Installing google-chrome-stable
 output "Installing google-chrome-beta"
 apt-get install -y google-chrome-beta

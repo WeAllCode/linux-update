@@ -1,10 +1,25 @@
+URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
+
+SCRIPTDIR=/etc/init.d
+SCRIPT=coderdojochi-phonehome
+CONFDIR=/etc/init
+CONF=$SCRIPT.conf
 
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
     sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "$1"';
 }
 
-URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
+# Install the coderdojochi-phone autoupdate script
+if [ ! -f $CONFDIR/$CONF ]; then
+    output "Installing phonehome config file"
+    wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+fi
+
+if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
+    output "Installing phonehome script"
+    wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
+fi
 
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=critical "Updating System"'
 
@@ -29,6 +44,7 @@ command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
+
 apt-get autoremove --purge -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
 
 # Installing git

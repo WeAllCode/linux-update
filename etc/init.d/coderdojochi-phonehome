@@ -1,0 +1,31 @@
+#!/bin/bash
+################################################################################
+# this script runs at start up and checks in with CDC to run system updates for 
+# the machine
+################################################################################
+# below line is for logging to /var/log/syslog.  Comment out to not log
+#exec 1> >(logger -s -t $(basename $0)) 2>&1
+
+# URL - the CDC check in URL
+# TODO - change this to actual url
+URL=http://www.davekam.com/cdc/test.php
+
+# UUID - used as the unique idenfier for the machine
+UUID="$(dmidecode | grep -i uuid | awk -F': ' '{print $2}')"
+
+# DATA - set up the data to be passed via post in curl
+DATA="--data uuid=${UUID}"
+
+# FLAGS - curl flags to use
+FLAGS="-s -X POST"
+
+# create curl command
+CURLCMD="curl ${FLAGS} ${DATA} ${URL}"
+echo $CURLCMD
+
+# run curl command capturing output
+CICMD=$(${CURLCMD})
+echo $CICMD
+eval $CICMD
+
+

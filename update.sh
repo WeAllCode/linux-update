@@ -1,9 +1,12 @@
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=critical "Updating System"'
 
+URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
+
 # Adding Google to package manager
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Adding Google to package manager"'
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-wget -qLO /etc/apt/sources.list.d/google-chrome.list "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome.list"
+wget -qLO /etc/apt/sources.list.d/google-chrome.list \
+     "$URL/etc/apt/sources.list.d/google-chrome.list"
 
 # Adding Elementary Tweaks to package manager
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Adding Elementary Tweaks to package manager"'
@@ -46,7 +49,8 @@ apt-get -q=2 install -y google-chrome-beta
 
 rm -rf /home/coderdojochi/.config/midori /home/coderdojochi/.config/google-chrome-beta
 
-wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/external_extensions.json"
+wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
+     "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
 
 sudo -H -u coderdojochi bash -c 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
 sudo -H -u coderdojochi bash -c 'sleep 10'
@@ -71,15 +75,19 @@ sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Setting up the dock"'
 rm /home/coderdojochi/.config/plank/dock1/launchers/*.dockitem
 
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/pantheon-files.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/pantheon-files.dockitem"
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/gedit.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/gedit.dockitem"
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/google-chrome-beta.dockitem "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/google-chrome-beta.dockitem"
+wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/pantheon-files.dockitem \
+     "$URL/home/coderdojochi/.config/plank/dock1/launchers/pantheon-files.dockitem"
+wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/gedit.dockitem \
+     "$URL/home/coderdojochi/.config/plank/dock1/launchers/gedit.dockitem"
+wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
+     "$URL/home/coderdojochi/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
 
 sed -i 's/HideMode=3/HideMode=0/g' /home/coderdojochi/.config/plank/dock1/settings
 
 # Changing desktop background
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Changing desktop background"'
-wget -qLO /usr/share/backgrounds/coderdojochi.png "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/coderdojochi.png"
+wget -qLO /usr/share/backgrounds/coderdojochi.png \
+     "$URL/usr/share/backgrounds/coderdojochi.png"
 gsettings set 'org.gnome.desktop.background' 'picture-uri' 'file:///usr/share/backgrounds/coderdojochi.png'
 gsettings set 'org.gnome.desktop.background' 'picture-options' 'zoom'
 
@@ -91,7 +99,8 @@ gsettings set 'org.gnome.desktop.screensaver' 'idle-activation-enabled' false
 
 killall plank
 
-wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf "https://raw.githubusercontent.com/CoderDojoChi/linux-update/master/60-drag-and-drop-quirk.conf"
+wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
+     "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 
 # Cleanup
 sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "Cleanup"'

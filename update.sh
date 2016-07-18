@@ -1,9 +1,6 @@
 
 output() {
-    echo -e "\n\n####################\n";
-    echo -e "# $1";
-    echo -e "\n####################\n\n";
-
+    echo "\n\n####################\n# $1\n####################\n\n";
     sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "$1"';
 }
 

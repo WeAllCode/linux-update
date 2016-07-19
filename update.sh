@@ -174,8 +174,11 @@ sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
 output "Changing desktop background"
 wget -qLO /usr/share/backgrounds/coderdojochi.png \
      "$URL/usr/share/backgrounds/coderdojochi.png"
+
 sudo mv /usr/share/backgrounds/elementaryos-default
-sudo ln -s coderdojochi.png elementaryos-default
+sudo ln -s /usr/share/backgrounds/coderdojochi.png \
+           /usr/share/backgrounds/elementaryos-default
+
 # userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
 userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
 

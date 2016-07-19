@@ -124,6 +124,7 @@ output "Setting screensaver settings"
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
+sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
 # Disable guest login
 output "Disable guest login"

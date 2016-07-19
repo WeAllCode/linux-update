@@ -1,5 +1,6 @@
 URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
 
+HOMEDIR=/home/coderdojochi
 SCRIPTDIR=/etc/init.d
 SCRIPT=coderdojochi-phonehome
 CONFDIR=/etc/init
@@ -88,7 +89,9 @@ dpkg --install /tmp/atom-amd64.deb
 output "Installing google-chrome-beta"
 apt-get install -y google-chrome-beta
 
-rm -rf /home/coderdojochi/.config/midori /home/coderdojochi/.config/google-chrome-beta
+rm -rf $HOMEDIR/.config/midori \
+       $HOMEDIR/.config/google-chrome \
+       $HOMEDIR/.config/google-chrome-beta
 
 wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
      "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
@@ -98,32 +101,57 @@ userrun 'sleep 10'
 userrun 'killall chrome'
 userrun 'sleep 5'
 
+
 # Chrome: disable password manager
 output "Chrome: disable password manager"
-sed -i 's/user",/user","password_manage_enabled":false,/' /home/coderdojochi/.config/google-chrome-beta/Default/Preferences
+sed -i 's/user",/user","password_manage_enabled":false,/' \
+    $HOMEDIR/.config/google-chrome/Default/Preferences
+
+sed -i 's/user",/user","password_manage_enabled":false,/' \
+    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
+
 
 # Chrome: change startup URL to google.com
 output "Chrome: change startup URL to google.com"
-sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' /home/coderdojochi/.config/google-chrome-beta/Default/Preferences
+
+sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' \
+    $HOMEDIR/.config/google-chrome/Default/Preferences
+
+sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' \
+    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
+
 
 # Chrome: turn off custome frame
 output "Chrome: turn off custome frame"
-sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' /home/coderdojochi/.config/google-chrome-beta/Default/Preferences
 
-sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' /home/coderdojochi/.config/google-chrome-beta/Default/Preferences
+sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' \
+    $HOMEDIR/.config/google-chrome/Default/Preferences
+
+sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' \
+    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
+
+sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' \
+    $HOMEDIR/.config/google-chrome/Default/Preferences
+
+sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' \
+    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
+
 
 # Setting up the dock
 output "Setting up the dock"
-rm /home/coderdojochi/.config/plank/dock1/launchers/*.dockitem
+rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/pantheon-files.dockitem \
-     "$URL/home/coderdojochi/.config/plank/dock1/launchers/pantheon-files.dockitem"
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/gedit.dockitem \
-     "$URL/home/coderdojochi/.config/plank/dock1/launchers/gedit.dockitem"
-wget -qLO /home/coderdojochi/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
-     "$URL/home/coderdojochi/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
 
-sed -i 's/HideMode=3/HideMode=0/g' /home/coderdojochi/.config/plank/dock1/settings
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/gedit.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/gedit.dockitem"
+
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
+
+sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
+
 
 # Changing desktop background
 output "Changing desktop background"
@@ -168,13 +196,14 @@ rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
 # Remove old files that students might of saved
-rm -rf /home/coderdojochi/Downloads/*
-rm -rf /home/coderdojochi/Documents/*
-rm -rf /home/coderdojochi/Music/*
-rm -rf /home/coderdojochi/Pictures/*
-rm -rf /home/coderdojochi/Videos/*
-rm -rf /home/coderdojochi/Public/*
-rm -rf /home/coderdojochi/Templates/*
+rm -rf $HOMEDIR/Documents/*
+rm -rf $HOMEDIR/Downloads/*
+rm -rf $HOMEDIR/Music/*
+rm -rf $HOMEDIR/Pictures/*
+rm -rf $HOMEDIR/Public/*
+rm -rf $HOMEDIR/Templates/*
+rm -rf $HOMEDIR/Videos/*
+
 
 # Restarting in 1 minute
 output "Restarting in 1 minute"

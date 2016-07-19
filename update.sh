@@ -7,12 +7,12 @@ CONFDIR=/etc/init
 CONF=$SCRIPT.conf
 
 userrun() {
-    sudo -H -u coderdojochi bash -c '$1'
+    sudo -H -u coderdojochi bash -c '$1';
 }
 
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
-    userrun 'notify-send --urgency=low "$1"'
+    userrun 'notify-send --urgency=low "$1"';
 }
 
 

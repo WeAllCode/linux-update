@@ -131,8 +131,12 @@ output "Disable guest login"
 wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
      "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
 
+# Restart dock
+output "Restart dock"
 killall plank
 
+# Fix drag and drop quirk
+output "Fix drag and drop quirk"
 wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 

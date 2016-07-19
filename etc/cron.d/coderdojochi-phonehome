@@ -3,4 +3,4 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-*/2 * * * * root /bin/sh /etc/init.d/coderdojochi-phonehome
+*/10 * * * * root /bin/sh /etc/init.d/coderdojochi-phonehome

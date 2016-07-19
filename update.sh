@@ -16,16 +16,15 @@ output() {
 }
 
 
-# Install the coderdojochi-phone autoupdate script
-if [ ! -f $CONFDIR/$CONF ]; then
-    output "Installing phonehome config file"
-    wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
-fi
+# Installing phonehome config file
+output "Installing phonehome config file"
+wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
 
-if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
-    output "Installing phonehome script"
-    wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
-fi
+
+# Installing phonehome script
+output "Installing phonehome script"
+wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
+chmod +x $SCRIPTDIR/$SCRIPT
 
 
 # Update Script Running

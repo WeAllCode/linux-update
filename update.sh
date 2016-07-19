@@ -141,10 +141,10 @@ sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on
 # Chrome: turn off custome frame
 output "Chrome: turn off custome frame"
 
-sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' \
+sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":true,"pepper_flash_settings_enabled":true,"window_placement"/' \
     $HOMEDIR/.config/google-chrome/Default/Preferences
 
-sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":false,"pepper_flash_settings_enabled":true,"window_placement"/' \
+sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"custom_chrome_frame":true,"pepper_flash_settings_enabled":true,"window_placement"/' \
     $HOMEDIR/.config/google-chrome-beta/Default/Preferences
 
 sed -i 's/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{/"cjpalhdlnbpafiamejdnhcphjbkeiagm":{"browser_action_visible":false,/' \

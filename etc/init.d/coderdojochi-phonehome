@@ -6,6 +6,8 @@
 # below line is for logging to /var/log/syslog.  Comment out to not log
 #exec 1> >(logger -s -t $(basename $0)) 2>&1
 
+export DISPLAY=:0
+
 # URL - the CDC check in URL
 # TODO - change this to actual url
 URL=http://staging.coderdojochi.org/admin/checksystem/

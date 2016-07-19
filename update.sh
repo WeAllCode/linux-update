@@ -17,14 +17,28 @@ output() {
 
 
 # Installing phonehome config file
-output "Installing phonehome config file"
-wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+if [ ! -f $CONFDIR/$CONF ]; then
+    output "Installing phonehome config file"
+    wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+else
+    output "Phonehome config file exists"
+fi
 
 
 # Installing phonehome script
-output "Installing phonehome script"
-wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
-chmod +x $SCRIPTDIR/$SCRIPT
+if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
+    output "Installing phonehome script"
+    wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
+    chmod +x $SCRIPTDIR/$SCRIPT
+
+    output "Running phonehome script"
+    $SCRIPTDIR/$SCRIPT
+
+    output "Quitting update.sh"
+    exit
+else
+    output "Phonehome script exists"
+fi
 
 
 # Update Script Running

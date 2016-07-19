@@ -5,10 +5,15 @@ SCRIPT=coderdojochi-phonehome
 CONFDIR=/etc/init
 CONF=$SCRIPT.conf
 
+userrun() {
+    sudo -H -u coderdojochi bash -c '$1'
+}
+
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
-    sudo -H -u coderdojochi bash -c 'notify-send --urgency=low "$1"';
+    userrun 'notify-send --urgency=low "$1"'
 }
+
 
 # Install the coderdojochi-phone autoupdate script
 if [ ! -f $CONFDIR/$CONF ]; then
@@ -21,7 +26,10 @@ if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
     wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
 fi
 
-sudo -H -u coderdojochi bash -c 'notify-send --urgency=critical "Updating System"'
+
+# Update Script Running
+userrun 'notify-send --urgency=critical "Update Script Running"'
+
 
 # Adding Google to package manager
 output "Adding Google to package manager"
@@ -29,14 +37,17 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 wget -qLO /etc/apt/sources.list.d/google-chrome.list \
      "$URL/etc/apt/sources.list.d/google-chrome.list"
 
+
 # Adding Elementary Tweaks to package manager
 output "Adding Elementary Tweaks to package manager"
 add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
+
 
 # Upgrading system
 output "Upgrading system"
 apt-get update
 apt-get dist-upgrade -y
+
 
 # Uninstalling unused packages
 output "Uninstalling unused packages"
@@ -51,17 +62,21 @@ apt-get autoremove --purge -y deja-dup indicator-messages empathy-* gnome-online
 output "Installing git"
 apt-get install -y git
 
+
 # Installing elementary-tweaks
 output "Installing elementary-tweaks"
 apt-get install -y elementary-tweaks
+
 
 # Installing gedit
 output "Installing gedit"
 apt-get install -y gedit
 
+
 # Installing vim
 output "Installing vim"
 apt-get install -y vim
+
 
 # Installing atom
 output "Installing atom"
@@ -78,10 +93,10 @@ rm -rf /home/coderdojochi/.config/midori /home/coderdojochi/.config/google-chrom
 wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
      "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
 
-sudo -H -u coderdojochi bash -c 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
-sudo -H -u coderdojochi bash -c 'sleep 10'
-sudo -H -u coderdojochi bash -c 'killall chrome'
-sudo -H -u coderdojochi bash -c 'sleep 5'
+userrun 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
+userrun 'sleep 10'
+userrun 'killall chrome'
+userrun 'sleep 5'
 
 # Chrome: disable password manager
 output "Chrome: disable password manager"
@@ -116,35 +131,41 @@ wget -qLO /usr/share/backgrounds/coderdojochi.png \
      "$URL/usr/share/backgrounds/coderdojochi.png"
 sudo mv /usr/share/backgrounds/elementaryos-default
 sudo ln -s coderdojochi.png elementaryos-default
-# sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
+# userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
+userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
+
 
 # Setting screensaver settings
 output "Setting screensaver settings"
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
+userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
+userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
+userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
+userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
+
 
 # Disable guest login
 output "Disable guest login"
 wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
      "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
 
+
 # Restart dock
 output "Restart dock"
 killall plank
+
 
 # Fix drag and drop quirk
 output "Fix drag and drop quirk"
 wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 
+
 # Cleanup
 output "Cleanup"
 apt-get autoremove -y
 apt-get autoclean -y
 rm -rf {/root,/home/*}/.local/share/zeitgeist
+
 
 # Remove old files that students might of saved
 rm -rf /home/coderdojochi/Downloads/*

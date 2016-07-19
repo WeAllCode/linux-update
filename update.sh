@@ -89,7 +89,7 @@ apt-get autoremove --purge -y \
     deja-dup \
     empathy-* \
     geary \
-    google-chrome \
+    google-chrome-stable \
     gnome-online-accounts \
     indicator-messages \
     midori-granite \

@@ -104,11 +104,11 @@ apt-get install -y vim
 
 # Installing google-chrome-stable
 output "Installing google-chrome-beta"
-apt-get install -y google-chrome-beta
-
 rm -rf $HOMEDIR/.config/midori \
        $HOMEDIR/.config/google-chrome \
        $HOMEDIR/.config/google-chrome-beta
+
+apt-get install -y google-chrome-beta
 
 wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
      "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"

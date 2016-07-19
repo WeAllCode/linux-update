@@ -123,6 +123,11 @@ sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
 
+# Disable guest login
+output "Disable guest login"
+wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
+     "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
+
 killall plank
 
 wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \

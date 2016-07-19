@@ -114,7 +114,9 @@ sed -i 's/HideMode=3/HideMode=0/g' /home/coderdojochi/.config/plank/dock1/settin
 output "Changing desktop background"
 wget -qLO /usr/share/backgrounds/coderdojochi.png \
      "$URL/usr/share/backgrounds/coderdojochi.png"
-sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
+sudo mv /usr/share/backgrounds/elementaryos-default
+sudo ln -s coderdojochi.png elementaryos-default
+# sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
 sudo -H -u coderdojochi bash -c 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
 
 # Setting screensaver settings

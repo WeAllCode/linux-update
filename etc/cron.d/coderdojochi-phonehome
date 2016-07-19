@@ -1,3 +1,6 @@
 # /etc/cron.d/coderdojochi-phonehome: crontab entry for coderdojochi-phonehome package
 
-*/2 * * * * root /etc/init.d/coderdojochi-phonehome
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/2 * * * * root /bin/sh /etc/init.d/coderdojochi-phonehome

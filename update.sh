@@ -1,10 +1,15 @@
 URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
 
 HOMEDIR=/home/coderdojochi
+
 SCRIPTDIR=/etc/init.d
 SCRIPT=coderdojochi-phonehome
+
 CONFDIR=/etc/init
 CONF=$SCRIPT.conf
+
+CRONDIR=/etc/cron.d
+
 
 userrun() {
     sudo -H -u coderdojochi bash -c "$1";
@@ -38,6 +43,14 @@ if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
     exit
 else
     output "Phonehome script exists"
+fi
+
+# Installing phonehome cron
+if [ ! -f $CRONDIR/$SCRIPT ]; then
+    output "Installing phonehome cron"
+    wget -qLO $CRONDIR/$SCRIPT $URL/$CRONDIR/$SCRIPT
+else
+    output "Phonehome cron exists"
 fi
 
 

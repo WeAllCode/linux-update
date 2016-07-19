@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# this script runs at start up and checks in with CDC to run system updates for 
+# this script runs at start up and checks in with CDC to run system updates for
 # the machine
 ################################################################################
 # below line is for logging to /var/log/syslog.  Comment out to not log
@@ -8,7 +8,7 @@
 
 # URL - the CDC check in URL
 # TODO - change this to actual url
-URL=http://www.davekam.com/cdc/test.php
+URL=http://staging.coderdojochi.org/admin/checksystem/
 
 # UUID - used as the unique idenfier for the machine
 UUID="$(dmidecode | grep -i uuid | awk -F': ' '{print $2}')"

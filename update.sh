@@ -57,7 +57,24 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-apt-get autoremove --purge -y deja-dup indicator-messages empathy-* gnome-online-accounts activity-log-manager-common activity-log-manager-control-center zeitgeist zeitgeist-core zeitgeist-datahub midori-granite noise software-center update-manager scratch-text-editor modemmanager geary
+apt-get autoremove --purge -y \
+    activity-log-manager-common \
+    activity-log-manager-control-center \
+    deja-dup \
+    empathy-* \
+    geary \
+    gnome-online-accounts \
+    indicator-messages \
+    midori-granite \
+    modemmanager \
+    noise \
+    scratch-text-editor \
+    software-center \
+    update-manager \
+    zeitgeist \
+    zeitgeist-core \
+    zeitgeist-datahub
+
 
 # Installing git
 output "Installing git"

@@ -119,30 +119,9 @@ userrun 'killall chrome'
 userrun 'sleep 5'
 
 
-# Chrome: disable password manager
-output "Chrome: disable password manager"
-sed -i 's/user",/user","password_manage_enabled":false,/' \
-    $HOMEDIR/.config/google-chrome/Default/Preferences
+# wget -qLO /home/coderdojochi/.config/google-chrome-beta/Default/Preferences \
+#      "$URL/home/coderdojochi/.config/google-chrome-beta/Default/Preferences"
 
-sed -i 's/user",/user","password_manage_enabled":false,/' \
-    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
-
-
-# Chrome: change startup URL to google.com
-output "Chrome: change startup URL to google.com"
-
-sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' \
-    $HOMEDIR/.config/google-chrome/Default/Preferences
-
-sed -i 's/"restore_on_startup_migrated":true,/"restore_on_startup":4,"restore_on_startup_migrated":true,"startup_urls":["https:\/\/google.com\/"],/' \
-    $HOMEDIR/.config/google-chrome-beta/Default/Preferences
-
-
-# Chrome: turn off custome frame
-output "Chrome: turn off custome frame"
-
-wget -qLO /home/coderdojochi/.config/google-chrome-beta/Default/Preferences \
-     "$URL/home/coderdojochi/.config/google-chrome-beta/Default/Preferences"
 
 # Setting up the dock
 output "Setting up the dock"

@@ -86,7 +86,7 @@ apt-get dist-upgrade -y
 output "Uninstalling unused packages"
 command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
-    zeitgeist-daemon --quit
+    zeitgeist-daemon --quitd
 fi
 
 apt-get autoremove --purge -y \
@@ -183,6 +183,8 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/gedit.dockitem \
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
 
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
 sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
 
 

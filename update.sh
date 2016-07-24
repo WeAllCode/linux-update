@@ -171,11 +171,11 @@ else
 
   # Installing chromium
   output "Installing chromium"
-  apt-get install chromium-browser
+  apt-get install -y chromium-browser
   
   # Install flash plugin
   output "Install flash plugin"
-  apt-get install adobe-flashplugin
+  apt-get install -y adobe-flashplugin
   
 fi
 

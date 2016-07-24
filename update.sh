@@ -33,6 +33,7 @@ fi
 
 
 # Installing phonehome script
+rm -rf $SCRIPTDIR/$SCRIPT
 if [ ! -f $SCRIPTDIR/$SCRIPT ]; then
     output "Installing phonehome script"
     wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT

@@ -90,6 +90,8 @@ apt-get autoremove --purge -y zeitgeist
 apt-get autoremove --purge -y zeitgeist-core
 apt-get autoremove --purge -y zeitgeist-datahub
 
+apt-get autoremove -y
+apt-get autoclean -y
 
 # Upgrading system
 output "Upgrading system"

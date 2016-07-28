@@ -38,7 +38,6 @@ wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
 chmod +x $SCRIPTDIR/$SCRIPT
 
 
-
 # Installing phonehome cron
 if [ ! -f $CRONDIR/$SCRIPT ]; then
     output "Installing phonehome cron"
@@ -46,7 +45,6 @@ if [ ! -f $CRONDIR/$SCRIPT ]; then
 else
     output "Phonehome cron exists"
 fi
-
 
 
 # Update Script Running
@@ -65,13 +63,6 @@ wget -qLO /etc/apt/sources.list.d/google-chrome.list \
 # Adding Elementary Tweaks to package manager
 output "Adding Elementary Tweaks to package manager"
 add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
-
-
-# Upgrading system
-output "Upgrading system"
-apt-get update
-apt-get dist-upgrade -y
-
 
 # Uninstalling unused packages
 output "Uninstalling unused packages"
@@ -98,6 +89,12 @@ apt-get autoremove --purge -y \
     zeitgeist \
     zeitgeist-core \
     zeitgeist-datahub
+
+
+# Upgrading system
+output "Upgrading system"
+apt-get update
+apt-get dist-upgrade -y
 
 
 # Installing git

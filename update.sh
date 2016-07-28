@@ -52,23 +52,14 @@ fi
 # Update Script Running
 userrun 'notify-send --urgency=critical "Update Script Running"'
 
-if [ ${MACHINE_TYPE} == 'x86_64' ]; then
-  
-  # Adding Google to package manager
-  output "Adding Google to package manager"
-  wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
-  rm -rf /etc/apt/sources.list.d/google-chrome.list*
-  wget -qLO /etc/apt/sources.list.d/google-chrome.list \
-       "$URL/etc/apt/sources.list.d/google-chrome.list"
+# Adding Google to package manager
+output "Adding Google to package manager"
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
-else
-
-  # Remove old google source list
-  output "Remove old google source list"
-  rm -rf /etc/apt/sources.list.d/google-chrome.list*
-
-fi
+rm -rf /etc/apt/sources.list.d/google-chrome.list*
+wget -qLO /etc/apt/sources.list.d/google-chrome.list \
+     "$URL/etc/apt/sources.list.d/google-chrome.list"
 
 
 # Adding Elementary Tweaks to package manager
@@ -86,7 +77,7 @@ apt-get dist-upgrade -y
 output "Uninstalling unused packages"
 command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
-    zeitgeist-daemon --quitd
+    zeitgeist-daemon --quit
 fi
 
 apt-get autoremove --purge -y \
@@ -134,39 +125,27 @@ apt-get install -y vim
 # wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.8.0/atom-amd64.deb
 # dpkg --install /tmp/atom-amd64.deb
 
-if [ ${MACHINE_TYPE} == 'x86_64' ]; then
 
-  # Installing google-chrome-stable
-  output "Installing google-chrome-beta"
-  rm -rf $HOMEDIR/.config/midori \
-         $HOMEDIR/.config/google-chrome \
-         $HOMEDIR/.config/google-chrome-beta
+# Installing google-chrome-stable
+output "Installing google-chrome-beta"
+rm -rf $HOMEDIR/.config/midori \
+     $HOMEDIR/.config/google-chrome \
+     $HOMEDIR/.config/google-chrome-beta
 
-  apt-get install -y google-chrome-beta
+apt-get install -y google-chrome-beta
 
-  wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
-       "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
+wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
+   "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
 
-  userrun 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
-  userrun 'sleep 10'
-  userrun 'killall chrome'
-  userrun 'sleep 5'
+userrun 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
+userrun 'sleep 10'
+userrun 'killall chrome'
+userrun 'sleep 5'
 
 
-  # wget -qLO /home/coderdojochi/.config/google-chrome-beta/Default/Preferences \
-  #      "$URL/home/coderdojochi/.config/google-chrome-beta/Default/Preferences"
+# wget -qLO /home/coderdojochi/.config/google-chrome-beta/Default/Preferences \
+#      "$URL/home/coderdojochi/.config/google-chrome-beta/Default/Preferences"
 
-else
-
-  # Installing chromium
-  output "Installing chromium"
-  apt-get install -y chromium-browser
-  
-  # Install flash plugin
-  output "Install flash plugin"
-  apt-get install -y adobe-flashplugin
-  
-fi
 
 
 

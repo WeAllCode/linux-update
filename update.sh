@@ -75,6 +75,7 @@ apt-get autoremove --purge -y activity-log-manager-common
 apt-get autoremove --purge -y activity-log-manager-control-center
 apt-get autoremove --purge -y deja-dup
 apt-get autoremove --purge -y empathy-*
+apt-get autoremove --purge -y firefox*
 apt-get autoremove --purge -y geary
 apt-get autoremove --purge -y google-chrome-stable
 apt-get autoremove --purge -y gnome-online-accounts

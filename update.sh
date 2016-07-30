@@ -182,6 +182,12 @@ wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 
 
+# Install cdcformat script
+output "Install cdcformat script"
+wget -qLO /usr/sbin/cdcformat \
+     "$URL/usr/sbin/cdcformat"
+
+
 # Cleanup
 output "Cleanup"
 apt-get autoremove -y

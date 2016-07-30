@@ -186,7 +186,7 @@ wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
 output "Install cdcformat script"
 wget -qLO /usr/sbin/cdcformat \
      "$URL/usr/sbin/cdcformat"
-
+chmod +x /usr/sbin/cdcformat
 
 # Cleanup
 output "Cleanup"

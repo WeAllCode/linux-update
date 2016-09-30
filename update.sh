@@ -96,9 +96,9 @@ apt-get install -y vim
 
 
 # Installing atom
-# output "Installing atom"
-# wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.8.0/atom-amd64.deb
-# dpkg --install /tmp/atom-amd64.deb
+output "Installing atom"
+wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.10.2/atom-amd64.deb
+dpkg --install /tmp/atom-amd64.deb
 
 
 # Installing google-chrome-stable

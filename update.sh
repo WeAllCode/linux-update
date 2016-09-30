@@ -140,8 +140,13 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
 
-
+# If 0, the dock won't hide.
 sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
+
+# List of *.dockitems files on this dock.
+sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;atom.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
+
+
 
 
 # Changing desktop background

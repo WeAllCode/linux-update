@@ -131,14 +131,16 @@ rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/gedit.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/gedit.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/atom.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/atom.dockitem"
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
+
+
 sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
 
 

@@ -248,5 +248,5 @@ fi
 
 
 # Restarting in 1 minute
-output "Restarting in 1 minute"
-shutdown -r 1
+# output "Restarting in 1 minute"
+# shutdown -r 1

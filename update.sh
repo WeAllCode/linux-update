@@ -155,7 +155,7 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
 sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
 
 # List of *.dockitems files on this dock.
-sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;atom.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
+sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
 
 
 

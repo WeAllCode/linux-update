@@ -34,6 +34,12 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 rm -rf /etc/apt/sources.list.d/google-chrome.list*
 wget -qLO /etc/apt/sources.list.d/google-chrome.list \
      "$URL/etc/apt/sources.list.d/google-chrome.list"
+     
+     
+# VS Code
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 
 # Adding Elementary Tweaks to package manager
@@ -99,6 +105,9 @@ apt-get install -y vim
 output "Installing atom"
 wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.10.2/atom-amd64.deb
 dpkg --install /tmp/atom-amd64.deb
+
+# Install VS Code
+apt-get install code
 
 
 # Installing google-chrome-stable

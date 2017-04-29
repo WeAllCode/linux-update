@@ -37,6 +37,7 @@ wget -qLO /etc/apt/sources.list.d/google-chrome.list \
      
      
 # VS Code
+output "Adding VS Code to package manager"
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -102,11 +103,12 @@ apt-get install -y vim
 
 
 # Installing atom
-output "Installing atom"
-wget -qLO /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.10.2/atom-amd64.deb
-dpkg --install /tmp/atom-amd64.deb
+output "Uninstalling atom"
+apt-get remove -y atom
+
 
 # Install VS Code
+output "Install VS Code"
 apt-get install code
 
 
@@ -140,8 +142,8 @@ rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/atom.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/atom.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem"

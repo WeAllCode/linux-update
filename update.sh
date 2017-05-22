@@ -45,7 +45,7 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 
 # Adding Elementary Tweaks to package manager
 output "Adding Elementary Tweaks to package manager"
-add-apt-repository ppa:mpstark/elementary-tweaks-daily -y
+add-apt-repository ppa:philip.scott/elementary-tweaks -y
 
 # Uninstalling unused packages
 output "Uninstalling unused packages"

@@ -109,7 +109,7 @@ apt-get remove -y atom
 
 # Install VS Code
 output "Install VS Code"
-apt-get install code
+apt-get install -y code
 
 
 # Installing google-chrome-stable

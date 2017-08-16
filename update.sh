@@ -222,6 +222,9 @@ rm -rf $HOMEDIR/Public/*
 rm -rf $HOMEDIR/Templates/*
 rm -rf $HOMEDIR/Videos/*
 
+# Reset Code settings
+wget -qLO $HOMEDIR/.config/Code/User/settings.json \
+     "$URL$HOMEDIR/.config/Code/User/settings.json"
 
 # Installing phonehome config file
 if [ ! -f $CONFDIR/$CONF ]; then

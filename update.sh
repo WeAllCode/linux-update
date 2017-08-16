@@ -60,7 +60,7 @@ apt-get autoremove --purge -y deja-dup
 apt-get autoremove --purge -y empathy-*
 apt-get autoremove --purge -y firefox*
 apt-get autoremove --purge -y geary
-apt-get autoremove --purge -y google-chrome-stable
+apt-get autoremove --purge -y google-chrome-beta
 apt-get autoremove --purge -y gnome-online-accounts
 apt-get autoremove --purge -y indicator-messages
 apt-get autoremove --purge -y midori-granite
@@ -116,14 +116,14 @@ apt-get install -y code
 output "Installing google-chrome-beta"
 rm -rf $HOMEDIR/.config/midori \
      $HOMEDIR/.config/google-chrome \
-     $HOMEDIR/.config/google-chrome-beta
+     $HOMEDIR/.config/google-chrome-stable
 
-apt-get install -y google-chrome-beta
+apt-get install -y google-chrome-stable
 
-wget -qLO /opt/google/chrome-beta/default_apps/external_extensions.json \
+wget -qLO /opt/google/chrome-stable/default_apps/external_extensions.json \
    "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
 
-userrun 'google-chrome-beta --no-first-run > /dev/null 2>&1 &'
+userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
 userrun 'sleep 10'
 userrun 'killall chrome'
 userrun 'sleep 5'

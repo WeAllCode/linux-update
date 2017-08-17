@@ -34,8 +34,8 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 rm -rf /etc/apt/sources.list.d/google-chrome.list*
 wget -qLO /etc/apt/sources.list.d/google-chrome.list \
      "$URL/etc/apt/sources.list.d/google-chrome.list"
-     
-     
+
+
 # VS Code
 output "Adding VS Code to package manager"
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -162,6 +162,12 @@ else
     sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
        $HOMEDIR/.config/google-chrome/Default/Preferences
 fi
+
+
+# Fixing Chrome Keyring issue
+output "Fixing Chrome Keyring issue"
+mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
+killall gnome-keyring-daemon
 
 
 # Setting up the dock

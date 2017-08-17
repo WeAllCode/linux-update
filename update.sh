@@ -116,12 +116,12 @@ apt-get install -y code
 output "Installing Google Chrome (stable)"
 rm -rf $HOMEDIR/.config/midori \
      $HOMEDIR/.config/google-chrome \
-     $HOMEDIR/.config/google-chrome-beta
+     $HOMEDIR/.config/google-chrome-stable
 
 apt-get install -y google-chrome-stable
 
 wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
-   "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
+   "$URL/opt/google/chrome/default_apps/external_extensions.json"
 
 
 userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
@@ -248,6 +248,9 @@ rm -rf $HOMEDIR/Public/*
 rm -rf $HOMEDIR/Templates/*
 rm -rf $HOMEDIR/Videos/*
 
+# Reset Code settings
+wget -qLO $HOMEDIR/.config/Code/User/settings.json \
+     "$URL$HOMEDIR/.config/Code/User/settings.json"
 
 # Installing phonehome config file
 if [ ! -f $CONFDIR/$CONF ]; then

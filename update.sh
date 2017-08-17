@@ -113,26 +113,55 @@ apt-get install -y code
 
 
 # Installing google-chrome-stable
-output "Installing google-chrome-beta"
+output "Installing Google Chrome (stable)"
 rm -rf $HOMEDIR/.config/midori \
      $HOMEDIR/.config/google-chrome \
      $HOMEDIR/.config/google-chrome-stable
 
 apt-get install -y google-chrome-stable
 
-wget -qLO /opt/google/chrome-stable/default_apps/external_extensions.json \
-   "$URL/opt/google/chrome-beta/default_apps/external_extensions.json"
+wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
+   "$URL/opt/google/chrome/default_apps/external_extensions.json"
+
 
 userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
 userrun 'sleep 10'
 userrun 'killall chrome'
 userrun 'sleep 5'
 
+# Disabling Google's Custom Frame
+if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+    # Already in the file, change true to false
+    sed -i 's/"custom_chrome_frame":true/"custom_chrome_frame":false/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+else
+    # Not in the file, add it to the file before "window_placement"
+    sed -i 's/"window_placement"/"custom_chrome_frame":false,"window_placement"/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+fi
 
-# wget -qLO /home/coderdojochi/.config/google-chrome-beta/Default/Preferences \
-#      "$URL/home/coderdojochi/.config/google-chrome-beta/Default/Preferences"
 
+# Clear browser history
+if grep -q "clear_lso_data_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+    # Already in the file, change true to false
+    sed -i 's/"clear_lso_data_enabled":false/"clear_lso_data_enabled":true/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+else
+    # Not in the file, add it to the file before "window_placement"
+    sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"window_placement"/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+fi
 
+# Enable pepper flash in browser
+if grep -q "pepper_flash_settings_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+    # Already in the file, change true to false
+    sed -i 's/"pepper_flash_settings_enabled":false/"pepper_flash_settings_enabled":true/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+else
+    # Not in the file, add it to the file before "window_placement"
+    sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
+       $HOMEDIR/.config/google-chrome/Default/Preferences
+fi
 
 
 # Setting up the dock
@@ -145,8 +174,8 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome-beta.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
@@ -156,9 +185,6 @@ sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
 
 # List of *.dockitems files on this dock.
 sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
-
-
-
 
 # Changing desktop background
 output "Changing desktop background"
@@ -253,3 +279,4 @@ fi
 # Restarting in 1 minute
 # output "Restarting in 1 minute"
 # shutdown -r 1
+

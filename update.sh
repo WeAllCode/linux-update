@@ -72,6 +72,7 @@ apt-get autoremove --purge -y update-manager
 apt-get autoremove --purge -y zeitgeist
 apt-get autoremove --purge -y zeitgeist-core
 apt-get autoremove --purge -y zeitgeist-datahub
+apt-get autoremove --purge -y elementary-tweaks
 
 apt-get autoremove -y
 apt-get autoclean -y
@@ -85,11 +86,6 @@ apt-get dist-upgrade -y
 # Installing git
 output "Installing git"
 apt-get install -y git
-
-
-# Installing elementary-tweaks
-output "Installing elementary-tweaks"
-apt-get install -y elementary-tweaks
 
 
 # Installing gedit
@@ -213,6 +209,11 @@ userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
 userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
 userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
 userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
+
+# Setting Window Controls
+output "Setting Window Controls"
+gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close
+gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
 
 
 # Disable guest login

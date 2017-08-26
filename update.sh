@@ -79,7 +79,7 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-aptitude remove -y \
+aptitude purge -y \
     activity-log-manager-common \
     activity-log-manager-control-center \
     appcenter \
@@ -98,8 +98,9 @@ aptitude remove -y \
     modemmanager \
     noise \
     pantheon-mail \
-    pantheon-photos* \
+    pantheon-photos? \
     scratch-text-editor \
+    simple-scan \
     software-center \
     update-manager \
     zeitgeist \

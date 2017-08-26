@@ -32,6 +32,7 @@ output "Adding Google to package manager"
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 rm -rf /etc/apt/sources.list.d/google-chrome.list*
+
 wget -qLO /etc/apt/sources.list.d/google-chrome.list \
      "$URL/etc/apt/sources.list.d/google-chrome.list"
 
@@ -47,6 +48,7 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 output "Adding Elementary Tweaks to package manager"
 add-apt-repository ppa:philip.scott/elementary-tweaks -y
 
+
 # Uninstalling unused packages
 output "Uninstalling unused packages"
 command -v zeitgeist-daemon &> /dev/null
@@ -54,28 +56,28 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-apt-get autoremove --purge -y activity-log-manager-common
-apt-get autoremove --purge -y activity-log-manager-control-center
-apt-get autoremove --purge -y deja-dup
-apt-get autoremove --purge -y empathy-*
-apt-get autoremove --purge -y firefox*
-apt-get autoremove --purge -y geary
-apt-get autoremove --purge -y google-chrome-beta
-apt-get autoremove --purge -y gnome-online-accounts
-apt-get autoremove --purge -y indicator-messages
-apt-get autoremove --purge -y midori-granite
-apt-get autoremove --purge -y modemmanager
-apt-get autoremove --purge -y noise
-apt-get autoremove --purge -y scratch-text-editor
-apt-get autoremove --purge -y software-center
-apt-get autoremove --purge -y update-manager
-apt-get autoremove --purge -y zeitgeist
-apt-get autoremove --purge -y zeitgeist-core
-apt-get autoremove --purge -y zeitgeist-datahub
-apt-get autoremove --purge -y elementary-tweaks
+apt-get autoremove --purge -y \
+    activity-log-manager-common \
+    activity-log-manager-control-center \
+    atom \
+    deja-dup \
+    elementary-tweaks \
+    empathy-* \
+    firefox* \
+    geary \
+    google-chrome-beta \
+    gnome-online-accounts \
+    indicator-messages \
+    midori-granite \
+    modemmanager \
+    noise \
+    scratch-text-editor \
+    software-center \
+    update-manager \
+    zeitgeist \
+    zeitgeist-core \
+    zeitgeist-datahub
 
-apt-get autoremove -y
-apt-get autoclean -y
 
 # Upgrading system
 output "Upgrading system"
@@ -83,30 +85,27 @@ apt-get update
 apt-get dist-upgrade -y
 
 
-# Installing git
-output "Installing git"
-apt-get install -y git
+# Cleanup
+output "Cleanup"
+apt-get autoremove -y
+apt-get autoclean -y
+rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
-# Installing gedit
-output "Installing gedit"
-apt-get install -y gedit
+# Remove old files that students might of saved
+rm -rf $HOMEDIR/Documents/*
+rm -rf $HOMEDIR/Downloads/*
+rm -rf $HOMEDIR/Music/*
+rm -rf $HOMEDIR/Pictures/*
+rm -rf $HOMEDIR/Public/*
+rm -rf $HOMEDIR/Templates/*
+rm -rf $HOMEDIR/Videos/*
 
 
-# Installing vim
-output "Installing vim"
-apt-get install -y vim
-
-
-# Installing atom
-output "Uninstalling atom"
-apt-get remove -y atom
-
-
-# Install VS Code
-output "Install VS Code"
-apt-get install -y code
-
+# Reset Code settings
+wget -qLO $HOMEDIR/.config/Code/User/settings.json \
+     "$URL$HOMEDIR/.config/Code/User/settings.json"
+     
 
 # Installing google-chrome-stable
 output "Installing Google Chrome (stable)"
@@ -114,7 +113,16 @@ rm -rf $HOMEDIR/.config/midori \
      $HOMEDIR/.config/google-chrome \
      $HOMEDIR/.config/google-chrome-stable
 
-apt-get install -y google-chrome-stable
+
+# Installing programs
+output "Installing programs"
+apt-get install -y \
+    code \
+    gedit \
+    git \
+    google-chrome-stable \
+    vim
+
 
 wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
    "$URL/opt/google/chrome/default_apps/external_extensions.json"
@@ -210,6 +218,7 @@ userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
 userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
 userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
+
 # Setting Window Controls
 output "Setting Window Controls"
 gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close
@@ -239,25 +248,6 @@ wget -qLO /usr/sbin/cdcformat \
      "$URL/usr/sbin/cdcformat"
 chmod +x /usr/sbin/cdcformat
 
-# Cleanup
-output "Cleanup"
-apt-get autoremove -y
-apt-get autoclean -y
-rm -rf {/root,/home/*}/.local/share/zeitgeist
-
-
-# Remove old files that students might of saved
-rm -rf $HOMEDIR/Documents/*
-rm -rf $HOMEDIR/Downloads/*
-rm -rf $HOMEDIR/Music/*
-rm -rf $HOMEDIR/Pictures/*
-rm -rf $HOMEDIR/Public/*
-rm -rf $HOMEDIR/Templates/*
-rm -rf $HOMEDIR/Videos/*
-
-# Reset Code settings
-wget -qLO $HOMEDIR/.config/Code/User/settings.json \
-     "$URL$HOMEDIR/.config/Code/User/settings.json"
 
 # Installing phonehome config file
 if [ ! -f $CONFDIR/$CONF ]; then

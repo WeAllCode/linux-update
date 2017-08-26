@@ -75,31 +75,31 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-apt-get autoremove --purge -y activity-log-manager-common
-apt-get autoremove --purge -y activity-log-manager-control-center
-apt-get autoremove --purge -y appcenter
-apt-get autoremove --purge -y atom
-apt-get autoremove --purge -y audience
-apt-get autoremove --purge -y deja-dup
-apt-get autoremove --purge -y elementary-tweaks
-apt-get autoremove --purge -y empathy-*
-apt-get autoremove --purge -y epiphany-*
-apt-get autoremove --purge -y firefox*
-apt-get autoremove --purge -y geary
-apt-get autoremove --purge -y gnome-online-accounts
-apt-get autoremove --purge -y google-chrome*
-apt-get autoremove --purge -y indicator-messages
-apt-get autoremove --purge -y midori-granite
-apt-get autoremove --purge -y modemmanager
-apt-get autoremove --purge -y noise
-apt-get autoremove --purge -y pantheon-mail
-apt-get autoremove --purge -y pantheon-photos*
-apt-get autoremove --purge -y scratch-text-editor
-apt-get autoremove --purge -y software-center
-apt-get autoremove --purge -y update-manager
-apt-get autoremove --purge -y zeitgeist
-apt-get autoremove --purge -y zeitgeist-core
-apt-get autoremove --purge -y zeitgeist-datahub
+apt-get autoremove -y activity-log-manager-common
+apt-get autoremove -y activity-log-manager-control-center
+apt-get autoremove -y appcenter
+apt-get autoremove -y atom
+apt-get autoremove -y audience
+apt-get autoremove -y deja-dup
+apt-get autoremove -y elementary-tweaks
+apt-get autoremove -y empathy-*
+apt-get autoremove -y epiphany-*
+apt-get autoremove -y firefox*
+apt-get autoremove -y geary
+apt-get autoremove -y gnome-online-accounts
+apt-get autoremove -y google-chrome*
+apt-get autoremove -y indicator-messages
+apt-get autoremove -y midori-granite
+apt-get autoremove -y modemmanager
+apt-get autoremove -y noise
+apt-get autoremove -y pantheon-mail
+apt-get autoremove -y pantheon-photos*
+apt-get autoremove -y scratch-text-editor
+apt-get autoremove -y software-center
+apt-get autoremove -y update-manager
+apt-get autoremove -y zeitgeist
+apt-get autoremove -y zeitgeist-core
+apt-get autoremove -y zeitgeist-datahub
 
 
 # Upgrading system
@@ -114,7 +114,7 @@ apt-get autoremove -y
 apt-get autoclean -y
 rm -rf {/root,/home/*}/.local/share/zeitgeist
 
-     
+
 
 # Installing google-chrome-stable
 output "Installing Google Chrome (stable)"

@@ -84,7 +84,7 @@ apt-get autoremove --purge -y empathy-*
 apt-get autoremove --purge -y firefox*
 apt-get autoremove --purge -y geary
 apt-get autoremove --purge -y gnome-online-accounts
-apt-get autoremove --purge -y google-chrome-beta
+apt-get autoremove --purge -y google-chrome*
 apt-get autoremove --purge -y indicator-messages
 apt-get autoremove --purge -y midori-granite
 apt-get autoremove --purge -y modemmanager

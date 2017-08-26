@@ -44,9 +44,9 @@ sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 
-# Adding Elementary Tweaks to package manager
-output "Adding Elementary Tweaks to package manager"
-add-apt-repository ppa:philip.scott/elementary-tweaks -y
+# Removing Elementary Tweaks from package manager
+output "Removing Elementary Tweaks from package manager"
+add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
 # Uninstalling unused packages

@@ -77,10 +77,13 @@ fi
 
 apt-get autoremove --purge -y activity-log-manager-common
 apt-get autoremove --purge -y activity-log-manager-control-center
+apt-get autoremove --purge -y appcenter
 apt-get autoremove --purge -y atom
+apt-get autoremove --purge -y audience
 apt-get autoremove --purge -y deja-dup
 apt-get autoremove --purge -y elementary-tweaks
 apt-get autoremove --purge -y empathy-*
+apt-get autoremove --purge -y epiphany-*
 apt-get autoremove --purge -y firefox*
 apt-get autoremove --purge -y geary
 apt-get autoremove --purge -y gnome-online-accounts
@@ -89,6 +92,8 @@ apt-get autoremove --purge -y indicator-messages
 apt-get autoremove --purge -y midori-granite
 apt-get autoremove --purge -y modemmanager
 apt-get autoremove --purge -y noise
+apt-get autoremove --purge -y pantheon-mail
+apt-get autoremove --purge -y pantheon-photos*
 apt-get autoremove --purge -y scratch-text-editor
 apt-get autoremove --purge -y software-center
 apt-get autoremove --purge -y update-manager

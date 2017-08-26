@@ -238,9 +238,9 @@ userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
 
 # Setting Window Controls
-output "Setting Window Controls"
-userrun 'gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close'
-userrun 'gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{\'Gtk/DecorationLayout\': <\':minimize,maximize,close\'>}"'
+# output "Setting Window Controls"
+# userrun 'gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close'
+# userrun 'gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'"'"'Gtk/DecorationLayout'"'"': <'"'"':minimize,maximize,close'"'"'>}"'
 
 
 # Disable guest login

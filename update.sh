@@ -75,31 +75,32 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-apt-get autoremove -y activity-log-manager-common
-apt-get autoremove -y activity-log-manager-control-center
-apt-get autoremove -y appcenter
-apt-get autoremove -y atom
-apt-get autoremove -y audience
-apt-get autoremove -y deja-dup
-apt-get autoremove -y elementary-tweaks
-apt-get autoremove -y empathy-*
-apt-get autoremove -y epiphany-*
-apt-get autoremove -y firefox*
-apt-get autoremove -y geary
-apt-get autoremove -y gnome-online-accounts
-apt-get autoremove -y google-chrome*
-apt-get autoremove -y indicator-messages
-apt-get autoremove -y midori-granite
-apt-get autoremove -y modemmanager
-apt-get autoremove -y noise
-apt-get autoremove -y pantheon-mail
-apt-get autoremove -y pantheon-photos*
-apt-get autoremove -y scratch-text-editor
-apt-get autoremove -y software-center
-apt-get autoremove -y update-manager
-apt-get autoremove -y zeitgeist
-apt-get autoremove -y zeitgeist-core
-apt-get autoremove -y zeitgeist-datahub
+apt-get autoremove -y \
+    activity-log-manager-common \
+    activity-log-manager-control-center \
+    appcenter \
+    atom \
+    audience \
+    deja-dup \
+    elementary-tweaks \
+    empathy-* \
+    epiphany-* \
+    firefox* \
+    geary \
+    gnome-online-accounts \
+    google-chrome* \
+    indicator-messages \
+    midori-granite \
+    modemmanager \
+    noise \
+    pantheon-mail \
+    pantheon-photos* \
+    scratch-text-editor \
+    software-center \
+    update-manager \
+    zeitgeist \
+    zeitgeist-core \
+    zeitgeist-datahub
 
 
 # Upgrading system
@@ -125,12 +126,13 @@ rm -rf $HOMEDIR/.config/midori \
 
 # Installing programs
 output "Installing programs"
-apt-get install -y code
-apt-get install -y gedit
-apt-get install -y git
-apt-get install -y google-chrome-stable
-apt-get install -y vim
-apt-get install -y xbacklight
+apt-get install -y \
+    code \
+    gedit \
+    git \
+    google-chrome-stable \
+    vim \
+    xbacklight
 
 
 # Setting screen brightness to 100

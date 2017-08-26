@@ -24,7 +24,9 @@ output() {
 
 
 # Update Script Running
-userrun 'notify-send --urgency=critical "Update Script Running"'
+output "Update Script Running"
+echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
+killall wingpanel
 
 
 # Cleanup files
@@ -69,6 +71,7 @@ add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
 # Install aptitude
+apt update
 apt install -y aptitude
 
 
@@ -100,6 +103,7 @@ aptitude purge -y \
     pantheon-mail \
     pantheon-photos? \
     scratch-text-editor \
+    screenshot-tool \
     simple-scan \
     software-center \
     update-manager \
@@ -296,6 +300,12 @@ if [ ! -f $CRONDIR/$SCRIPT ]; then
 else
     output "Phonehome cron exists"
 fi
+
+
+# Reset theme
+output "Reset theme"
+sed -i '$ d' /usr/share/themes/elementary/gtk-3.0/apps.css
+killall wingpanel
 
 
 # Open survey

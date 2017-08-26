@@ -114,13 +114,14 @@ aptitude purge -y \
 
 # Upgrading system
 output "Upgrading system"
-aptitude update
-aptitude dist-upgrade -y
+apt update
+apt dist-upgrade -y
 
 
 # Cleanup
 output "Cleanup"
-aptitude autoclean -y
+apt-get autoremove -y
+apt-get autoclean -y
 rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
@@ -134,13 +135,12 @@ rm -rf $HOMEDIR/.config/midori \
 
 # Installing programs
 output "Installing programs"
-aptitude install -y \
-    code \
-    gedit \
-    git \
-    google-chrome-stable \
-    vim \
-    xbacklight
+apt install -y code
+apt install -y gedit
+apt install -y git
+apt install -y google-chrome-stable
+apt install -y vim
+apt install -y xbacklight
 
 
 # Setting screen brightness to 100

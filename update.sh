@@ -121,9 +121,17 @@ apt-get install -y \
     gedit \
     git \
     google-chrome-stable \
-    vim
+    vim \
+    xbacklight
 
 
+# Setting screen brightness to 100
+output "Setting screen brightness to 100"
+xbacklight -set 100
+
+
+# Configuring Google Chrome
+output "Configuring Google Chrome"
 wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
    "$URL/opt/google/chrome/default_apps/external_extensions.json"
 

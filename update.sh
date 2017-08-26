@@ -291,6 +291,10 @@ else
 fi
 
 
+# Open survey
+xdg-open "http://coderdojoch.com/pre"
+
+
 # Restarting in 1 minute
 # output "Restarting in 1 minute"
 # shutdown -r 1

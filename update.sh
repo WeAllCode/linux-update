@@ -27,6 +27,26 @@ output() {
 userrun 'notify-send --urgency=critical "Update Script Running"'
 
 
+# Cleanup files
+output "Cleanup files"
+rm -rf /etc/apt/trusted.gpg.d/*
+
+
+# Remove old files that students might of saved
+rm -rf $HOMEDIR/Documents/*
+rm -rf $HOMEDIR/Downloads/*
+rm -rf $HOMEDIR/Music/*
+rm -rf $HOMEDIR/Pictures/*
+rm -rf $HOMEDIR/Public/*
+rm -rf $HOMEDIR/Templates/*
+rm -rf $HOMEDIR/Videos/*
+
+
+# Reset Code settings
+wget -qLO $HOMEDIR/.config/Code/User/settings.json \
+     "$URL$HOMEDIR/.config/Code/User/settings.json"
+
+
 # Adding Google to package manager
 output "Adding Google to package manager"
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -39,9 +59,8 @@ wget -qLO /etc/apt/sources.list.d/google-chrome.list \
 
 # VS Code
 output "Adding VS Code to package manager"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 
 # Removing Elementary Tweaks from package manager
@@ -92,19 +111,7 @@ apt-get autoclean -y
 rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
-# Remove old files that students might of saved
-rm -rf $HOMEDIR/Documents/*
-rm -rf $HOMEDIR/Downloads/*
-rm -rf $HOMEDIR/Music/*
-rm -rf $HOMEDIR/Pictures/*
-rm -rf $HOMEDIR/Public/*
-rm -rf $HOMEDIR/Templates/*
-rm -rf $HOMEDIR/Videos/*
 
-
-# Reset Code settings
-wget -qLO $HOMEDIR/.config/Code/User/settings.json \
-     "$URL$HOMEDIR/.config/Code/User/settings.json"
      
 
 # Installing google-chrome-stable

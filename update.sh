@@ -292,7 +292,7 @@ fi
 
 
 # Open survey
-userrun "xdg-open http://coderdojoch.com/pre"
+userrun "xdg-open http://coderdojochi.com/survey/pre"
 
 
 # Restarting in 1 minute

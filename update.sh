@@ -107,13 +107,13 @@ sudo add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 # Upgrading system
 output "Upgrading system"
-sudo apt update -qy
-sudo apt dist-upgrade -qy
+sudo apt update -qqy
+sudo apt dist-upgrade -qqy
 
 
 # Cleanup
 output "Cleanup"
-sudo apt autoremove -qy
+sudo apt autoremove -qqy
 sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
@@ -126,12 +126,12 @@ sudo rm -rf $HOMEDIR/.config/midori \
 
 # Installing programs
 output "Installing programs"
-sudo apt install -qy code
-sudo apt install -qy gedit
-sudo apt install -qy git
-sudo apt install -qy google-chrome-stable
-sudo apt install -qy vim
-sudo apt install -qy xbacklight
+sudo apt install -qqy code
+sudo apt install -qqy gedit
+sudo apt install -qqy git
+sudo apt install -qqy google-chrome-stable
+sudo apt install -qqy vim
+sudo apt install -qqy xbacklight
 
 
 # Setting screen brightness to 100
@@ -141,6 +141,7 @@ sudo xbacklight -set 100
 
 # Configuring Google Chrome
 output "Configuring Google Chrome"
+sudo rm -rf /opt/google/chrome/default_apps/external_extensions.json
 wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
      "$URL/opt/google/chrome/default_apps/external_extensions.json"
 
@@ -193,7 +194,8 @@ sudo killall gnome-keyring-daemon
 
 # Setting up the dock
 output "Setting up the dock"
-rm -rf $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
+sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/
+sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"

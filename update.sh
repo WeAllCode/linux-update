@@ -42,6 +42,7 @@ sudo rm -rf $HOMEDIR/Videos/*
 
 
 # Reset Code settings
+sudo rm -rf $HOMEDIR/.config/Code/User/settings.json
 wget -qLO $HOMEDIR/.config/Code/User/settings.json \
      "$URL$HOMEDIR/.config/Code/User/settings.json"
 
@@ -53,32 +54,32 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-sudo apt purge -qy activity-log-manager-common
-sudo apt purge -qy activity-log-manager-control-center
-sudo apt purge -qy appcenter
-sudo apt purge -qy atom
-sudo apt purge -qy audience
-sudo apt purge -qy deja-dup
-sudo apt purge -qy elementary-tweaks
-sudo apt purge -qy empathy-*
-sudo apt purge -qy epiphany-*
-sudo apt purge -qy firefox*
-sudo apt purge -qy geary
-sudo apt purge -qy gnome-online-accounts
-sudo apt purge -qy indicator-messages
-sudo apt purge -qy midori-granite
-sudo apt purge -qy modemmanager
-sudo apt purge -qy noise
-sudo apt purge -qy pantheon-mail
-sudo apt purge -qy pantheon-photos*
-sudo apt purge -qy scratch-text-editor
-sudo apt purge -qy screenshot-tool
-sudo apt purge -qy simple-scan
-sudo apt purge -qy software-center
-sudo apt purge -qy update-manager
-sudo apt purge -qy zeitgeist
-sudo apt purge -qy zeitgeist-core
-sudo apt purge -qy zeitgeist-datahub
+sudo apt purge -qqy activity-log-manager-common
+sudo apt purge -qqy activity-log-manager-control-center
+sudo apt purge -qqy appcenter
+sudo apt purge -qqy atom
+sudo apt purge -qqy audience
+sudo apt purge -qqy deja-dup
+sudo apt purge -qqy elementary-tweaks
+sudo apt purge -qqy empathy-*
+sudo apt purge -qqy epiphany-*
+sudo apt purge -qqy firefox*
+sudo apt purge -qqy geary
+sudo apt purge -qqy gnome-online-accounts
+sudo apt purge -qqy indicator-messages
+sudo apt purge -qqy midori-granite
+sudo apt purge -qqy modemmanager
+sudo apt purge -qqy noise
+sudo apt purge -qqy pantheon-mail
+sudo apt purge -qqy pantheon-photos*
+sudo apt purge -qqy scratch-text-editor
+sudo apt purge -qqy screenshot-tool
+sudo apt purge -qqy simple-scan
+sudo apt purge -qqy software-center
+sudo apt purge -qqy update-manager
+sudo apt purge -qqy zeitgeist
+sudo apt purge -qqy zeitgeist-core
+sudo apt purge -qqy zeitgeist-datahub
 
 # Adding Google to package manager
 output "Adding Google to package manager"
@@ -101,7 +102,7 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" 
 
 # Removing Elementary Tweaks from package manager
 output "Removing Elementary Tweaks from package manager"
-sudo add-apt-repository -r -qy ppa:philip.scott/elementary-tweaks
+sudo add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
 # Upgrading system

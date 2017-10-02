@@ -194,14 +194,14 @@ output "Setting up the dock"
 sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/*
 mkdir -p $HOMEDIR/.config/plank/dock1/launchers
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
+sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
+sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
 
 
 # If 0, the dock won't hide.

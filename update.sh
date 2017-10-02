@@ -15,7 +15,7 @@ MACHINE_TYPE=`uname -m`
 
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
-    userrun "notify-send --urgency=low '$1'";
+    notify-send --urgency=low '$1';
 }
 
 

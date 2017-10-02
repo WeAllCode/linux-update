@@ -95,7 +95,6 @@ aptitude purge -y \
     firefox? \
     geary \
     gnome-online-accounts \
-    google-chrome? \
     indicator-messages \
     midori-granite \
     modemmanager \

@@ -15,13 +15,14 @@ MACHINE_TYPE=`uname -m`
 
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
-    notify-send --urgency=low '$1';
+    notify-send --urgency=low "$1";
 }
 
 
 # Update Script Running
 output "Update Script Running"
-sudo echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
+echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" | \
+    sudo tee -a /usr/share/themes/elementary/gtk-3.0/apps.css
 sudo killall wingpanel
 
 
@@ -91,8 +92,11 @@ sudo wget -qLO /etc/apt/sources.list.d/google-chrome.list \
 
 # VS Code
 output "Adding VS Code to package manager"
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-sudo echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+curl https://packages.microsoft.com/keys/microsoft.asc | \
+    sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | \
+    sudo tee /etc/apt/sources.list.d/vscode.list
 
 
 # Removing Elementary Tweaks from package manager

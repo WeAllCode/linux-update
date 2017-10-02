@@ -139,8 +139,8 @@ xbacklight -set 100
 # Configuring Google Chrome
 output "Configuring Google Chrome"
 sudo rm -rf /opt/google/chrome/default_apps/external_extensions.json
-wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
-     "$URL/opt/google/chrome/default_apps/external_extensions.json"
+sudo wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
+          "$URL/opt/google/chrome/default_apps/external_extensions.json"
 
 
 google-chrome-stable --no-first-run > /dev/null 2>&1 &

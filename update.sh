@@ -13,10 +13,6 @@ CRONDIR=/etc/cron.d
 MACHINE_TYPE=`uname -m`
 
 
-userrun() {
-    sudo -H -u coderdojochi bash -c "$1";
-}
-
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
     userrun "notify-send --urgency=low '$1'";
@@ -25,54 +21,28 @@ output() {
 
 # Update Script Running
 output "Update Script Running"
-echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
-killall wingpanel
+sudo echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
+sudo killall wingpanel
 
 
 # Cleanup files
 output "Cleanup files"
-rm -rf /etc/apt/trusted.gpg.d/*
+sudo rm -rf /etc/apt/trusted.gpg.d/*
 
 
 # Remove old files that students might of saved
-rm -rf $HOMEDIR/Documents/*
-rm -rf $HOMEDIR/Downloads/*
-rm -rf $HOMEDIR/Music/*
-rm -rf $HOMEDIR/Pictures/*
-rm -rf $HOMEDIR/Public/*
-rm -rf $HOMEDIR/Templates/*
-rm -rf $HOMEDIR/Videos/*
+sudo rm -rf $HOMEDIR/Documents/*
+sudo rm -rf $HOMEDIR/Downloads/*
+sudo rm -rf $HOMEDIR/Music/*
+sudo rm -rf $HOMEDIR/Pictures/*
+sudo rm -rf $HOMEDIR/Public/*
+sudo rm -rf $HOMEDIR/Templates/*
+sudo rm -rf $HOMEDIR/Videos/*
 
 
 # Reset Code settings
 wget -qLO $HOMEDIR/.config/Code/User/settings.json \
      "$URL$HOMEDIR/.config/Code/User/settings.json"
-
-
-# Adding Google to package manager
-output "Adding Google to package manager"
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-
-rm -rf /etc/apt/sources.list.d/google-chrome.list*
-
-wget -qLO /etc/apt/sources.list.d/google-chrome.list \
-     "$URL/etc/apt/sources.list.d/google-chrome.list"
-
-
-# VS Code
-output "Adding VS Code to package manager"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-
-# Removing Elementary Tweaks from package manager
-output "Removing Elementary Tweaks from package manager"
-add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
-
-
-# Install aptitude
-apt update
-apt install -y aptitude
 
 
 # Uninstalling unused packages
@@ -82,81 +52,98 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-aptitude purge -y \
-    activity-log-manager-common \
-    activity-log-manager-control-center \
-    appcenter \
-    atom \
-    audience \
-    deja-dup \
-    elementary-tweaks \
-    empathy-? \
-    epiphany-? \
-    firefox? \
-    geary \
-    gnome-online-accounts \
-    indicator-messages \
-    midori-granite \
-    modemmanager \
-    noise \
-    pantheon-mail \
-    pantheon-photos? \
-    scratch-text-editor \
-    screenshot-tool \
-    simple-scan \
-    software-center \
-    update-manager \
-    zeitgeist \
-    zeitgeist-core \
-    zeitgeist-datahub
+sudo apt purge -y activity-log-manager-common
+sudo apt purge -y activity-log-manager-control-center
+sudo apt purge -y appcenter
+sudo apt purge -y atom
+sudo apt purge -y audience
+sudo apt purge -y deja-dup
+sudo apt purge -y elementary-tweaks
+sudo apt purge -y empathy-*
+sudo apt purge -y epiphany-*
+sudo apt purge -y firefox*
+sudo apt purge -y geary
+sudo apt purge -y gnome-online-accounts
+sudo apt purge -y indicator-messages
+sudo apt purge -y midori-granite
+sudo apt purge -y modemmanager
+sudo apt purge -y noise
+sudo apt purge -y pantheon-mail
+sudo apt purge -y pantheon-photos*
+sudo apt purge -y scratch-text-editor
+sudo apt purge -y screenshot-tool
+sudo apt purge -y simple-scan
+sudo apt purge -y software-center
+sudo apt purge -y update-manager
+sudo apt purge -y zeitgeist
+sudo apt purge -y zeitgeist-core
+sudo apt purge -y zeitgeist-datahub
+
+# Adding Google to package manager
+output "Adding Google to package manager"
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+sudo rm -rf /etc/apt/sources.list.d/google-chrome.list*
+
+sudo wget -qLO /etc/apt/sources.list.d/google-chrome.list \
+          "$URL/etc/apt/sources.list.d/google-chrome.list"
+
+
+# VS Code
+output "Adding VS Code to package manager"
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+
+
+# Removing Elementary Tweaks from package manager
+output "Removing Elementary Tweaks from package manager"
+sudo add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
 # Upgrading system
 output "Upgrading system"
-apt update
-apt dist-upgrade -y
+sudo apt update
+sudo apt dist-upgrade -y
 
 
 # Cleanup
 output "Cleanup"
-apt-get autoremove -y
-apt-get autoclean -y
-rm -rf {/root,/home/*}/.local/share/zeitgeist
-
+sudo apt autoremove -y
+sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
 # Installing google-chrome-stable
 output "Installing Google Chrome (stable)"
-rm -rf $HOMEDIR/.config/midori \
-     $HOMEDIR/.config/google-chrome \
-     $HOMEDIR/.config/google-chrome-stable
+sudo rm -rf $HOMEDIR/.config/midori \
+            $HOMEDIR/.config/google-chrome \
+            $HOMEDIR/.config/google-chrome-stable
 
 
 # Installing programs
 output "Installing programs"
-apt install -y code
-apt install -y gedit
-apt install -y git
-apt install -y google-chrome-stable
-apt install -y vim
-apt install -y xbacklight
+sudo apt install -y code
+sudo apt install -y gedit
+sudo apt install -y git
+sudo apt install -y google-chrome-stable
+sudo apt install -y vim
+sudo apt install -y xbacklight
 
 
 # Setting screen brightness to 100
 output "Setting screen brightness to 100"
-xbacklight -set 100
+sudo xbacklight -set 100
 
 
 # Configuring Google Chrome
 output "Configuring Google Chrome"
 wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
-   "$URL/opt/google/chrome/default_apps/external_extensions.json"
+     "$URL/opt/google/chrome/default_apps/external_extensions.json"
 
 
-userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
-userrun 'sleep 10'
-userrun 'killall chrome'
-userrun 'sleep 5'
+google-chrome-stable --no-first-run > /dev/null 2>&1 &
+sleep 10
+sudo killall chrome
+sleep 5
 
 # Disabling Google's Custom Frame
 if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
@@ -195,8 +182,8 @@ fi
 
 # Fixing Chrome Keyring issue
 output "Fixing Chrome Keyring issue"
-mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
-killall gnome-keyring-daemon
+sudo mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
+sudo killall gnome-keyring-daemon
 
 
 # Setting up the dock
@@ -226,61 +213,62 @@ sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;google-c
 
 # Changing desktop background
 output "Changing desktop background"
-wget -qLO /usr/share/backgrounds/coderdojochi.png \
-     "$URL/usr/share/backgrounds/coderdojochi.png"
+sudo wget -qLO /usr/share/backgrounds/coderdojochi.png \
+          "$URL/usr/share/backgrounds/coderdojochi.png"
 
-mv /usr/share/backgrounds/elementaryos-default \
-   /usr/share/backgrounds/elementaryos-default-bak
+sudo mv /usr/share/backgrounds/elementaryos-default \
+        /usr/share/backgrounds/elementaryos-default-bak
 
-ln -s /usr/share/backgrounds/coderdojochi.png \
-      /usr/share/backgrounds/elementaryos-default
+sudo ln -s /usr/share/backgrounds/coderdojochi.png \
+           /usr/share/backgrounds/elementaryos-default
 
-userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
-userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
+gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"
+gsettings set "org.gnome.desktop.background" "picture-options" "zoom"
 
 
 # Setting screensaver settings
 output "Setting screensaver settings"
-userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
-userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
-userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
-userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
+gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600
+gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false
+gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false
+gsettings set "org.gnome.desktop.session" "idle-delay" 0
 
 
 # Setting Window Controls
 # output "Setting Window Controls"
-# userrun 'gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close'
-# userrun 'gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'"'"'Gtk/DecorationLayout'"'"': <'"'"':minimize,maximize,close'"'"'>}"'
+# gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close
+# gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'"'"'Gtk/DecorationLayout'"'"': <'"'"':minimize,maximize,close'"'"'>}"
 
 
 # Disable guest login
 output "Disable guest login"
-wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
-     "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
+sudo wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
+          "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
 
 
 # Restart dock
 output "Restart dock"
-killall plank
+sudo killall plank
 
 
 # Fix drag and drop quirk
 output "Fix drag and drop quirk"
-wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
-     "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
+sudo wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
+          "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 
 
 # Install cdcformat script
 output "Install cdcformat script"
-wget -qLO /usr/sbin/cdcformat \
-     "$URL/usr/sbin/cdcformat"
-chmod +x /usr/sbin/cdcformat
+sudo wget -qLO /usr/sbin/cdcformat \
+          "$URL/usr/sbin/cdcformat"
+sudo chmod +x /usr/sbin/cdcformat
 
 
 # Installing phonehome config file
 if [ ! -f $CONFDIR/$CONF ]; then
     output "Installing phonehome config file"
-    wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+    sudo wget -qLO $CONFDIR/$CONF \
+              $URL/$CONFDIR/$CONF
 else
     output "Phonehome config file exists"
 fi
@@ -288,14 +276,16 @@ fi
 
 # Installing phonehome script
 output "Installing phonehome script"
-wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
-chmod +x $SCRIPTDIR/$SCRIPT
+sudo wget -qLO $SCRIPTDIR/$SCRIPT \
+          $URL/$SCRIPTDIR/$SCRIPT
+sudo chmod +x $SCRIPTDIR/$SCRIPT
 
 
 # Installing phonehome cron
 if [ ! -f $CRONDIR/$SCRIPT ]; then
     output "Installing phonehome cron"
-    wget -qLO $CRONDIR/$SCRIPT $URL/$CRONDIR/$SCRIPT
+    sudo wget -qLO $CRONDIR/$SCRIPT \
+              $URL/$CRONDIR/$SCRIPT
 else
     output "Phonehome cron exists"
 fi
@@ -303,15 +293,9 @@ fi
 
 # Reset theme
 output "Reset theme"
-sed -i '$ d' /usr/share/themes/elementary/gtk-3.0/apps.css
-killall wingpanel
+sudo sed -i '$ d' /usr/share/themes/elementary/gtk-3.0/apps.css
+sudo killall wingpanel
 
 
 # Open survey
-userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"
-
-
-# Restarting in 1 minute
-# output "Restarting in 1 minute"
-# shutdown -r 1
-
+xdg-open http://coderdojochi.com/survey/pre &> /dev/null

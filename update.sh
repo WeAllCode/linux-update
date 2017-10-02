@@ -21,8 +21,7 @@ output() {
 
 # Update Script Running
 output "Update Script Running"
-echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" | \
-    sudo tee -a /usr/share/themes/elementary/gtk-3.0/apps.css
+echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" | sudo tee -a /usr/share/themes/elementary/gtk-3.0/apps.css
 sudo killall wingpanel
 
 
@@ -93,11 +92,9 @@ sudo wget -qLO /etc/apt/sources.list.d/google-chrome.list \
 
 # VS Code
 output "Adding VS Code to package manager"
-curl https://packages.microsoft.com/keys/microsoft.asc | \
-    sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
 
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | \
-    sudo tee /etc/apt/sources.list.d/vscode.list
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
 
 
 # Removing Elementary Tweaks from package manager
@@ -136,7 +133,7 @@ sudo apt install -qqy xbacklight
 
 # Setting screen brightness to 100
 output "Setting screen brightness to 100"
-sudo xbacklight -set 100
+xbacklight -set 100
 
 
 # Configuring Google Chrome
@@ -194,8 +191,8 @@ sudo killall gnome-keyring-daemon
 
 # Setting up the dock
 output "Setting up the dock"
-sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/
-sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
+sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/*
+mkdir -p $HOMEDIR/.config/plank/dock1/launchers
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
@@ -205,9 +202,6 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
-
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
 
 
 # If 0, the dock won't hide.

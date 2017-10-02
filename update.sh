@@ -52,36 +52,36 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-sudo apt purge -y activity-log-manager-common
-sudo apt purge -y activity-log-manager-control-center
-sudo apt purge -y appcenter
-sudo apt purge -y atom
-sudo apt purge -y audience
-sudo apt purge -y deja-dup
-sudo apt purge -y elementary-tweaks
-sudo apt purge -y empathy-*
-sudo apt purge -y epiphany-*
-sudo apt purge -y firefox*
-sudo apt purge -y geary
-sudo apt purge -y gnome-online-accounts
-sudo apt purge -y indicator-messages
-sudo apt purge -y midori-granite
-sudo apt purge -y modemmanager
-sudo apt purge -y noise
-sudo apt purge -y pantheon-mail
-sudo apt purge -y pantheon-photos*
-sudo apt purge -y scratch-text-editor
-sudo apt purge -y screenshot-tool
-sudo apt purge -y simple-scan
-sudo apt purge -y software-center
-sudo apt purge -y update-manager
-sudo apt purge -y zeitgeist
-sudo apt purge -y zeitgeist-core
-sudo apt purge -y zeitgeist-datahub
+sudo apt purge -qy activity-log-manager-common
+sudo apt purge -qy activity-log-manager-control-center
+sudo apt purge -qy appcenter
+sudo apt purge -qy atom
+sudo apt purge -qy audience
+sudo apt purge -qy deja-dup
+sudo apt purge -qy elementary-tweaks
+sudo apt purge -qy empathy-*
+sudo apt purge -qy epiphany-*
+sudo apt purge -qy firefox*
+sudo apt purge -qy geary
+sudo apt purge -qy gnome-online-accounts
+sudo apt purge -qy indicator-messages
+sudo apt purge -qy midori-granite
+sudo apt purge -qy modemmanager
+sudo apt purge -qy noise
+sudo apt purge -qy pantheon-mail
+sudo apt purge -qy pantheon-photos*
+sudo apt purge -qy scratch-text-editor
+sudo apt purge -qy screenshot-tool
+sudo apt purge -qy simple-scan
+sudo apt purge -qy software-center
+sudo apt purge -qy update-manager
+sudo apt purge -qy zeitgeist
+sudo apt purge -qy zeitgeist-core
+sudo apt purge -qy zeitgeist-datahub
 
 # Adding Google to package manager
 output "Adding Google to package manager"
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+wget -qLO - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 sudo rm -rf /etc/apt/sources.list.d/google-chrome.list*
 
@@ -97,18 +97,18 @@ sudo echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable m
 
 # Removing Elementary Tweaks from package manager
 output "Removing Elementary Tweaks from package manager"
-sudo add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
+sudo add-apt-repository -r -qy ppa:philip.scott/elementary-tweaks
 
 
 # Upgrading system
 output "Upgrading system"
-sudo apt update
-sudo apt dist-upgrade -y
+sudo apt update -qy
+sudo apt dist-upgrade -qy
 
 
 # Cleanup
 output "Cleanup"
-sudo apt autoremove -y
+sudo apt autoremove -qy
 sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
@@ -121,12 +121,12 @@ sudo rm -rf $HOMEDIR/.config/midori \
 
 # Installing programs
 output "Installing programs"
-sudo apt install -y code
-sudo apt install -y gedit
-sudo apt install -y git
-sudo apt install -y google-chrome-stable
-sudo apt install -y vim
-sudo apt install -y xbacklight
+sudo apt install -qy code
+sudo apt install -qy gedit
+sudo apt install -qy git
+sudo apt install -qy google-chrome-stable
+sudo apt install -qy vim
+sudo apt install -qy xbacklight
 
 
 # Setting screen brightness to 100
@@ -188,7 +188,7 @@ sudo killall gnome-keyring-daemon
 
 # Setting up the dock
 output "Setting up the dock"
-rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
+rm -rf $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
@@ -298,4 +298,4 @@ sudo killall wingpanel
 
 
 # Open survey
-xdg-open http://coderdojochi.com/survey/pre &> /dev/null
+xdg-open http://coderdojochi.com/survey/pre &> /dev/null &

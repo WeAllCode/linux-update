@@ -82,39 +82,39 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-aptitude purge -y \
-    activity-log-manager-common \
-    activity-log-manager-control-center \
-    appcenter \
-    atom \
-    audience \
-    deja-dup \
-    elementary-tweaks \
-    empathy-? \
-    epiphany-? \
-    firefox? \
-    geary \
-    gnome-online-accounts \
-    indicator-messages \
-    midori-granite \
-    modemmanager \
-    noise \
-    pantheon-mail \
-    pantheon-photos? \
-    scratch-text-editor \
-    screenshot-tool \
-    simple-scan \
-    software-center \
-    update-manager \
-    zeitgeist \
-    zeitgeist-core \
-    zeitgeist-datahub
+# aptitude purge -y \
+#     activity-log-manager-common \
+#     activity-log-manager-control-center \
+#     appcenter \
+#     atom \
+#     audience \
+#     deja-dup \
+#     elementary-tweaks \
+#     empathy-? \
+#     epiphany-? \
+#     firefox? \
+#     geary \
+#     gnome-online-accounts \
+#     indicator-messages \
+#     midori-granite \
+#     modemmanager \
+#     noise \
+#     pantheon-mail \
+#     pantheon-photos? \
+#     scratch-text-editor \
+#     screenshot-tool \
+#     simple-scan \
+#     software-center \
+#     update-manager \
+#     zeitgeist \
+#     zeitgeist-core \
+#     zeitgeist-datahub
 
 
 # Upgrading system
 output "Upgrading system"
-apt update
-apt dist-upgrade -y
+# apt update
+# apt dist-upgrade -y
 
 
 # Cleanup
@@ -306,6 +306,8 @@ output "Reset theme"
 sed -i '$ d' /usr/share/themes/elementary/gtk-3.0/apps.css
 killall wingpanel
 
+# Set ownership
+chown -R coderdojochi:coderdojochi $HOMEDIR/.config/
 
 # Open survey
 userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"

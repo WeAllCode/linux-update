@@ -1,6 +1,9 @@
 {
-    "git.ignoreLegacyWarning": true,
-    "git.enabled": false,
+    "editor.autoClosingBrackets": false,
+    "editor.minimap.enabled": false,
     "editor.parameterHints": false,
-    "editor.minimap.enabled": false
+    "editor.wordWrap": "on",
+    "git.enabled": false,
+    "git.ignoreLegacyWarning": true,
+    "html.autoClosingTags": false
 }

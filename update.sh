@@ -194,22 +194,23 @@ output "Setting up the dock"
 sudo rm -rf $HOMEDIR/.config/plank/dock1/launchers/*
 mkdir -p $HOMEDIR/.config/plank/dock1/launchers
 
-sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
-          "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/org.pantheon.files.dockitem \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/org.pantheon.files.dockitem"
 
-sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
           "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
-sudo wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
           "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
 
 
 # If 0, the dock won't hide.
 sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
+gsettings set net.launchpad.plank.docks.dock1.theme "Transparent"
 
 
 # List of *.dockitems files on this dock.
-sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
+sed -i 's/DockItems=*/DockItems=org.pantheon.files.dockitem;;code.dockitem;;google-chrome.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
 
 
 # Changing desktop background

@@ -23,6 +23,21 @@ output() {
 }
 
 
+uninstall() {
+    debInst() {
+        dpkg-query -Wf'${db:Status-abbrev}' "$1" 2>/dev/null | grep -q '^i'
+    }
+
+    if debInst "$1"; then
+        printf 'Why yes, the package %s _is_ installed!\n' "$1"
+        aptitude purge -y $1
+    else
+        printf 'I regret to inform you that the package %s is not currently installed.\n' "$1"
+    fi
+}
+
+
+
 # Update Script Running
 output "Update Script Running"
 echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
@@ -131,6 +146,10 @@ aptitude purge -y epiphany-?
 
 output "Uninstall Geary"
 aptitude purge -y geary
+
+
+output "Uninstall Google"
+uninstall google-?
 
 
 output "Uninstall Gnome Online Accounts"

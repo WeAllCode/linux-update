@@ -100,8 +100,7 @@ uninstall activity-log-manager-control-center
 
 
 output "Uninstall App Center"
-command -v zeitgeist-daemon &> /dev/null
-if [ $? -eq 0 ]; then
+if [ $(command -v zeitgeist-daemon &> /dev/null) -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 

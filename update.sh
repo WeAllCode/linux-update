@@ -88,6 +88,8 @@ sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable
 # ---
 # # Removing Elementary Tweaks from package manager
 # output "Removing Elementary Tweaks from package manager"
+install software-properties-common
+add-apt-repository -y ppa:philip.scott/elementary-tweaks 
 # add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
@@ -101,7 +103,8 @@ uninstall activity-log-manager-control-center
 
 
 output "Uninstall App Center"
-if [ $(command -v zeitgeist-daemon &> /dev/null) -eq 0 ]; then
+command -v zeitgeist-daemon &> /dev/null
+if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
@@ -153,6 +156,7 @@ uninstall "geary"
 
 output "Uninstall Google"
 uninstall "google-*" "^google-.*"
+rm -rf $HOMEDIR/.config/google-chrome*
 
 
 output "Uninstall Gnome Online Accounts"
@@ -162,7 +166,7 @@ uninstall "indicator-messages"
 
 output "Uninstall Midori"
 uninstall "midori-granite"
-rm -rf "$HOMEDIR/.config/midori"
+rm -rf $HOMEDIR/.config/midori
 
 
 output "Uninstall Mode Manager"
@@ -207,11 +211,6 @@ apt-get autoclean -y
 
 
 
-# # Installing google-chrome-stable
-# output "Installing Google Chrome (stable)"
-# rm -rf "$HOMEDIR/.config/google-chrome" \
-#        "$HOMEDIR/.config/google-chrome-stable"
-
 # ---
 # Installing programs
 output "Installing programs"
@@ -242,6 +241,10 @@ install "vim"
 
 output "Installing xbacklight"
 install "xbacklight"
+
+
+output "Installing elementary tweaks"
+install "elementary-tweaks"
 
 
 # ---
@@ -310,7 +313,7 @@ xbacklight -set 100
 # ---
 # Setting up the dock
 output "Setting up the dock"
-rm "$HOMEDIR/.config/plank/dock1/launchers/*.dockitem"
+rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
 wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem" \
       "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
@@ -370,8 +373,8 @@ userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
 # Disable guest login
 output "Disable guest login"
-wget -qLO "/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf" \
-      "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
+wget -qLO "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
+      "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
 
 
 # Restart dock
@@ -405,7 +408,7 @@ fi
 # Installing phonehome script
 output "Installing phonehome script"
 wget -qLO "$SCRIPTDIR/$SCRIPT" \ 
-     "$URL/$SCRIPTDIR/$SCRIPT"
+     "$URL$SCRIPTDIR/$SCRIPT"
 chmod +x "$SCRIPTDIR/$SCRIPT"
 
 

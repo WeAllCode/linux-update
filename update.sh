@@ -43,162 +43,250 @@ rm -rf $HOMEDIR/Public/*
 rm -rf $HOMEDIR/Templates/*
 rm -rf $HOMEDIR/Videos/*
 
+# ---
+# # Adding Google to package manager
+# output "Adding Google to package manager"
+# wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
-# Reset Code settings
-wget -qLO $HOMEDIR/.config/Code/User/settings.json \
-     "$URL$HOMEDIR/.config/Code/User/settings.json"
-
-
-# Adding Google to package manager
-output "Adding Google to package manager"
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-
+# Remove Google apt source
+output "Remove Google apt source"
 rm -rf /etc/apt/sources.list.d/google-chrome.list*
 
-wget -qLO /etc/apt/sources.list.d/google-chrome.list \
-     "$URL/etc/apt/sources.list.d/google-chrome.list"
+# wget -qLO /etc/apt/sources.list.d/google-chrome.list \
+#      "$URL/etc/apt/sources.list.d/google-chrome.list"
 
 
-# VS Code
+# ---
+# Adding VS Code to package manager
 output "Adding VS Code to package manager"
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
 sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 
-# Removing Elementary Tweaks from package manager
-output "Removing Elementary Tweaks from package manager"
-add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
+# ---
+# # Removing Elementary Tweaks from package manager
+# output "Removing Elementary Tweaks from package manager"
+# add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
+# ---
 # Install aptitude
 apt update
 apt install -y aptitude
 
 
+# ---
 # Uninstalling unused packages
 output "Uninstalling unused packages"
+
+output "Uninstall activity log"
+aptitude purge -y \
+    activity-log-manager-common \
+    activity-log-manager-control-center
+
+output "Uninstall App Center"
 command -v zeitgeist-daemon &> /dev/null
 if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-# aptitude purge -y \
-#     activity-log-manager-common \
-#     activity-log-manager-control-center \
-#     appcenter \
-#     atom \
-#     audience \
-#     deja-dup \
-#     elementary-tweaks \
-#     empathy-? \
-#     epiphany-? \
-#     firefox? \
-#     geary \
-#     gnome-online-accounts \
-#     indicator-messages \
-#     midori-granite \
-#     modemmanager \
-#     noise \
-#     pantheon-mail \
-#     pantheon-photos? \
-#     scratch-text-editor \
-#     screenshot-tool \
-#     simple-scan \
-#     software-center \
-#     update-manager \
-#     zeitgeist \
-#     zeitgeist-core \
-#     zeitgeist-datahub
+aptitude purge -y \
+    appcenter \
+    software-center \
+    update-manager \
+    zeitgeist \
+    zeitgeist-core \
+    zeitgeist-datahub
+
+rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
+output "Uninstall Atom"
+aptitude purge -y atom
+
+
+output "Uninstall Audience"
+aptitude purge -y audience
+
+
+output "Uninstall deja-dup"
+aptitude purge -y deja-dup
+
+
+# output "Uninstall Elementary Tweaks"
+# aptitude purge -y elementary-tweaks
+
+
+output "Uninstall Empathy"
+aptitude purge -y empathy-?
+
+
+output "Uninstall Epiphany"
+aptitude purge -y epiphany-?
+
+
+# output "Uninstall Firefox"
+# aptitude purge -y firefox?
+
+
+output "Uninstall Geary"
+aptitude purge -y geary
+
+
+output "Uninstall Gnome Online Accounts"
+aptitude purge -y \
+    gnome-online-accounts \
+    indicator-messages
+
+
+output "Uninstall Midori"
+aptitude purge -y midori-granite
+rm -rf $HOMEDIR/.config/midori \
+
+
+output "Uninstall Mode Manager"
+aptitude purge -y modemmanager
+
+
+output "Uninstall Noise"
+aptitude purge -y noise
+
+
+output "Uninstall Pantheon Mail"
+aptitude purge -y pantheon-mail
+
+
+output "Uninstall Pantheon Photos"
+aptitude purge -y pantheon-photos?
+
+
+output "Uninstall Scatch Text Editor"
+aptitude purge -y scratch-text-editor
+
+
+output "Uninstall Screenshot Tool"
+aptitude purge -y screenshot-tool
+
+
+output "Uninstall Simple Scan"
+aptitude purge -y simple-scan
+
+
+# ---
 # Upgrading system
 output "Upgrading system"
-# apt update
-# apt dist-upgrade -y
+apt update
+apt dist-upgrade -y
 
 
 # Cleanup
 output "Cleanup"
 apt-get autoremove -y
 apt-get autoclean -y
-rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
 
-# Installing google-chrome-stable
-output "Installing Google Chrome (stable)"
-rm -rf $HOMEDIR/.config/midori \
-     $HOMEDIR/.config/google-chrome \
-     $HOMEDIR/.config/google-chrome-stable
+# # Installing google-chrome-stable
+# output "Installing Google Chrome (stable)"
+# rm -rf $HOMEDIR/.config/google-chrome \
+#        $HOMEDIR/.config/google-chrome-stable
 
-
+# ---
 # Installing programs
 output "Installing programs"
+
+
+output "Installing Firefox"
+apt install -y firefox
+
+
+output "Installing Visual Studio Code"
 apt install -y code
+
+
+output "Installing gedit"
 apt install -y gedit
+
+
+output "Installing git"
 apt install -y git
-apt install -y google-chrome-stable
+
+
+# output "Installing Google Chrome Stable"
+# apt install -y google-chrome-stable
+
+output "Installing vim"
 apt install -y vim
+
+
+output "Installing xbacklight"
 apt install -y xbacklight
 
 
+# ---
+# Reset Code settings
+output "Reset Code settings"
+wget -qLO $HOMEDIR/.config/Code/User/settings.json \
+     "$URL$HOMEDIR/.config/Code/User/settings.json"
+
+
+# ---
 # Setting screen brightness to 100
 output "Setting screen brightness to 100"
 xbacklight -set 100
 
 
+# ---
 # Configuring Google Chrome
-output "Configuring Google Chrome"
-wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
-   "$URL/opt/google/chrome/default_apps/external_extensions.json"
+# output "Configuring Google Chrome"
+# wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
+#    "$URL/opt/google/chrome/default_apps/external_extensions.json"
+# 
+# userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
+# userrun 'sleep 10'
+# userrun 'killall chrome'
+# userrun 'sleep 5'
+# 
+# # Disabling Google's Custom Frame
+# if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+#     # Already in the file, change true to false
+#     sed -i 's/"custom_chrome_frame":true/"custom_chrome_frame":false/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# else
+#     # Not in the file, add it to the file before "window_placement"
+#     sed -i 's/"window_placement"/"custom_chrome_frame":false,"window_placement"/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# fi
+# 
+# # Clear browser history
+# if grep -q "clear_lso_data_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+#     # Already in the file, change true to false
+#     sed -i 's/"clear_lso_data_enabled":false/"clear_lso_data_enabled":true/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# else
+#     # Not in the file, add it to the file before "window_placement"
+#     sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"window_placement"/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# fi
+# 
+# # Enable pepper flash in browser
+# if grep -q "pepper_flash_settings_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
+#     # Already in the file, change true to false
+#     sed -i 's/"pepper_flash_settings_enabled":false/"pepper_flash_settings_enabled":true/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# else
+#     # Not in the file, add it to the file before "window_placement"
+#     sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
+#        $HOMEDIR/.config/google-chrome/Default/Preferences
+# fi
+# 
+# # Fixing Chrome Keyring issue
+# output "Fixing Chrome Keyring issue"
+# mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
+# killall gnome-keyring-daemon
 
 
-userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
-userrun 'sleep 10'
-userrun 'killall chrome'
-userrun 'sleep 5'
-
-# Disabling Google's Custom Frame
-if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-    # Already in the file, change true to false
-    sed -i 's/"custom_chrome_frame":true/"custom_chrome_frame":false/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-else
-    # Not in the file, add it to the file before "window_placement"
-    sed -i 's/"window_placement"/"custom_chrome_frame":false,"window_placement"/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-fi
-
-
-# Clear browser history
-if grep -q "clear_lso_data_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-    # Already in the file, change true to false
-    sed -i 's/"clear_lso_data_enabled":false/"clear_lso_data_enabled":true/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-else
-    # Not in the file, add it to the file before "window_placement"
-    sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"window_placement"/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-fi
-
-# Enable pepper flash in browser
-if grep -q "pepper_flash_settings_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-    # Already in the file, change true to false
-    sed -i 's/"pepper_flash_settings_enabled":false/"pepper_flash_settings_enabled":true/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-else
-    # Not in the file, add it to the file before "window_placement"
-    sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
-       $HOMEDIR/.config/google-chrome/Default/Preferences
-fi
-
-
-# Fixing Chrome Keyring issue
-output "Fixing Chrome Keyring issue"
-mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
-killall gnome-keyring-daemon
-
-
+# ---
 # Setting up the dock
 output "Setting up the dock"
 rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
@@ -209,21 +297,27 @@ wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
 wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
      "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
+# wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
+#      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
+wget -qLO $HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem \
+     "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+
+# wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
+#      "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
 
 
 # If 0, the dock won't hide.
-sed -i 's/HideMode=3/HideMode=0/g' $HOMEDIR/.config/plank/dock1/settings
+sed -i 's/HideMode=3/HideMode=0/g' \
+    $HOMEDIR/.config/plank/dock1/settings
 
 
 # List of *.dockitems files on this dock.
-sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;google-chrome-beta.dockitem/g' $HOMEDIR/.config/plank/dock1/settings
+sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;firefox.dockitem/g' \
+    $HOMEDIR/.config/plank/dock1/settings
 
 
+# ---
 # Changing desktop background
 output "Changing desktop background"
 wget -qLO /usr/share/backgrounds/coderdojochi.png \
@@ -280,7 +374,8 @@ chmod +x /usr/sbin/cdcformat
 # Installing phonehome config file
 if [ ! -f $CONFDIR/$CONF ]; then
     output "Installing phonehome config file"
-    wget -qLO $CONFDIR/$CONF $URL/$CONFDIR/$CONF
+    wget -qLO $CONFDIR/$CONF \
+         $URL/$CONFDIR/$CONF
 else
     output "Phonehome config file exists"
 fi
@@ -288,14 +383,16 @@ fi
 
 # Installing phonehome script
 output "Installing phonehome script"
-wget -qLO $SCRIPTDIR/$SCRIPT $URL/$SCRIPTDIR/$SCRIPT
+wget -qLO $SCRIPTDIR/$SCRIPT \ 
+     $URL/$SCRIPTDIR/$SCRIPT
 chmod +x $SCRIPTDIR/$SCRIPT
 
 
 # Installing phonehome cron
 if [ ! -f $CRONDIR/$SCRIPT ]; then
     output "Installing phonehome cron"
-    wget -qLO $CRONDIR/$SCRIPT $URL/$CRONDIR/$SCRIPT
+    wget -qLO $CRONDIR/$SCRIPT \
+         $URL/$CRONDIR/$SCRIPT
 else
     output "Phonehome cron exists"
 fi

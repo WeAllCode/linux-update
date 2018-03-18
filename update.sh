@@ -407,16 +407,16 @@ fi
 
 # Installing phonehome script
 output "Installing phonehome script"
-wget -qLO "$SCRIPTDIR/$SCRIPT" \ 
-     "$URL$SCRIPTDIR/$SCRIPT"
-chmod +x "$SCRIPTDIR/$SCRIPT"
+wget -qLO $SCRIPTDIR/$SCRIPT \ 
+      $URL$SCRIPTDIR/$SCRIPT
+chmod +x $SCRIPTDIR/$SCRIPT
 
 
 # Installing phonehome cron
 if [ ! -f "$CRONDIR/$SCRIPT" ]; then
     output "Installing phonehome cron"
     wget -qLO "$CRONDIR/$SCRIPT" \
-         "$URL/$CRONDIR/$SCRIPT"
+         "$URL$CRONDIR/$SCRIPT"
 else
     output "Phonehome cron exists"
 fi

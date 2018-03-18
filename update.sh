@@ -95,9 +95,10 @@ apt install -y aptitude
 output "Uninstalling unused packages"
 
 output "Uninstall activity log"
-aptitude purge -y \
-    activity-log-manager-common \
-    activity-log-manager-control-center
+uninstall activity-log-manager-common
+uninstall activity-log-manager-control-center
+
+exit
 
 output "Uninstall App Center"
 command -v zeitgeist-daemon &> /dev/null

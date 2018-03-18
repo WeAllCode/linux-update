@@ -22,12 +22,18 @@ output() {
     userrun "notify-send --urgency=low '$1'";
 }
 
+debInst() {
+    dpkg-query -Wf'${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
+}
+
+install() {
+    if debInst "$1"; then
+    else
+        apt install -y "$1"
+    fi
+}
 
 uninstall() {
-    debInst() {
-        dpkg-query -Wf'${Status}' {your_pkg_name} 2>/dev/null | grep -q "install ok installed"
-    }
-
     if debInst "$1"; then
         if [ -x "$2" ]; then
             apt-get remove -y "$2"
@@ -111,23 +117,23 @@ rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
 output "Uninstall aptitude"
-uninstall aptitude
+uninstall "aptitude"
 
 
 output "Uninstall Atom"
-uninstall atom
+uninstall "atom"
 
 
 output "Uninstall Audience"
-uninstall audience
+uninstall "audience"
 
 
 output "Uninstall deja-dup"
-uninstall deja-dup
+uninstall "deja-dup"
 
 
 # output "Uninstall Elementary Tweaks"
-# uninstall elementary-tweaks
+# uninstall "elementary-tweaks"
 
 
 output "Uninstall Empathy"
@@ -139,11 +145,11 @@ uninstall "epiphany-*" "^epiphany-.*"
 
 
 # output "Uninstall Firefox"
-# uninstall firefox?
+# uninstall "firefox*" "^firefox.*"
 
 
 output "Uninstall Geary"
-uninstall geary
+uninstall "geary"
 
 
 output "Uninstall Google"
@@ -151,25 +157,25 @@ uninstall "google-*" "^google-.*"
 
 
 output "Uninstall Gnome Online Accounts"
-uninstall gnome-online-accounts
-uninstall indicator-messages
+uninstall "gnome-online-accounts"
+uninstall "indicator-messages"
 
 
 output "Uninstall Midori"
-uninstall midori-granite
-rm -rf $HOMEDIR/.config/midori
+uninstall "midori-granite"
+rm -rf "$HOMEDIR/.config/midori"
 
 
 output "Uninstall Mode Manager"
-uninstall modemmanager
+uninstall "modemmanager"
 
 
 output "Uninstall Noise"
-uninstall noise
+uninstall "noise"
 
 
 output "Uninstall Pantheon Mail"
-uninstall pantheon-mail
+uninstall "pantheon-mail"
 
 
 output "Uninstall Pantheon Photos"
@@ -177,15 +183,15 @@ uninstall "pantheon-photos*" "^pantheon-photos.*"
 
 
 output "Uninstall Scatch Text Editor"
-uninstall scratch-text-editor
+uninstall "scratch-text-editor"
 
 
 output "Uninstall Screenshot Tool"
-uninstall screenshot-tool
+uninstall "screenshot-tool"
 
 
 output "Uninstall Simple Scan"
-uninstall simple-scan
+uninstall "simple-scan"
 
 
 # ---
@@ -204,8 +210,8 @@ apt-get autoclean -y
 
 # # Installing google-chrome-stable
 # output "Installing Google Chrome (stable)"
-# rm -rf $HOMEDIR/.config/google-chrome \
-#        $HOMEDIR/.config/google-chrome-stable
+# rm -rf "$HOMEDIR/.config/google-chrome" \
+#        "$HOMEDIR/.config/google-chrome-stable"
 
 # ---
 # Installing programs
@@ -213,37 +219,37 @@ output "Installing programs"
 
 
 output "Installing Firefox"
-apt install -y firefox
+install "firefox"
 
 
 output "Installing Visual Studio Code"
-apt install -y code
+install "code"
 
 
 output "Installing gedit"
-apt install -y gedit
+install "gedit"
 
 
 output "Installing git"
-apt install -y git
+install "git"
 
 
 # output "Installing Google Chrome Stable"
-# apt install -y google-chrome-stable
+# install "google-chrome-stable"
 
 output "Installing vim"
-apt install -y vim
+install "vim"
 
 
 output "Installing xbacklight"
-apt install -y xbacklight
+install "xbacklight"
 
 
 # ---
 # Reset Code settings
 output "Reset Code settings"
-wget -qLO $HOMEDIR/.config/Code/User/settings.json \
-     "$URL$HOMEDIR/.config/Code/User/settings.json"
+wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
+      "$URL$HOMEDIR/.config/Code/User/settings.json"
 
 
 # ---
@@ -305,45 +311,45 @@ xbacklight -set 100
 # ---
 # Setting up the dock
 output "Setting up the dock"
-rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
+rm "$HOMEDIR/.config/plank/dock1/launchers/*.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
+wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem" \
+      "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/code.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/code.dockitem" \
+      "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
-# wget -qLO $HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem \
-#      "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
+# wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem" \
+#       "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
 
-wget -qLO $HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem \
-     "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
+      "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
-# wget -qLO $HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem \
-#      "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
+# wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem" \
+#       "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
 
 
 # If 0, the dock won't hide.
 sed -i 's/HideMode=3/HideMode=0/g' \
-    $HOMEDIR/.config/plank/dock1/settings
+    "$HOMEDIR/.config/plank/dock1/settings"
 
 
 # List of *.dockitems files on this dock.
 sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;firefox.dockitem/g' \
-    $HOMEDIR/.config/plank/dock1/settings
+    "$HOMEDIR/.config/plank/dock1/settings"
 
 
 # ---
 # Changing desktop background
 output "Changing desktop background"
-wget -qLO /usr/share/backgrounds/coderdojochi.png \
-     "$URL/usr/share/backgrounds/coderdojochi.png"
+wget -qLO "/usr/share/backgrounds/coderdojochi.png" \
+      "$URL/usr/share/backgrounds/coderdojochi.png"
 
-mv /usr/share/backgrounds/elementaryos-default \
-   /usr/share/backgrounds/elementaryos-default-bak
+mv "/usr/share/backgrounds/elementaryos-default" \
+   "/usr/share/backgrounds/elementaryos-default-bak"
 
-ln -s /usr/share/backgrounds/coderdojochi.png \
-      /usr/share/backgrounds/elementaryos-default
+ln -s "/usr/share/backgrounds/coderdojochi.png" \
+      "/usr/share/backgrounds/elementaryos-default"
 
 userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
 userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
@@ -365,8 +371,8 @@ userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
 # Disable guest login
 output "Disable guest login"
-wget -qLO /usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf \
-     "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
+wget -qLO "/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf" \
+      "$URL/usr/share/lightdm/lightdm.conf/40-pantheon-greeter.conf"
 
 
 # Restart dock
@@ -376,22 +382,22 @@ killall plank
 
 # Fix drag and drop quirk
 output "Fix drag and drop quirk"
-wget -qLO /usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf \
-     "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
+wget -qLO "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
+      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" 
 
 
 # Install cdcformat script
 output "Install cdcformat script"
-wget -qLO /usr/sbin/cdcformat \
-     "$URL/usr/sbin/cdcformat"
-chmod +x /usr/sbin/cdcformat
+wget -qLO "/usr/sbin/cdcformat" \
+      "$URL/usr/sbin/cdcformat"
+chmod +x "/usr/sbin/cdcformat"
 
 
 # Installing phonehome config file
-if [ ! -f $CONFDIR/$CONF ]; then
+if [ ! -f "$CONFDIR/$CONF" ]; then
     output "Installing phonehome config file"
-    wget -qLO $CONFDIR/$CONF \
-         $URL/$CONFDIR/$CONF
+    wget -qLO "$CONFDIR/$CONF" \
+         "$URL/$CONFDIR/$CONF"
 else
     output "Phonehome config file exists"
 fi
@@ -399,16 +405,16 @@ fi
 
 # Installing phonehome script
 output "Installing phonehome script"
-wget -qLO $SCRIPTDIR/$SCRIPT \ 
-     $URL/$SCRIPTDIR/$SCRIPT
-chmod +x $SCRIPTDIR/$SCRIPT
+wget -qLO "$SCRIPTDIR/$SCRIPT" \ 
+     "$URL/$SCRIPTDIR/$SCRIPT"
+chmod +x "$SCRIPTDIR/$SCRIPT"
 
 
 # Installing phonehome cron
-if [ ! -f $CRONDIR/$SCRIPT ]; then
+if [ ! -f "$CRONDIR/$SCRIPT" ]; then
     output "Installing phonehome cron"
-    wget -qLO $CRONDIR/$SCRIPT \
-         $URL/$CRONDIR/$SCRIPT
+    wget -qLO "$CRONDIR/$SCRIPT" \
+         "$URL/$CRONDIR/$SCRIPT"
 else
     output "Phonehome cron exists"
 fi
@@ -416,11 +422,11 @@ fi
 
 # Reset theme
 output "Reset theme"
-sed -i '$ d' /usr/share/themes/elementary/gtk-3.0/apps.css
+sed -i '$ d' "/usr/share/themes/elementary/gtk-3.0/apps.css"
 killall wingpanel
 
 # Set ownership
-chown -R coderdojochi:coderdojochi $HOMEDIR/.config/
+chown -R coderdojochi:coderdojochi "$HOMEDIR/.config/"
 
 # Open survey
 userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"

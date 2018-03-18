@@ -27,7 +27,8 @@ debInst() {
 }
 
 install() {
-    if [ debInst "$1" -eq 0 ]; then
+    debInst "$1"
+    if [ $? -eq 1 ]; then
         apt install -y "$1"
     fi
 }

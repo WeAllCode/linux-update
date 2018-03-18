@@ -25,14 +25,15 @@ output() {
 
 uninstall() {
     debInst() {
-        dpkg-query -Wf'${db:Status-abbrev}' "$1" 2>/dev/null | grep -q '^i'
+        dpkg-query -Wf'${Status}' {your_pkg_name} 2>/dev/null | grep -q "install ok installed"
     }
 
     if debInst "$1"; then
-        printf 'Why yes, the package %s _is_ installed!\n' "$1"
-        aptitude purge -y $1
-    else
-        printf 'I regret to inform you that the package %s is not currently installed.\n' "$1"
+        if [ -x "$2" ]; then
+            apt-get remove -y "$2"
+        else
+            apt-get remove -y "$1"
+        fi
     fi
 }
 
@@ -85,12 +86,6 @@ sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable
 
 
 # ---
-# Install aptitude
-apt update
-apt install -y aptitude
-
-
-# ---
 # Uninstalling unused packages
 output "Uninstalling unused packages"
 
@@ -98,7 +93,6 @@ output "Uninstall activity log"
 uninstall activity-log-manager-common
 uninstall activity-log-manager-control-center
 
-exit
 
 output "Uninstall App Center"
 command -v zeitgeist-daemon &> /dev/null
@@ -106,90 +100,92 @@ if [ $? -eq 0 ]; then
     zeitgeist-daemon --quit
 fi
 
-aptitude purge -y \
-    appcenter \
-    software-center \
-    update-manager \
-    zeitgeist \
-    zeitgeist-core \
-    zeitgeist-datahub
+uninstall appcenter
+uninstall software-center
+uninstall update-manager
+uninstall zeitgeist
+uninstall zeitgeist-core
+uninstall zeitgeist-datahub
 
 rm -rf {/root,/home/*}/.local/share/zeitgeist
 
 
+output "Uninstall aptitude"
+uninstall aptitude
+
+
 output "Uninstall Atom"
-aptitude purge -y atom
+uninstall atom
 
 
 output "Uninstall Audience"
-aptitude purge -y audience
+uninstall audience
 
 
 output "Uninstall deja-dup"
-aptitude purge -y deja-dup
+uninstall deja-dup
 
 
 # output "Uninstall Elementary Tweaks"
-# aptitude purge -y elementary-tweaks
+# uninstall elementary-tweaks
 
 
 output "Uninstall Empathy"
-aptitude purge -y empathy-?
+uninstall "empathy-*" "^empathy-.*"
 
 
 output "Uninstall Epiphany"
-aptitude purge -y epiphany-?
+uninstall "epiphany-*" "^epiphany-.*"
 
 
 # output "Uninstall Firefox"
-# aptitude purge -y firefox?
+# uninstall firefox?
 
 
 output "Uninstall Geary"
-aptitude purge -y geary
+uninstall geary
 
 
 output "Uninstall Google"
-uninstall google-?
+uninstall "google-*" "^google-.*"
 
 
 output "Uninstall Gnome Online Accounts"
-aptitude purge -y \
-    gnome-online-accounts \
-    indicator-messages
+uninstall gnome-online-accounts
+uninstall indicator-messages
 
 
 output "Uninstall Midori"
-aptitude purge -y midori-granite
-rm -rf $HOMEDIR/.config/midori \
+uninstall midori-granite
+rm -rf $HOMEDIR/.config/midori
 
 
 output "Uninstall Mode Manager"
-aptitude purge -y modemmanager
+uninstall modemmanager
 
 
 output "Uninstall Noise"
-aptitude purge -y noise
+uninstall noise
 
 
 output "Uninstall Pantheon Mail"
-aptitude purge -y pantheon-mail
+uninstall pantheon-mail
 
 
 output "Uninstall Pantheon Photos"
-aptitude purge -y pantheon-photos?
+uninstall "pantheon-photos*" "^pantheon-photos.*"
 
 
 output "Uninstall Scatch Text Editor"
-aptitude purge -y scratch-text-editor
+uninstall scratch-text-editor
 
 
 output "Uninstall Screenshot Tool"
-aptitude purge -y screenshot-tool
+uninstall screenshot-tool
 
 
 output "Uninstall Simple Scan"
-aptitude purge -y simple-scan
+uninstall simple-scan
 
 
 # ---

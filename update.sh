@@ -29,7 +29,7 @@ debInst() {
 install() {
     debInst "$1"
     if [ $? -eq 1 ]; then
-        apt install -y "$1"
+        apt install --force-yes -y "$1"
     fi
 }
 

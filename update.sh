@@ -1,14 +1,14 @@
-URL='https://raw.githubusercontent.com/CoderDojoChi/linux-update/master'
+URL="https://raw.githubusercontent.com/CoderDojoChi/linux-update/master"
 
-HOMEDIR=/home/coderdojochi
+HOMEDIR="/home/coderdojochi"
 
-SCRIPTDIR=/etc/init.d
-SCRIPT=coderdojochi-phonehome
+SCRIPTDIR="/etc/init.d"
+SCRIPT="coderdojochi-phonehome"
 
-CONFDIR=/etc/init
-CONF=$SCRIPT.conf
+CONFDIR="/etc/init"
+CONF="$SCRIPT.conf"
 
-CRONDIR=/etc/cron.d
+CRONDIR="/etc/cron.d"
 
 MACHINE_TYPE=`uname -m`
 

@@ -89,7 +89,7 @@ sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable
 # # Removing Elementary Tweaks from package manager
 # output "Removing Elementary Tweaks from package manager"
 install software-properties-common
-add-apt-repository -y ppa:philip.scott/elementary-tweaks 
+add-apt-repository -y ppa:philip.scott/elementary-tweaks
 # add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
@@ -261,16 +261,25 @@ xbacklight -set 100
 
 
 # ---
+# Install Finch
+cd /tmp/
+wget -o "Bird.tar.gz" "https://www.dropbox.com/s/5ftpl16rbevg4fq/BirdBrainRobotServerLinux.tar.gz?dl=1"
+tar -xvzf Bird.tar.gz
+cd BirdBrainRobotServerLinux
+sudo ./Configure
+
+
+# ---
 # Configuring Google Chrome
 # output "Configuring Google Chrome"
 # wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
 #    "$URL/opt/google/chrome/default_apps/external_extensions.json"
-# 
+#
 # userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
 # userrun 'sleep 10'
 # userrun 'killall chrome'
 # userrun 'sleep 5'
-# 
+#
 # # Disabling Google's Custom Frame
 # if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
 #     # Already in the file, change true to false
@@ -281,7 +290,7 @@ xbacklight -set 100
 #     sed -i 's/"window_placement"/"custom_chrome_frame":false,"window_placement"/' \
 #        $HOMEDIR/.config/google-chrome/Default/Preferences
 # fi
-# 
+#
 # # Clear browser history
 # if grep -q "clear_lso_data_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
 #     # Already in the file, change true to false
@@ -292,7 +301,7 @@ xbacklight -set 100
 #     sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"window_placement"/' \
 #        $HOMEDIR/.config/google-chrome/Default/Preferences
 # fi
-# 
+#
 # # Enable pepper flash in browser
 # if grep -q "pepper_flash_settings_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
 #     # Already in the file, change true to false
@@ -303,7 +312,7 @@ xbacklight -set 100
 #     sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
 #        $HOMEDIR/.config/google-chrome/Default/Preferences
 # fi
-# 
+#
 # # Fixing Chrome Keyring issue
 # output "Fixing Chrome Keyring issue"
 # mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
@@ -385,7 +394,7 @@ killall plank
 # Fix drag and drop quirk
 output "Fix drag and drop quirk"
 wget -qLO "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
-      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" 
+      "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 
 
 # Install cdcformat script
@@ -407,7 +416,7 @@ fi
 
 # Installing phonehome script
 output "Installing phonehome script"
-wget -qLO $SCRIPTDIR/$SCRIPT \ 
+wget -qLO $SCRIPTDIR/$SCRIPT \
       $URL$SCRIPTDIR/$SCRIPT
 chmod +x $SCRIPTDIR/$SCRIPT
 

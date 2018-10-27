@@ -261,7 +261,8 @@ xbacklight -set 100
 
 
 # ---
-# Install Finch
+# Installing Finch files
+output "Installing Finch files"
 cd /tmp/
 wget -o "Bird.tar.gz" "https://www.dropbox.com/s/5ftpl16rbevg4fq/BirdBrainRobotServerLinux.tar.gz?dl=1"
 tar -xvzf Bird.tar.gz

@@ -250,6 +250,8 @@ install "elementary-tweaks"
 # ---
 # Reset Code settings
 output "Reset Code settings"
+rm -rf "$HOMEDIR/.config/Code/User/"
+mkdir -p "$HOMEDIR/.config/Code/User/"
 wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
       "$URL$HOMEDIR/.config/Code/User/settings.json"
 

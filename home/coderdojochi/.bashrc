@@ -169,3 +169,7 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+
+# Replace prompt
+export PS1="\n\w\n$ "

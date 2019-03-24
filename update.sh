@@ -248,6 +248,13 @@ install "elementary-tweaks"
 
 
 # ---
+# Reset ~/.bashrc settings
+output "Reset ~/.bashrc settings"
+wget -qLO "$HOMEDIR/.bashrc" \
+      "$URL$HOMEDIR/.bashrc"
+
+
+# ---
 # Reset Code settings
 output "Reset Code settings"
 rm -rf "$HOMEDIR/.config/Code/User/"

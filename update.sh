@@ -363,16 +363,16 @@ sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;firefox.
 # ---
 # Changing desktop background
 output "Changing desktop background"
-wget -qLO "/usr/share/backgrounds/coderdojochi.png" \
-      "$URL/usr/share/backgrounds/coderdojochi.png"
+wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
+      "$URL/usr/share/backgrounds/weallcode-background.png"
 
 mv "/usr/share/backgrounds/elementaryos-default" \
    "/usr/share/backgrounds/elementaryos-default-bak"
 
-ln -s "/usr/share/backgrounds/coderdojochi.png" \
+ln -s "/usr/share/backgrounds/weallcode-background.png" \
       "/usr/share/backgrounds/elementaryos-default"
 
-userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/coderdojochi.png"'
+userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"'
 userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
 
 

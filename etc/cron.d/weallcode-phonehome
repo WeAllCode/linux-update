@@ -1,6 +1,0 @@
-# /etc/cron.d/weallcode-phonehome: crontab entry for weallcode-phonehome package
-
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-*/10 * * * * root /bin/sh /etc/init.d/weallcode-phonehome

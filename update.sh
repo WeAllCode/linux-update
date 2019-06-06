@@ -1,10 +1,9 @@
-URL="https://raw.githubusercontent.com/weallcode/linux-update/master"
+URL="https://raw.githubusercontent.com/CoderDojoChi/linux-update/master"
 
-USERNAME=weallcode
-HOMEDIR="/home/weallcode"
+HOMEDIR="/home/coderdojochi"
 
 SCRIPTDIR="/etc/init.d"
-SCRIPT="weallcode-phonehome"
+SCRIPT="coderdojochi-phonehome"
 
 CONFDIR="/etc/init"
 CONF="$SCRIPT.conf"
@@ -15,7 +14,7 @@ MACHINE_TYPE=`uname -m`
 
 
 userrun() {
-    sudo -H -u weallcode bash -c "$1";
+    sudo -H -u coderdojochi bash -c "$1";
 }
 
 output() {
@@ -45,10 +44,6 @@ uninstall() {
 }
 
 
-if ! getent passwd $USERNAME > /dev/null 2>&1; then
-    echo "User weallcode does not exist, aborting update script"
-    exit -1
-fi
 
 # Update Script Running
 output "Update Script Running"
@@ -452,7 +447,7 @@ sed -i '$ d' "/usr/share/themes/elementary/gtk-3.0/apps.css"
 killall wingpanel
 
 # Set ownership
-chown -R weallcode:weallcode "$HOMEDIR/.config/"
+chown -R coderdojochi:coderdojochi "$HOMEDIR/.config/"
 
 # Open survey
 userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"

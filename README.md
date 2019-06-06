@@ -1,3 +1,5 @@
 # linux-update
 
-`sudo sh -c "$(curl -fsSL git.io/vt0Pc)"`
+```command
+sudo sh -c "$(curl -fsSL wac.fyi/update?`date +%s`)"
+```

@@ -44,6 +44,10 @@ uninstall() {
 }
 
 
+if [ "$(whoami)" != "weallcode" ]; then
+    echo "User weallcode does not exist, aborting update script"
+    exit -1
+fi
 
 # Update Script Running
 output "Update Script Running"

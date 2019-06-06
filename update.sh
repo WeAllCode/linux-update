@@ -1,9 +1,9 @@
-URL="https://raw.githubusercontent.com/CoderDojoChi/linux-update/master"
+URL="https://raw.githubusercontent.com/weallcode/linux-update/master"
 
-HOMEDIR="/home/coderdojochi"
+HOMEDIR="/home/weallcode"
 
 SCRIPTDIR="/etc/init.d"
-SCRIPT="coderdojochi-phonehome"
+SCRIPT="weallcode-phonehome"
 
 CONFDIR="/etc/init"
 CONF="$SCRIPT.conf"
@@ -14,7 +14,7 @@ MACHINE_TYPE=`uname -m`
 
 
 userrun() {
-    sudo -H -u coderdojochi bash -c "$1";
+    sudo -H -u weallcode bash -c "$1";
 }
 
 output() {
@@ -447,7 +447,7 @@ sed -i '$ d' "/usr/share/themes/elementary/gtk-3.0/apps.css"
 killall wingpanel
 
 # Set ownership
-chown -R coderdojochi:coderdojochi "$HOMEDIR/.config/"
+chown -R weallcode:weallcode "$HOMEDIR/.config/"
 
 # Open survey
 userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"

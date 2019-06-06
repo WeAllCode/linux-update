@@ -10,7 +10,7 @@ export DISPLAY=:0
 
 # URL - the CDC check in URL
 # TODO - change this to actual url
-URL=http://coderdojochi.org/admin/checksystem/
+URL=https://www.weallcode.org/admin/checksystem/
 
 # UUID - used as the unique idenfier for the machine
 UUID="$(dmidecode | grep -i uuid | awk -F': ' '{print $2}')"

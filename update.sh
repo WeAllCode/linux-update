@@ -1,5 +1,6 @@
 URL="https://raw.githubusercontent.com/weallcode/linux-update/master"
 
+USERNAME=weallcode
 HOMEDIR="/home/weallcode"
 
 SCRIPTDIR="/etc/init.d"
@@ -44,7 +45,7 @@ uninstall() {
 }
 
 
-if [ "$(whoami)" != "weallcode" ]; then
+if ! getent passwd $USERNAME > /dev/null 2>&1; then
     echo "User weallcode does not exist, aborting update script"
     exit -1
 fi

@@ -1,17 +1,42 @@
 {
+    // Controls if quick suggestions should show up while typing
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+
+    // Controls if suggestions should be accepted on 'Enter' - in addition to 'Tab'. Helps to avoid ambiguity between inserting new lines or accepting suggestions. The value 'smart' means only accept a suggestion with Enter when it makes a textual change
+    "editor.acceptSuggestionOnEnter": "off",
+
+    // Controls if suggestions should automatically show up when typing trigger characters
+    "editor.suggestOnTriggerCharacters": false,
+
+    // Controls if pressing tab inserts the best suggestion and if tab cycles through other suggestions
+    "editor.tabCompletion": "on",
+
+    // Controls whether sorting favours words that appear close to the cursor
+    "editor.suggest.localityBonus": false,
+
+    // Controls how suggestions are pre-selected when showing the suggest list
+    "editor.suggestSelection": "recentlyUsed",
+
+    // Enable word based suggestions
+    "editor.wordBasedSuggestions": false,
+
+    // Enable parameter hints
+    "editor.parameterHints.enabled": false,
+
+
     "css.lint.duplicateProperties": "error",
     "css.lint.important": "error",
     "css.lint.zeroUnits": "ignore",
     "css.validate": false,
-    "editor.autoClosingBrackets": false,
+    "editor.autoClosingBrackets": "never",
     "editor.colorDecorators": false,
-    "editor.cursorBlinking": "solid",
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false,
     "editor.insertSpaces": true,
-    "editor.minimap.enabled": false,
-    "editor.parameterHints": false,
-    "editor.quickSuggestions": false,
     "editor.renderControlCharacters": true,
     "editor.renderIndentGuides": true,
     "editor.renderLineHighlight": "all",
@@ -23,7 +48,6 @@
     "emmet.showExpandedAbbreviation": "never",
     "extensions.autoUpdate": true,
     "files.autoSave": "onFocusChange",
-    "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.enabled": false,
     "git.ignoreLegacyWarning": true,
@@ -32,19 +56,35 @@
     "html.format.extraLiners": " ",
     "html.format.indentInnerHtml": false,
     "html.format.wrapLineLength": 0,
-    "html.suggest.angular1": false,
-    "html.suggest.ionic": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
-    "window.zoomLevel": 0,
-    "workbench.activityBar.visible": true,
-    "workbench.startupEditor": "none",
-    "workbench.statusBar.visible": true,
     "[json]": {
         "editor.tabSize": 4
     },
     "[markdown]": {
         "editor.quickSuggestions": false,
         "files.trimTrailingWhitespace": false
-    }
+    },
+    "editor.fontSize": 16,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "block",
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.enabled": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.suggest.filterGraceful": false,
+    "editor.suggest.showIcons": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "files.hotExit": "off",
+    "workbench.enableExperiments": false,
+    "workbench.startupEditor": "none",
+    "workbench.fontAliasing": "auto",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.statusBar.visible": false,
+    "workbench.tips.enabled": false,
+    "workbench.tree.indent": 16,
+    "breadcrumbs.enabled": false,
+    "workbench.editor.openPositioning": "left",
+    "search.location": "panel",
+    "extensions.ignoreRecommendations": true,
+    "problems.autoReveal": false
 }

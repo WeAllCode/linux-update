@@ -384,6 +384,11 @@ userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled"
 userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
 
 
+# Disable Single Click open file/folders
+output "Disable Single Click open file/folders"
+userrun 'gsettings set org.pantheon.files.preferences single-click false'
+
+
 # Setting Window Controls
 # output "Setting Window Controls"
 # userrun 'gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close'

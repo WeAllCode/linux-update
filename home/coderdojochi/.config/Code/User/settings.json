@@ -67,7 +67,7 @@
     },
     "editor.fontSize": 16,
     "editor.cursorBlinking": "smooth",
-    "editor.cursorStyle": "block",
+    "editor.cursorStyle": "underline",
     "editor.minimap.renderCharacters": false,
     "editor.minimap.enabled": false,
     "editor.acceptSuggestionOnCommitCharacter": false,

@@ -51,6 +51,11 @@ echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr
 killall wingpanel
 
 
+# Set sound volume to 0
+output "Set sound volume to 0"
+userrun 'amixer -D pulse sset Master 0%'
+
+
 # Cleanup files
 output "Cleanup files"
 rm -rf /etc/apt/trusted.gpg.d/*

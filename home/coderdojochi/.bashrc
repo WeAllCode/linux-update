@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # We use preexec and precmd hook functions for Bash
-# If you have anything that's using the Debug Trap or PROMPT_COMMAND 
+# If you have anything that's using the Debug Trap or PROMPT_COMMAND
 # change it to use preexec or precmd
 # See also https://github.com/rcaloras/bash-preexec
 
@@ -96,6 +96,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+# Change default python
+alias python='/usr/bin/python3'
+
+# We All Code update shortcut
+wac-update(){
+    sudo sh -c "$(curl -fsSL git.io/vt0Pc?d=$(date +%s))"
+}
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -111,14 +119,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# If this is an xterm set more declarative titles 
+# If this is an xterm set more declarative titles
 # "dir: last_cmd" and "actual_cmd" during execution
 # If you want to exclude a cmd from being printed see line 156
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\$(print_title)\a\]$PS1"
     __el_LAST_EXECUTED_COMMAND=""
-    print_title () 
+    print_title ()
     {
         __el_FIRSTPART=""
         __el_SECONDPART=""
@@ -141,7 +149,7 @@ xterm*|rxvt*)
             __el_SECONDPART="${__el_SECONDPART%% *}"
         else
             __el_SECONDPART="${__el_LAST_EXECUTED_COMMAND%% *}"
-        fi 
+        fi
         printf "%s: %s" "$__el_FIRSTPART" "$__el_SECONDPART"
     }
     put_title()
@@ -149,13 +157,13 @@ xterm*|rxvt*)
         __el_LAST_EXECUTED_COMMAND="${BASH_COMMAND}"
         printf "\033]0;%s\007" "$1"
     }
-    
+
     # Show the currently running command in the terminal title:
     # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
     update_tab_command()
     {
         # catch blacklisted commands and nested escapes
-        case "$BASH_COMMAND" in 
+        case "$BASH_COMMAND" in
             *\033]0*|update_*|echo*|printf*|clear*|cd*)
             __el_LAST_EXECUTED_COMMAND=""
                 ;;

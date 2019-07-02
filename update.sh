@@ -237,6 +237,10 @@ output "Installing git"
 install "git"
 
 
+output "Installing pip"
+install "python3-pip"
+
+
 # output "Installing Google Chrome Stable"
 # install "google-chrome-stable"
 
@@ -272,6 +276,12 @@ wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
 # Setting screen brightness to 100
 output "Setting screen brightness to 100"
 xbacklight -set 100
+
+
+# ---
+# Installing Python packages
+output "Installing Python packages"
+pip3 install --upgrade --force-reinstall weallcode_robot_danielmconrad
 
 
 # ---

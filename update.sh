@@ -281,7 +281,7 @@ xbacklight -set 100
 # ---
 # Installing Python packages
 output "Installing Python packages"
-pip3 install --upgrade --force-reinstall weallcode_robot_danielmconrad
+pip3 install --upgrade --force-reinstall weallcode_robot
 
 
 # ---

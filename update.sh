@@ -285,16 +285,6 @@ pip3 install --upgrade --force-reinstall weallcode_robot_danielmconrad
 
 
 # ---
-# Installing Finch files
-output "Installing Finch files"
-cd /tmp/
-wget -O "Bird.tar.gz" "https://www.dropbox.com/s/5ftpl16rbevg4fq/BirdBrainRobotServerLinux.tar.gz?dl=1"
-tar -xvzf Bird.tar.gz
-cd BirdBrainRobotServerLinux
-sudo ./Configure
-
-
-# ---
 # Configuring Google Chrome
 # output "Configuring Google Chrome"
 # wget -qLO /opt/google/chrome/default_apps/external_extensions.json \

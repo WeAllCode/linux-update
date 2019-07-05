@@ -1,0 +1,59 @@
+// This file can be used to configure global preferences for Firefox
+
+// Set homepage to blank
+pref("browser.startup.homepage", "about:blank");
+
+pref("accessibility.typeaheadfind.flashBar", 0);
+pref("app.normandy.first_run", false);
+pref("app.normandy.startupRolloutPrefs.extensions.fxmonitor.enabled", true);
+pref("app.normandy.startupRolloutPrefs.geo.provider.use_gpsd", true);
+pref("app.normandy.startupRolloutPrefs.media.autoplay.default", 1);
+pref("browser.bookmarks.restore_default_bookmarks", false);
+pref("browser.cache.disk.filesystem_reported", 1);
+pref("browser.cache.disk.hashstats_reported", 1);
+pref("browser.cache.disk.smart_size.first_run", false);
+pref("browser.contentblocking.category", "standard");
+pref("browser.ctrlTab.migrated", true);
+pref("browser.ctrlTab.recentlyUsedOrder", false);
+pref("browser.download.panel.shown", true);
+pref("browser.download.save_converter_index", 0);
+pref("browser.download.useDownloadDir", false);
+pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
+pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+pref("browser.newtabpage.activity-stream.migrationExpired", true);
+pref("browser.newtabpage.activity-stream.prerender", false);
+pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks", false);
+pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
+pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
+pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
+pref("browser.newtabpage.activity-stream.section.highlights.rows", 1);
+pref("browser.newtabpage.activity-stream.showSearch", false);
+pref("browser.newtabpage.activity-stream.showSponsored", false);
+pref("browser.newtabpage.enabled", false);
+pref("browser.newtabpage.enhanced", true);
+pref("browser.newtabpage.storageVersion", 1);
+pref("browser.pageActions.persistedActions", "{\"version\":1,\"ids\":[\"bookmark\",\"bookmarkSeparator\",\"copyURL\",\"emailLink\",\"sendToDevice\",\"pocket\",\"addSearchEngine\",\"screenshots_mozilla_org\"],\"idsInUrlbar\":[\"pocket\"]}");
+pref("browser.pagethumbnails.storage_version", 3);
+pref("browser.places.smartBookmarksVersion", 8);
+pref("browser.rights.3.shown", true);
+pref("browser.search.countryCode", "US");
+pref("browser.search.region", "US");
+pref("browser.shell.checkDefaultBrowser", true);
+
+pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-fixed-list\":[],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"urlbar-container\",\"downloads-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"personal-bookmarks\"]},\"seen\":[\"developer-button\",\"webide-button\",\"feed-button\"],\"dirtyAreaCache\":[\"PersonalToolbar\",\"nav-bar\",\"TabsToolbar\",\"toolbar-menubar\"],\"currentVersion\":15,\"newElementCount\":3}");
+pref("browser.urlbar.placeholderName", "DuckDuckGo");
+pref("browser.urlbar.timesBeforeHidingSuggestionsHint", 0);
+pref("devtools.onboarding.telemetry.logged", false);
+pref("devtools.performance.recording.interval", 1000);
+pref("devtools.toolsidebar-height.inspector", 350);
+pref("devtools.toolsidebar-width.inspector", 350);
+pref("devtools.toolsidebar-width.inspector.splitsidebar", 350);
+pref("dom.forms.autocomplete.formautofill", false);
+pref("extensions.webcompat.perform_injections", true);
+pref("extensions.webcompat.perform_ua_overrides", true);
+pref("findbar.highlightAll", true);
+pref("gecko.handlerService.migrated", true);
+pref("lightweightThemes.usedThemes", "[]");
+pref("toolkit.telemetry.reportingpolicy.firstRun", false);

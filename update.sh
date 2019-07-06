@@ -1,20 +1,25 @@
-URL="https://raw.githubusercontent.com/CoderDojoChi/linux-update/master"
+URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
-HOMEDIR="/home/coderdojochi"
+# Set username
+# USER=$(whoami)
+USER='weallcode'
+MACHINE_TYPE=$(uname -m)
+
+# Set home
+HOMEDIR="/home/$USER"
 
 SCRIPTDIR="/etc/init.d"
-SCRIPT="coderdojochi-phonehome"
+SCRIPT="weallcode-phonehome"
 
 CONFDIR="/etc/init"
 CONF="$SCRIPT.conf"
 
 CRONDIR="/etc/cron.d"
 
-MACHINE_TYPE=`uname -m`
 
 
 userrun() {
-    sudo -H -u coderdojochi bash -c "$1";
+    sudo -H -u $USER bash -c "$1";
 }
 
 output() {
@@ -53,7 +58,7 @@ killall wingpanel
 
 # Set sound volume to 0
 output "Set sound volume to 0"
-userrun 'amixer -D pulse sset Master 0%'
+userrun 'amixer -D pulse sset Master 0'
 
 
 # Cleanup files
@@ -76,8 +81,8 @@ rm -rf $HOMEDIR/Videos/*
 # wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 # Remove Google apt source
-output "Remove Google apt source"
-rm -rf /etc/apt/sources.list.d/google-chrome.list*
+# output "Remove Google apt source"
+# rm -rf /etc/apt/sources.list.d/google-chrome.list*
 
 # wget -qLO /etc/apt/sources.list.d/google-chrome.list \
 #      "$URL/etc/apt/sources.list.d/google-chrome.list"
@@ -91,11 +96,10 @@ sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable
 
 
 # ---
-# # Removing Elementary Tweaks from package manager
-# output "Removing Elementary Tweaks from package manager"
+# Adding Elementary Tweaks
+output "Adding Elementary Tweaks"
 install software-properties-common
 add-apt-repository -y ppa:philip.scott/elementary-tweaks
-# add-apt-repository -r -y ppa:philip.scott/elementary-tweaks
 
 
 # ---

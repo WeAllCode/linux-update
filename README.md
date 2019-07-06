@@ -1,6 +1,8 @@
 # linux-update
 
-`sudo sh -c "$(curl -fsSL git.io/vt0Pc)"`
+```bash
+sudo sh -c "$(curl -fsSL wac.fyi/juno?`date +%s`)"
+```
 
 
 ## TODO

@@ -461,7 +461,7 @@ sed -i '$ d' "/usr/share/themes/elementary/gtk-3.0/apps.css"
 killall wingpanel
 
 # Set ownership
-chown -R coderdojochi:coderdojochi "$HOMEDIR/.config/"
+chown -R $USER:$USER "$HOMEDIR/.config/"
 
 # Open survey
 userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"

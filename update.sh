@@ -60,7 +60,16 @@ uninstall() {
 
 # Update Script Running
 output "Update Script Running"
-echo ".panel,.panel.maximized,.panel.translucent{background-color:red;}" >> /usr/share/themes/elementary/gtk-3.0/apps.css
+
+# Add custom css file to theme
+findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
+if [ $findCustom -eq 1]; then
+    echo '@import url("custom.css");' >> /usr/share/themes/elementary/gtk-3.0/gtk.css
+fi
+
+wget -qLO "/usr/share/themes/elementary/gtk-3.0/custom.css" \
+      "$URL/usr/share/themes/elementary/gtk-3.0/custom.css"
+
 killall wingpanel
 
 

@@ -1,0 +1,5 @@
+.panel,
+.panel.maximized,
+.panel.translucent {
+    background-color: red;
+}

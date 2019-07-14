@@ -11,18 +11,18 @@ URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 # Set username
 # USER=$(whoami)
 USER='weallcode'
-MACHINE_TYPE=$(uname -m)
+# MACHINE_TYPE=$(uname -m)
 
 # Set home
-HOMEDIR="/home/$USER"
+# HOMEDIR="/home/$USER"
 
-SCRIPTDIR="/etc/init.d"
-SCRIPT="weallcode-phonehome"
+# SCRIPTDIR="/etc/init.d"
+# SCRIPT="weallcode-phonehome"
 
-CONFDIR="/etc/init"
-CONF="$SCRIPT.conf"
+# CONFDIR="/etc/init"
+# CONF="$SCRIPT.conf"
 
-CRONDIR="/etc/cron.d"
+# CRONDIR="/etc/cron.d"
 
 
 userrun() {
@@ -30,7 +30,7 @@ userrun() {
 }
 
 output() {
-    echo "\n\n####################\n# $1\n####################\n\n";
+    printf "\n\n####################\n# %s\n####################\n\n" "$1";
     # userrun "notify-send --urgency=low '$1'";
 }
 
@@ -39,7 +39,7 @@ debInst() {
 }
 
 version() {
-    echo "\n\n####################\n# $VERSION\n####################\n\n";
+    output "Version: %s" "$VERSION";
 }
 
 install() {
@@ -66,7 +66,7 @@ setCustomTheme() {
 
     # Add custom css file to theme
     findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
-    if [ $findCustom -eq 1]; then
+    if [ "$findCustom" -eq 1 ]; then
         echo '@import url("custom.css");' >> /usr/share/themes/elementary/gtk-3.0/gtk.css
     fi
 
@@ -89,13 +89,13 @@ unsetCustomTheme() {
 # Update Script Running
 output "Update Script Running"
 
-version()
+version
 
 # Change theme to show update script running.
-setCustomTheme()
+setCustomTheme
 
 # Reset theme
-unsetCustomTheme()
+unsetCustomTheme
 
 
 

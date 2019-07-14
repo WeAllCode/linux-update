@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.20"
+VERSION="2.0.21"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -129,6 +129,10 @@ uninstallAppCenter() {
     uninstall appcenter
 }
 
+uninstallSoftwareCenter() {
+    uninstall "software-center"
+}
+
 installVSCode() {
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
@@ -139,7 +143,7 @@ installVSCode() {
     sudo apt-get -qq install code # or code-insiders
 
     # Cleanup
-    rm "$HOMEDIR/microsoft.asc"
+    rm "$HOMEDIR/microsoft.gpg"
 }
 
 installVSCodium() {

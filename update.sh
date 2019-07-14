@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.1"
+VERSION="2.0.2"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -31,7 +31,7 @@ userrun() {
 
 output() {
     echo "\n\n####################\n# $1\n####################\n\n";
-    userrun "notify-send --urgency=low '$1'";
+    # userrun "notify-send --urgency=low '$1'";
 }
 
 debInst() {

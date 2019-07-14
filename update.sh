@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.24"
+VERSION="2.0.25"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -30,9 +30,6 @@ HOMEDIR="/home/$USER"
 # userrun() {
 #     sudo -H -u $USER bash -c "$1";
 # }
-
-# Set to be non-interactive
-export DEBIAN_FRONTEND=noninteractive
 
 output() {
     printf "\n####################\n# %s\n####################\n" "$1";
@@ -120,9 +117,43 @@ cleanOldFiles() {
 # Update System
 aptUpdate() {
     output "Update System"
-    sudo apt -qq update
-    sudo apt -qq autoremove -y
-    sudo apt -qq dist-upgrade -y
+
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt-get \
+        -qq \
+        -o Dpkg::Options::=--force-confold \
+        -o Dpkg::Options::=--force-confdef \
+        -y \
+        --allow-downgrades \
+        --allow-remove-essential \
+        --allow-change-held-packages
+        update
+
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt-get \
+        -qq \
+        -o Dpkg::Options::=--force-confold \
+        -o Dpkg::Options::=--force-confdef \
+        -y \
+        --allow-downgrades \
+        --allow-remove-essential \
+        --allow-change-held-packages
+        autoremove
+
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt-get \
+        -qq \
+        -o Dpkg::Options::=--force-confold \
+        -o Dpkg::Options::=--force-confdef \
+        -y \
+        --allow-downgrades \
+        --allow-remove-essential \
+        --allow-change-held-packages
+        dist-upgrade
+
+    # sudo apt -qq update -y
+    # sudo apt -qq autoremove -y
+    # sudo apt -qq dist-upgrade -y
 }
 
 # App Center

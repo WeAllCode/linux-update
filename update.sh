@@ -25,9 +25,9 @@ USER='weallcode'
 # CRONDIR="/etc/cron.d"
 
 
-userrun() {
-    sudo -H -u $USER bash -c "$1";
-}
+# userrun() {
+#     sudo -H -u $USER bash -c "$1";
+# }
 
 output() {
     printf "\n\n####################\n# %s\n####################\n\n" "$1";
@@ -67,13 +67,12 @@ setCustomTheme() {
     # Add custom css file to theme
     findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
 
-
     if [ "$findCustom" == 1 ]
     then
-        echo '@import url("custom.css");' >> /usr/share/themes/elementary/gtk-3.0/gtk.css
+        echo '@import url("custom.css");' | sudo tee -a /usr/share/themes/elementary/gtk-3.0/gtk.css > /dev/null
     fi
 
-    wget -qLO "/usr/share/themes/elementary/gtk-3.0/custom.css" \
+    sudo wget -qLO "/usr/share/themes/elementary/gtk-3.0/custom.css" \
         "$URL/usr/share/themes/elementary/gtk-3.0/custom.css"
 
     killall wingpanel
@@ -87,7 +86,11 @@ unsetCustomTheme() {
     killall wingpanel
 }
 
-
+setMute() {
+    # Set sound volume to 0
+    output "Set sound volume to 0"
+    amixer -D pulse sset Master 0
+}
 
 # Update Script Running
 output "Update Script Running"
@@ -100,14 +103,12 @@ setCustomTheme
 # Reset theme
 unsetCustomTheme
 
+setMute
 
 
 
 
 
-# # Set sound volume to 0
-# output "Set sound volume to 0"
-# userrun 'amixer -D pulse sset Master 0'
 
 
 # # Cleanup files

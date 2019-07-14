@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.18"
+VERSION="2.0.19"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -167,7 +167,7 @@ cleanOldFiles
 
 aptUpdate
 
-uninstallUnused
+uninstallAppCenter
 
 installVSCode
 # installVSCodium
@@ -179,7 +179,7 @@ installVSCode
 # add-apt-repository -y ppa:philip.scott/elementary-tweaks
 
 
-uninstallAppcenter
+
 
 
 # uninstall software-center

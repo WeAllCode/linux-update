@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.3"
+VERSION="2.0.4"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 

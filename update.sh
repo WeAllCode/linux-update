@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.10"
+VERSION="2.0.11"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -92,6 +92,25 @@ setMute() {
     amixer -q -D pulse sset Master 0
 }
 
+cleanOldFiles() {
+    # Cleanup files
+    output "Cleanup files"
+    sudo rm -rf "/etc/apt/trusted.gpg.d/*"
+
+
+    # Remove old files that students might of saved
+    sudo rm -rf "$HOMEDIR/Documents/*"
+    sudo rm -rf "$HOMEDIR/Downloads/*"
+    sudo rm -rf "$HOMEDIR/Music/*"
+    sudo rm -rf "$HOMEDIR/Pictures/*"
+    sudo rm -rf "$HOMEDIR/Public/*"
+    sudo rm -rf "$HOMEDIR/Templates/*"
+    sudo rm -rf "$HOMEDIR/Videos/*"
+
+    # Remove firefox files
+    sudo rm -rf "$HOMEDIR/.mozilla/"
+}
+
 # Update Script Running
 output "Update Script Running"
 
@@ -105,25 +124,12 @@ unsetCustomTheme
 
 setMute
 
+cleanOldFiles
 
 
 
 
 
-
-# # Cleanup files
-# output "Cleanup files"
-# rm -rf /etc/apt/trusted.gpg.d/*
-
-
-# # Remove old files that students might of saved
-# rm -rf $HOMEDIR/Documents/*
-# rm -rf $HOMEDIR/Downloads/*
-# rm -rf $HOMEDIR/Music/*
-# rm -rf $HOMEDIR/Pictures/*
-# rm -rf $HOMEDIR/Public/*
-# rm -rf $HOMEDIR/Templates/*
-# rm -rf $HOMEDIR/Videos/*
 
 # # ---
 # # # Adding Google to package manager

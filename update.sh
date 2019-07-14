@@ -38,6 +38,10 @@ debInst() {
     dpkg-query -Wf'${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
 }
 
+version() {
+    echo "\n\n####################\n# $VERSION\n####################\n\n";
+}
+
 install() {
     debInst "$1"
     if [ $? -eq 1 ]; then
@@ -84,6 +88,8 @@ unsetCustomTheme() {
 
 # Update Script Running
 output "Update Script Running"
+
+version()
 
 # Change theme to show update script running.
 setCustomTheme()

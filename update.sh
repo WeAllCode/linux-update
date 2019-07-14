@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.7"
+VERSION="2.0.8"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -89,7 +89,7 @@ unsetCustomTheme() {
 setMute() {
     # Set sound volume to 0
     output "Set sound volume to 0"
-    amixer -D pulse sset Master 0
+    amixer -q -D pulse sset Master 0
 }
 
 # Update Script Running

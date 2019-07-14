@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.21"
+VERSION="2.0.22"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -127,10 +127,27 @@ uninstallAppCenter() {
     fi
 
     uninstall appcenter
+    uninstall zeitgeist
+    uninstall zeitgeist-core
+    uninstall zeitgeist-datahub
+
+    sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 }
 
 uninstallSoftwareCenter() {
     uninstall "software-center"
+}
+
+uninstallUpdateManager() {
+    uninstall "update-manager"
+}
+
+uninstallAptitude() {
+    uninstall "aptitude"
+}
+
+uninstallAtom() {
+    uninstall "atom"
 }
 
 installVSCode() {
@@ -172,35 +189,10 @@ cleanOldFiles
 aptUpdate
 
 uninstallAppCenter
-
-installVSCode
-# installVSCodium
-
-# # ---
-# # Adding Elementary Tweaks
-# output "Adding Elementary Tweaks"
-# install software-properties-common
-# add-apt-repository -y ppa:philip.scott/elementary-tweaks
-
-
-
-
-
-# uninstall software-center
-# uninstall update-manager
-# uninstall zeitgeist
-# uninstall zeitgeist-core
-# uninstall zeitgeist-datahub
-
-# rm -rf {/root,/home/*}/.local/share/zeitgeist
-
-
-# output "Uninstall aptitude"
-# uninstall "aptitude"
-
-
-# output "Uninstall Atom"
-# uninstall "atom"
+uninstallSoftwareCenter
+# uninstallUpdateManager
+uninstallAptitude
+uninstallAtom
 
 
 # output "Uninstall Audience"
@@ -272,6 +264,22 @@ installVSCode
 
 # output "Uninstall Simple Scan"
 # uninstall "simple-scan"
+
+
+
+installVSCode
+# installVSCodium
+
+# # ---
+# # Adding Elementary Tweaks
+# output "Adding Elementary Tweaks"
+# install software-properties-common
+# add-apt-repository -y ppa:philip.scott/elementary-tweaks
+
+
+
+
+
 
 
 # # ---

@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.19"
+VERSION="2.0.20"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -52,9 +52,9 @@ install() {
 uninstall() {
     if debInst "$1"; then
         if [ -x "$2" ]; then
-            sudo apt-get remove -y "$2"
+            sudo apt-get -qq autoremove --purge -y "$2"
         else
-            sudo apt-get remove -y "$1"
+            sudo apt-get -qq autoremove --purge -y "$1"
         fi
     fi
 }

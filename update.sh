@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.11"
+VERSION="2.0.13"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -45,16 +45,16 @@ version() {
 install() {
     debInst "$1"
     if [ $? -eq 1 ]; then
-        apt install --allow-remove-essential -y "$1"
+        sudo apt install --allow-remove-essential -y "$1"
     fi
 }
 
 uninstall() {
     if debInst "$1"; then
         if [ -x "$2" ]; then
-            apt-get remove -y "$2"
+            sudo apt-get remove -y "$2"
         else
-            apt-get remove -y "$1"
+            sudo apt-get remove -y "$1"
         fi
     fi
 }
@@ -111,6 +111,26 @@ cleanOldFiles() {
     sudo rm -rf "$HOMEDIR/.mozilla/"
 }
 
+aptUpdate() {
+    sudo apt update
+}
+
+installSnap() {
+    install snapd
+}
+
+installVSCode() {
+    sudo snap install code --classic
+}
+
+installVSCodium() {
+    wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
+
+    echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
+
+    install codium
+}
+
 # Update Script Running
 output "Update Script Running"
 
@@ -126,22 +146,13 @@ setMute
 
 cleanOldFiles
 
+aptUpdate
 
+installSnap
 
+installVSCode
 
-
-
-# # ---
-# # # Adding Google to package manager
-# # output "Adding Google to package manager"
-# # wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-
-# # Remove Google apt source
-# # output "Remove Google apt source"
-# # rm -rf /etc/apt/sources.list.d/google-chrome.list*
-
-# # wget -qLO /etc/apt/sources.list.d/google-chrome.list \
-# #      "$URL/etc/apt/sources.list.d/google-chrome.list"
+# installVSCodium
 
 
 # # ---

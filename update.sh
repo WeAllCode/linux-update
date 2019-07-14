@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.25"
+VERSION="2.0.26"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -118,42 +118,18 @@ cleanOldFiles() {
 aptUpdate() {
     output "Update System"
 
-    sudo DEBIAN_FRONTEND=noninteractive \
-        apt-get \
-        -qq \
-        -o Dpkg::Options::=--force-confold \
-        -o Dpkg::Options::=--force-confdef \
-        -y \
-        --allow-downgrades \
-        --allow-remove-essential \
-        --allow-change-held-packages
-        update
-
-    sudo DEBIAN_FRONTEND=noninteractive \
-        apt-get \
-        -qq \
-        -o Dpkg::Options::=--force-confold \
-        -o Dpkg::Options::=--force-confdef \
-        -y \
-        --allow-downgrades \
-        --allow-remove-essential \
-        --allow-change-held-packages
-        autoremove
-
-    sudo DEBIAN_FRONTEND=noninteractive \
-        apt-get \
-        -qq \
-        -o Dpkg::Options::=--force-confold \
-        -o Dpkg::Options::=--force-confdef \
-        -y \
-        --allow-downgrades \
-        --allow-remove-essential \
-        --allow-change-held-packages
-        dist-upgrade
-
-    # sudo apt -qq update -y
-    # sudo apt -qq autoremove -y
+    sudo apt -qq update -y
+    sudo apt -qq autoremove -y
     # sudo apt -qq dist-upgrade -y
+
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt-get \
+        -o Dpkg::Options::="--force-confnew" \
+        -y \
+        --allow-downgrades \
+        --allow-remove-essential \
+        --allow-change-held-packages \
+        dist-upgrade
 }
 
 # App Center

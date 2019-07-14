@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.26"
+VERSION="2.0.27"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -124,6 +124,7 @@ aptUpdate() {
 
     sudo DEBIAN_FRONTEND=noninteractive \
         apt-get \
+        -qq \
         -o Dpkg::Options::="--force-confnew" \
         -y \
         --allow-downgrades \

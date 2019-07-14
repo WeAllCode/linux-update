@@ -3,8 +3,10 @@
 #
 # This script updates all We All Code computers.
 #
+# bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
+#
 
-VERSION="2.0.22"
+VERSION="2.0.24"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -29,6 +31,9 @@ HOMEDIR="/home/$USER"
 #     sudo -H -u $USER bash -c "$1";
 # }
 
+# Set to be non-interactive
+export DEBIAN_FRONTEND=noninteractive
+
 output() {
     printf "\n####################\n# %s\n####################\n" "$1";
     # userrun "notify-send --urgency=low '$1'";
@@ -52,8 +57,10 @@ install() {
 uninstall() {
     if debInst "$1"; then
         if [ -x "$2" ]; then
+            output "Uninstall $2"
             sudo apt-get -qq autoremove --purge -y "$2"
         else
+            output "Uninstall $1"
             sudo apt-get -qq autoremove --purge -y "$1"
         fi
     fi
@@ -114,13 +121,12 @@ cleanOldFiles() {
 aptUpdate() {
     output "Update System"
     sudo apt -qq update
+    sudo apt -qq autoremove -y
     sudo apt -qq dist-upgrade -y
 }
 
 # App Center
 uninstallAppCenter() {
-    output "Uninstall App Center"
-
     command -v zeitgeist-daemon &> /dev/null
     if [ $? -eq 0 ]; then
         zeitgeist-daemon --quit
@@ -148,6 +154,10 @@ uninstallAptitude() {
 
 uninstallAtom() {
     uninstall "atom"
+}
+
+uninstallAudience() {
+    uninstall "audience"
 }
 
 installVSCode() {
@@ -188,23 +198,12 @@ cleanOldFiles
 
 aptUpdate
 
-uninstallAppCenter
-uninstallSoftwareCenter
+# uninstallAppCenter
+# uninstallSoftwareCenter
 # uninstallUpdateManager
 uninstallAptitude
 uninstallAtom
-
-
-# output "Uninstall Audience"
-# uninstall "audience"
-
-
-# output "Uninstall deja-dup"
-# uninstall "deja-dup"
-
-
-# # output "Uninstall Elementary Tweaks"
-# # uninstall "elementary-tweaks"
+uninstallAudience
 
 
 # output "Uninstall Empathy"

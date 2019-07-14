@@ -1,7 +1,7 @@
 # linux-update
 
 ```bash
-sudo sh -c "$(curl -fsSL wac.fyi/juno?`date +%s`)"
+bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 ```
 
 

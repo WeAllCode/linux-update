@@ -39,7 +39,7 @@ debInst() {
 }
 
 version() {
-    output "Version: %s" "$VERSION";
+    output "Version: $VERSION";
 }
 
 install() {

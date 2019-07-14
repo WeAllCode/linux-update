@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.27"
+VERSION="2.0.28"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -118,7 +118,7 @@ cleanOldFiles() {
 aptUpdate() {
     output "Update System"
 
-    sudo apt -qq update -y
+    sudo apt-get -qq update
     sudo apt -qq autoremove -y
     # sudo apt -qq dist-upgrade -y
 
@@ -168,6 +168,15 @@ uninstallAudience() {
     uninstall "audience"
 }
 
+uninstallEpiphany() {
+    uninstall "epiphany-browser"
+}
+
+uninstallFirefox() {
+    uninstall "firefox"
+    sudo rm -rf "$HOMEDIR/.mozilla"
+}
+
 installVSCode() {
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
@@ -212,15 +221,8 @@ aptUpdate
 uninstallAptitude
 uninstallAtom
 uninstallAudience
-
-
-# output "Uninstall Empathy"
-# uninstall "empathy-*" "^empathy-.*"
-
-
-# output "Uninstall Epiphany"
-# uninstall "epiphany-*" "^epiphany-.*"
-
+uninstallEpiphany
+uninstallFirefox
 
 # # output "Uninstall Firefox"
 # # uninstall "firefox*" "^firefox.*"

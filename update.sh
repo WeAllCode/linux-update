@@ -66,7 +66,7 @@ setCustomTheme() {
 
     # Add custom css file to theme
     findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
-    if [ "$findCustom" -eq 1 ]; then
+    if [[ "$findCustom" -eq 1 ]]; then
         echo '@import url("custom.css");' >> /usr/share/themes/elementary/gtk-3.0/gtk.css
     fi
 

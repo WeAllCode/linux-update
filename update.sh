@@ -47,7 +47,7 @@ version() {
 install() {
     debInst "$1"
     if [ $? -eq 1 ]; then
-        sudo apt install --allow-remove-essential -y "$1"
+        sudo apt -qq install --allow-remove-essential -y "$1"
     fi
 }
 

@@ -30,7 +30,7 @@ USER='weallcode'
 # }
 
 output() {
-    printf "\n\n####################\n# %s\n####################" "$1";
+    printf "\n####################\n# %s\n####################\n" "$1";
     # userrun "notify-send --urgency=low '$1'";
 }
 

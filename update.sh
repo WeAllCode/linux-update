@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.5"
+VERSION="2.0.6"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -66,7 +66,10 @@ setCustomTheme() {
 
     # Add custom css file to theme
     findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
-    if [ "$findCustom" == 1 ]; then
+
+
+    if [ "$findCustom" == 1 ]
+    then
         echo '@import url("custom.css");' >> /usr/share/themes/elementary/gtk-3.0/gtk.css
     fi
 

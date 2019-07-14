@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.8"
+VERSION="2.0.9"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -30,7 +30,7 @@ USER='weallcode'
 # }
 
 output() {
-    printf "\n\n####################\n# %s\n####################\n\n" "$1";
+    printf "\n\n####################\n# %s\n####################" "$1";
     # userrun "notify-send --urgency=low '$1'";
 }
 
@@ -82,7 +82,7 @@ setCustomTheme() {
 # Reset theme
 unsetCustomTheme() {
     # output "Reset theme"
-    rm -rf /usr/share/themes/elementary/gtk-3.0/custom.css
+    sudo rm -rf /usr/share/themes/elementary/gtk-3.0/custom.css
     killall wingpanel
 }
 

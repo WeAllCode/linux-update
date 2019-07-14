@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.17"
+VERSION="2.0.18"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -117,6 +117,18 @@ aptUpdate() {
     sudo apt -qq dist-upgrade -y
 }
 
+# App Center
+uninstallAppCenter() {
+    output "Uninstall App Center"
+
+    command -v zeitgeist-daemon &> /dev/null
+    if [ $? -eq 0 ]; then
+        zeitgeist-daemon --quit
+    fi
+
+    uninstall appcenter
+}
+
 installVSCode() {
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
@@ -155,16 +167,10 @@ cleanOldFiles
 
 aptUpdate
 
+uninstallUnused
+
 installVSCode
 # installVSCodium
-
-
-# # ---
-# # Adding VS Code to package manager
-# output "Adding VS Code to package manager"
-# curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/microsoft.gpg
-# install -o root -g root -m 644 /tmp/microsoft.gpg /etc/apt/trusted.gpg.d/
-# sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 # # ---
 # # Adding Elementary Tweaks
@@ -173,22 +179,9 @@ installVSCode
 # add-apt-repository -y ppa:philip.scott/elementary-tweaks
 
 
-# # ---
-# # Uninstalling unused packages
-# output "Uninstalling unused packages"
-
-# output "Uninstall activity log"
-# uninstall activity-log-manager-common
-# uninstall activity-log-manager-control-center
+uninstallAppcenter
 
 
-# output "Uninstall App Center"
-# command -v zeitgeist-daemon &> /dev/null
-# if [ $? -eq 0 ]; then
-#     zeitgeist-daemon --quit
-# fi
-
-# uninstall appcenter
 # uninstall software-center
 # uninstall update-manager
 # uninstall zeitgeist

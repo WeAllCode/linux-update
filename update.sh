@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.14"
+VERSION="2.0.15"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -62,7 +62,7 @@ uninstall() {
 
 # Set custom theme to indicate update running
 setCustomTheme() {
-    # output "Set custom theme to indicate update running"
+    output "Set custom theme to indicate update running"
 
     # Add custom css file to theme
     findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
@@ -81,22 +81,21 @@ setCustomTheme() {
 
 # Reset theme
 unsetCustomTheme() {
-    # output "Reset theme"
+    output "Reset theme"
     sudo rm -rf /usr/share/themes/elementary/gtk-3.0/custom.css
     killall wingpanel
 }
 
+# Set sound volume to 0
 setMute() {
-    # Set sound volume to 0
     output "Set sound volume to 0"
     amixer -q -D pulse sset Master 0
 }
 
+# Cleanup files
 cleanOldFiles() {
-    # Cleanup files
     output "Cleanup files"
     sudo rm -rf "/etc/apt/trusted.gpg.d/*"
-
 
     # Remove old files that students might of saved
     sudo rm -rf "$HOMEDIR/Documents/*"
@@ -111,9 +110,11 @@ cleanOldFiles() {
     sudo rm -rf "$HOMEDIR/.mozilla/"
 }
 
+# Update System
 aptUpdate() {
-    sudo apt update
-    sudo apt dist-upgrade -y
+    output "Update System"
+    sudo apt -qq update
+    sudo apt -qq dist-upgrade -y
 }
 
 installVSCode() {
@@ -121,9 +122,9 @@ installVSCode() {
     sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
-    sudo apt-get install apt-transport-https
-    sudo apt-get update
-    sudo apt-get install code # or code-insiders
+    sudo apt-get -qq install apt-transport-https
+    sudo apt-get -qq update
+    sudo apt-get -qq install code # or code-insiders
 }
 
 installVSCodium() {

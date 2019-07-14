@@ -4,7 +4,7 @@
 # This script updates all We All Code computers.
 #
 
-VERSION="2.0.0"
+VERSION="2.0.1"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -85,7 +85,15 @@ unsetCustomTheme() {
 # Update Script Running
 output "Update Script Running"
 
+# Change theme to show update script running.
 setCustomTheme()
+
+# Reset theme
+unsetCustomTheme()
+
+
+
+
 
 
 # # Set sound volume to 0
@@ -487,8 +495,6 @@ setCustomTheme()
 # fi
 
 
-# Reset theme
-unsetCustomTheme()
 
 # Set ownership
 # chown -R $USER:$USER "$HOMEDIR/.config/"

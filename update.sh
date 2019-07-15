@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.36"
+VERSION="2.0.37"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -296,8 +296,6 @@ updateDock() {
     output "Setting up the dock"
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
-    gsettings set "net.launchpad.plank.dock.settings" "dock-items" "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
-
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
           "$URL$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
 
@@ -307,10 +305,12 @@ updateDock() {
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
           "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
-    chown -R $USER:$USER "$HOMEDIR/.config/"
+    # chown -R $USER:$USER "$HOMEDIR/.config/"
+
+    gsettings set net.launchpad.plank.dock.settings:/ dock-items "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
 
     # Restart dock
-    sudo killall plank
+    killall plank
 }
 
 

@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.34"
+VERSION="2.0.35"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -326,8 +326,8 @@ updateBackground() {
     sudo ln -s "/usr/share/backgrounds/weallcode-background.png" \
                "/usr/share/backgrounds/elementaryos-default"
 
-    # gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"
-    # gsettings set "org.gnome.desktop.background" "picture-options" "zoom"
+    gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"
+    gsettings set "org.gnome.desktop.background" "picture-options" "zoom"
 
 }
 
@@ -335,21 +335,21 @@ updateBackground() {
 updateScreensaver() {
     output "Setting screensaver settings"
 
-    gsettings set "org.gnome.desktop.screensaver" "lock-delay" uint32 7200
-    gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false
-    gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false
-    gsettings set "org.gnome.desktop.session" "idle-delay" uint32 300
+    gsettings set org.gnome.desktop.screensaver lock-delay 7200
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+    gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+    gsettings set org.gnome.desktop.session idle-delay 300
 }
 
 updateFilesControl() {
     output "Setting files control settings"
 
     # Disable Single Click open file/folders
-    gsettings set "io.elementary.files.preferences" "single-click" false
+    gsettings set io.elementary.files.preferences single-click false
 
     # Setting Window Controls
-    gsettings set "org.pantheon.desktop.gala.appearance" "button-layout" ":minimize,maximize,close"
-    gsettings set "org.gnome.settings-daemon.plugins.xsettings" "overrides" "{'Gtk/DialogsUserHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
+    gsettings set org.pantheon.desktop.gala.appearance button-layout ":minimize,maximize,close"
+    gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUserHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
 }
 
 openSurvey() {

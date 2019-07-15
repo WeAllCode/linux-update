@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.33"
+VERSION="2.0.34"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -253,6 +253,7 @@ installVSCode() {
     wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
           "$URL$HOMEDIR/.config/Code/User/settings.json"
 
+    chown -R $USER:$USER "$HOMEDIR/.config/"
 
     # VSCodium
     # wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
@@ -278,6 +279,84 @@ installVim() {
 installBacklight() {
     install 'xbacklight'
 }
+
+setBrightness() {
+    output "Setting screen brightness to 100"
+    xbacklight -set 100
+}
+
+installPythonPackages() {
+    output "Installing Python packages"
+    pip3 install --upgrade --force-reinstall weallcode_robot
+}
+
+updateDock() {
+    # ---
+    # Setting up the dock
+    output "Setting up the dock"
+    rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
+
+    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+
+    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/code.dockitem" \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+
+    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
+          "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+
+    chown -R $USER:$USER "$HOMEDIR/.config/"
+
+    gsettings set "net.launchpad.plank.dock.settings" "dock-items" "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
+
+    # Restart dock
+    sudo killall plank
+}
+
+
+# Changing desktop background
+updateBackground() {
+    output "Changing desktop background"
+    wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
+          "$URL/usr/share/backgrounds/weallcode-background.png"
+
+    sudo mv "/usr/share/backgrounds/elementaryos-default" \
+            "/usr/share/backgrounds/elementaryos-default-bak"
+
+    sudo ln -s "/usr/share/backgrounds/weallcode-background.png" \
+               "/usr/share/backgrounds/elementaryos-default"
+
+    # gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"
+    # gsettings set "org.gnome.desktop.background" "picture-options" "zoom"
+
+}
+
+# Setting screensaver settings
+updateScreensaver() {
+    output "Setting screensaver settings"
+
+    gsettings set "org.gnome.desktop.screensaver" "lock-delay" uint32 7200
+    gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false
+    gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false
+    gsettings set "org.gnome.desktop.session" "idle-delay" uint32 300
+}
+
+updateFilesControl() {
+    output "Setting files control settings"
+
+    # Disable Single Click open file/folders
+    gsettings set "io.elementary.files.preferences" "single-click" false
+
+    # Setting Window Controls
+    gsettings set "org.pantheon.desktop.gala.appearance" "button-layout" ":minimize,maximize,close"
+    gsettings set "org.gnome.settings-daemon.plugins.xsettings" "overrides" "{'Gtk/DialogsUserHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
+}
+
+openSurvey() {
+    # Open survey
+    xdg-open "http://coderdojochi.com/survey/pre" &>/dev/null
+}
+
 
 # Update Script Running
 output "Update Script Running"
@@ -316,6 +395,15 @@ installPython
 installVim
 installBacklight
 
+setBrightness
+installPythonPackages
+
+updateDock
+updateBackground
+updateScreensaver
+updateFilesControl
+
+openSurvey
 
 
 # # ---
@@ -329,145 +417,10 @@ installBacklight
 
 
 
-
-
-# # ---
-# # Setting screen brightness to 100
-# output "Setting screen brightness to 100"
-# xbacklight -set 100
-
-
-# # ---
-# # Installing Python packages
-# output "Installing Python packages"
-# pip3 install --upgrade --force-reinstall weallcode_robot
-
-
-# # ---
-# # Configuring Google Chrome
-# # output "Configuring Google Chrome"
-# # wget -qLO /opt/google/chrome/default_apps/external_extensions.json \
-# #    "$URL/opt/google/chrome/default_apps/external_extensions.json"
-# #
-# # userrun 'google-chrome-stable --no-first-run > /dev/null 2>&1 &'
-# # userrun 'sleep 10'
-# # userrun 'killall chrome'
-# # userrun 'sleep 5'
-# #
-# # # Disabling Google's Custom Frame
-# # if grep -q "custom_chrome_frame" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-# #     # Already in the file, change true to false
-# #     sed -i 's/"custom_chrome_frame":true/"custom_chrome_frame":false/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # else
-# #     # Not in the file, add it to the file before "window_placement"
-# #     sed -i 's/"window_placement"/"custom_chrome_frame":false,"window_placement"/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # fi
-# #
-# # # Clear browser history
-# # if grep -q "clear_lso_data_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-# #     # Already in the file, change true to false
-# #     sed -i 's/"clear_lso_data_enabled":false/"clear_lso_data_enabled":true/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # else
-# #     # Not in the file, add it to the file before "window_placement"
-# #     sed -i 's/"window_placement"/"clear_lso_data_enabled":true,"window_placement"/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # fi
-# #
-# # # Enable pepper flash in browser
-# # if grep -q "pepper_flash_settings_enabled" $HOMEDIR/.config/google-chrome/Default/Preferences; then
-# #     # Already in the file, change true to false
-# #     sed -i 's/"pepper_flash_settings_enabled":false/"pepper_flash_settings_enabled":true/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # else
-# #     # Not in the file, add it to the file before "window_placement"
-# #     sed -i 's/"window_placement"/"pepper_flash_settings_enabled":true,"window_placement"/' \
-# #        $HOMEDIR/.config/google-chrome/Default/Preferences
-# # fi
-# #
-# # # Fixing Chrome Keyring issue
-# # output "Fixing Chrome Keyring issue"
-# # mv /usr/bin/gnome-keyring-daemon /usr/bin/gnome-keyring-daemon-bak
-# # killall gnome-keyring-daemon
-
-
-# # ---
-# # Setting up the dock
-# output "Setting up the dock"
-# rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
-
-# wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem" \
-#       "$URL$HOMEDIR/.config/plank/dock1/launchers/pantheon-files.dockitem"
-
-# wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/code.dockitem" \
-#       "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
-
-# # wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem" \
-# #       "$URL$HOMEDIR/.config/plank/dock1/launchers/google-chrome.dockitem"
-
-# wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
-#       "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
-
-# # wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem" \
-# #       "$URL$HOMEDIR/.config/plank/dock1/launchers/chromium-browser.dockitem"
-
-
-# # If 0, the dock won't hide.
-# sed -i 's/HideMode=3/HideMode=0/g' \
-#     "$HOMEDIR/.config/plank/dock1/settings"
-
-
-# # List of *.dockitems files on this dock.
-# sed -i 's/DockItems=*/DockItems=pantheon-files.dockitem;;code.dockitem;;firefox.dockitem/g' \
-#     "$HOMEDIR/.config/plank/dock1/settings"
-
-
-# # ---
-# # Changing desktop background
-# output "Changing desktop background"
-# wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
-#       "$URL/usr/share/backgrounds/weallcode-background.png"
-
-# mv "/usr/share/backgrounds/elementaryos-default" \
-#    "/usr/share/backgrounds/elementaryos-default-bak"
-
-# ln -s "/usr/share/backgrounds/weallcode-background.png" \
-#       "/usr/share/backgrounds/elementaryos-default"
-
-# userrun 'gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"'
-# userrun 'gsettings set "org.gnome.desktop.background" "picture-options" "zoom"'
-
-
-# # Setting screensaver settings
-# output "Setting screensaver settings"
-# userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-delay" 3600'
-# userrun 'gsettings set "org.gnome.desktop.screensaver" "lock-enabled" false'
-# userrun 'gsettings set "org.gnome.desktop.screensaver" "idle-activation-enabled" false'
-# userrun 'gsettings set "org.gnome.desktop.session" "idle-delay" 0'
-
-
-# # Disable Single Click open file/folders
-# output "Disable Single Click open file/folders"
-# userrun 'gsettings set org.pantheon.files.preferences single-click false'
-
-
-# # Setting Window Controls
-# # output "Setting Window Controls"
-# # userrun 'gsettings set org.pantheon.desktop.gala.appearance button-layout :minimize,maximize,close'
-# # userrun 'gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'"'"'Gtk/DecorationLayout'"'"': <'"'"':minimize,maximize,close'"'"'>}"'
-
-
 # # Disable guest login
 # output "Disable guest login"
 # wget -qLO "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
 #       "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
-
-
-# # Restart dock
-# output "Restart dock"
-# killall plank
 
 
 # # Fix drag and drop quirk
@@ -508,14 +461,6 @@ installBacklight
 # else
 #     output "Phonehome cron exists"
 # fi
-
-
-
-# Set ownership
-# chown -R $USER:$USER "$HOMEDIR/.config/"
-
-# Open survey
-# userrun "xdg-open http://coderdojochi.com/survey/pre &>/dev/null"
 
 
 # Restarting in 1 minute

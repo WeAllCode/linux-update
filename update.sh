@@ -49,7 +49,8 @@ install() {
 
     debInst "$1"
     if [ $? -eq 1 ]; then
-        sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y "$1"
+        # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y "$1"
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-remove-essential -y "$1"
     fi
 }
 
@@ -58,9 +59,11 @@ uninstall() {
 
     if debInst "$1"; then
         if [ -x "$2" ]; then
-            sudo apt-get -qq autoremove --purge -y "$2"
+            # sudo apt-get -qq autoremove --purge -y "$2"
+            sudo apt-get autoremove --purge -y "$2"
         else
-            sudo apt-get -qq autoremove --purge -y "$1"
+            # sudo apt-get -qq autoremove --purge -y "$1"
+            sudo apt-get autoremove --purge -y "$1"
         fi
     fi
 }
@@ -129,13 +132,23 @@ cleanOldFiles() {
 aptUpdate() {
     output "Update System"
 
-    sudo apt-get -qq update
-    sudo apt -qq autoremove -y
-    # sudo apt -qq dist-upgrade -y
+    # sudo apt-get -qq update
+    sudo apt-get update
+    # sudo apt -qq autoremove -y
+    sudo apt autoremove -y
+
+    # sudo DEBIAN_FRONTEND=noninteractive \
+    #     apt-get \
+    #     -qq \
+    #     -o Dpkg::Options::="--force-confnew" \
+    #     -y \
+    #     --allow-downgrades \
+    #     --allow-remove-essential \
+    #     --allow-change-held-packages \
+    #     dist-upgrade
 
     sudo DEBIAN_FRONTEND=noninteractive \
         apt-get \
-        -qq \
         -o Dpkg::Options::="--force-confnew" \
         -y \
         --allow-downgrades \
@@ -226,8 +239,10 @@ uninstallScreenshot() {
 # Cleanup
 autoRemove() {
     output "Cleanup"
-    sudo apt-get -qq autoremove -y
-    sudo apt-get -qq autoclean -y
+    # sudo apt-get -qq autoremove -y
+    sudo apt-get autoremove -y
+    # sudo apt-get -qq autoclean -y
+    sudo apt-get autoclean -y
 }
 
 installFirefox() {
@@ -239,9 +254,12 @@ installVSCode() {
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
-    sudo apt-get -qq install apt-transport-https
-    sudo apt-get -qq update
-    sudo apt-get -qq install code # or code-insiders
+    # sudo apt-get -qq install apt-transport-https
+    sudo apt-get install apt-transport-https
+    # sudo apt-get -qq update
+    sudo apt-get update
+    # sudo apt-get -qq install code # or code-insiders
+    sudo apt-get install code # or code-insiders
 
     # Cleanup
     rm "$HOMEDIR/microsoft.gpg"

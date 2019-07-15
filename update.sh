@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.30"
+VERSION="2.0.31"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -60,6 +60,15 @@ uninstall() {
             sudo apt-get -qq autoremove --purge -y "$1"
         fi
     fi
+}
+
+# Reset ~/.bashrc settings
+setBashrc() {
+    output "Reset ~/.bashrc settings"
+    wget -qLO "$HOMEDIR/.bashrc" \
+          "$URL$HOMEDIR/.bashrc"
+
+    source "$HOMEDIR/.bashrc"
 }
 
 
@@ -192,11 +201,11 @@ uninstallMail() {
 }
 
 uninstallMusic() {
-    uninstall "io.elementary.music"
+    uninstall "noise"
 }
 
 uninstallCalendar() {
-    uninstall "io.elementary.calendar"
+    uninstall "maya-calendar"
 }
 
 uninstallCode() {
@@ -204,11 +213,22 @@ uninstallCode() {
 }
 
 uninstallPhotos() {
-    uninstall "io.elementary.photos"
+    uninstall "pantheon-photos"
 }
 
 uninstallScreenshot() {
-    uninstall "io.elementary.screenshot-tool"
+    uninstall "screenshot-tool"
+}
+
+# Cleanup
+autoRemove() {
+    output "Cleanup"
+    sudo apt-get -qq autoremove -y
+    sudo apt-get -qq autoclean -y
+}
+
+installFirefox() {
+    install 'firefox'
 }
 
 installVSCode() {
@@ -222,20 +242,41 @@ installVSCode() {
 
     # Cleanup
     rm "$HOMEDIR/microsoft.gpg"
+
+    # Reset Code settings
+    output "Reset Code settings"
+    rm -rf "$HOMEDIR/.config/Code"
+    mkdir -p "$HOMEDIR/.config/Code/User/"
+    wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
+          "$URL$HOMEDIR/.config/Code/User/settings.json"
+
+
+    # VSCodium
+    # wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
+
+    # echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
+
+    # install codium
 }
 
-installVSCodium() {
-    wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
+installGit() {
+    install 'git'
+}
 
-    echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
+installPython() {
+    install 'python3'
+    install "python3-pip"
+}
 
-    install codium
+installVim() {
+    install 'vim'
 }
 
 # Update Script Running
 output "Update Script Running"
 
 version
+setBashrc
 setCustomTheme
 unsetCustomTheme
 setMute
@@ -259,91 +300,31 @@ uninstallCode
 uninstallPhotos
 uninstallScreenshot
 
+autoRemove
 
-
+installFirefox
 installVSCode
-# installVSCodium
+installGit
+installPython
+installVim
+
+# output "Installing xbacklight"
+# install "xbacklight"
+
+
+
 
 # # ---
 # # Adding Elementary Tweaks
 # output "Adding Elementary Tweaks"
 # install software-properties-common
 # add-apt-repository -y ppa:philip.scott/elementary-tweaks
-
-
-
-
-
-
-
-# # ---
-# # Upgrading system
-# output "Upgrading system"
-# apt update
-# apt dist-upgrade -y
-
-
-# # Cleanup
-# output "Cleanup"
-# apt-get autoremove -y
-# apt-get autoclean -y
-
-
-
-# # ---
-# # Installing programs
-# output "Installing programs"
-
-
-# output "Installing Firefox"
-# install "firefox"
-
-
-# output "Installing Visual Studio Code"
-# install "code"
-
-
-# output "Installing gedit"
-# install "gedit"
-
-
-# output "Installing git"
-# install "git"
-
-
-# output "Installing pip"
-# install "python3-pip"
-
-
-# # output "Installing Google Chrome Stable"
-# # install "google-chrome-stable"
-
-# output "Installing vim"
-# install "vim"
-
-
-# output "Installing xbacklight"
-# install "xbacklight"
-
-
 # output "Installing elementary tweaks"
 # install "elementary-tweaks"
 
 
-# # ---
-# # Reset ~/.bashrc settings
-# output "Reset ~/.bashrc settings"
-# wget -qLO "$HOMEDIR/.bashrc" \
-#       "$URL$HOMEDIR/.bashrc"
 
 
-# # ---
-# # Reset Code settings
-# output "Reset Code settings"
-# rm -rf "$HOMEDIR/.config/Code/User/"
-# mkdir -p "$HOMEDIR/.config/Code/User/"
-# wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-#       "$URL$HOMEDIR/.config/Code/User/settings.json"
 
 
 # # ---

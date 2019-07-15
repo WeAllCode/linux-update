@@ -3,10 +3,10 @@
 #
 # This script updates all We All Code computers.
 #
-# bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
+# bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.37"
+VERSION="2.0.38"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -159,12 +159,13 @@ aptUpdate() {
 
 # App Center
 uninstallAppCenter() {
+    uninstall appcenter
+
     command -v zeitgeist-daemon &> /dev/null
     if [ $? -eq 0 ]; then
         zeitgeist-daemon --quit
     fi
 
-    uninstall appcenter
     uninstall zeitgeist
     uninstall zeitgeist-core
     uninstall zeitgeist-datahub

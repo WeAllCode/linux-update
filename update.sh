@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.35"
+VERSION="2.0.36"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -296,6 +296,8 @@ updateDock() {
     output "Setting up the dock"
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
+    gsettings set "net.launchpad.plank.dock.settings" "dock-items" "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
+
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
           "$URL$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
 
@@ -307,8 +309,6 @@ updateDock() {
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
 
-    gsettings set "net.launchpad.plank.dock.settings" "dock-items" "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
-
     # Restart dock
     sudo killall plank
 }
@@ -317,11 +317,12 @@ updateDock() {
 # Changing desktop background
 updateBackground() {
     output "Changing desktop background"
-    wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
-          "$URL/usr/share/backgrounds/weallcode-background.png"
+    sudo wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
+               "$URL/usr/share/backgrounds/weallcode-background.png"
 
     sudo mv "/usr/share/backgrounds/elementaryos-default" \
             "/usr/share/backgrounds/elementaryos-default-bak"
+
 
     sudo ln -s "/usr/share/backgrounds/weallcode-background.png" \
                "/usr/share/backgrounds/elementaryos-default"

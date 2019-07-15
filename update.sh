@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.31"
+VERSION="2.0.32"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -45,14 +45,17 @@ version() {
 }
 
 install() {
+    output "Install $1"
+
     debInst "$1"
     if [ $? -eq 1 ]; then
-        sudo apt -qq install --allow-remove-essential -y "$1"
+        sudo apt -qq -o=Dpkg::Use-Pty=0 install --allow-remove-essential -y "$1"
     fi
 }
 
 uninstall() {
-    output "Uninstall $1-"
+    output "Uninstall $1"
+
     if debInst "$1"; then
         if [ -x "$2" ]; then
             sudo apt-get -qq autoremove --purge -y "$2"

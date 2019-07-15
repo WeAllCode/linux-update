@@ -4,7 +4,6 @@
 bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 ```
 
-
 ## TODO
 
 - [ ] System-wide DNS safe search

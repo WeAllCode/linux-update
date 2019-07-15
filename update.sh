@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.28"
+VERSION="2.0.29"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -69,9 +69,9 @@ setCustomTheme() {
     output "Set custom theme to indicate update running"
 
     # Add custom css file to theme
-    findCustom=$(grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css)
+    grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css
 
-    if [ "$findCustom" == 1 ]
+    if [ $? -eq 1 ]
     then
         echo '@import url("custom.css");' | sudo tee -a /usr/share/themes/elementary/gtk-3.0/gtk.css > /dev/null
     fi
@@ -144,6 +144,7 @@ uninstallAppCenter() {
     uninstall zeitgeist
     uninstall zeitgeist-core
     uninstall zeitgeist-datahub
+    uninstall io.elementary.appcenter
 
     sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 }
@@ -177,6 +178,40 @@ uninstallFirefox() {
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
+uninstallGoogleChrome() {
+    uninstall "google-chrome"
+    uninstall "google-chrome-stable"
+    sudo rm -rf "$HOMEDIR/.config/google-chrome*"
+}
+
+uninstallGeary() {
+    uninstall "geary"
+}
+
+uninstallMail() {
+    uninstall "pantheon-mail"
+}
+
+uninstallMusic() {
+    uninstall "io.elementary.music"
+}
+
+uninstallCalendar() {
+    uninstall "io.elementary.calendar"
+}
+
+uninstallCode() {
+    uninstall "io.elementary.code"
+}
+
+uninstallPhotos() {
+    uninstall "io.elementary.photos"
+}
+
+uninstallScreenshot() {
+    uninstall "io.elementary.screenshot-tool"
+}
+
 installVSCode() {
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
@@ -202,17 +237,10 @@ installVSCodium() {
 output "Update Script Running"
 
 version
-
-# Change theme to show update script running.
 setCustomTheme
-
-# Reset theme
 unsetCustomTheme
-
 setMute
-
 cleanOldFiles
-
 aptUpdate
 
 # uninstallAppCenter
@@ -223,56 +251,14 @@ uninstallAtom
 uninstallAudience
 uninstallEpiphany
 uninstallFirefox
-
-# # output "Uninstall Firefox"
-# # uninstall "firefox*" "^firefox.*"
-
-
-# output "Uninstall Geary"
-# uninstall "geary"
-
-
-# output "Uninstall Google"
-# uninstall "google-*" "^google-.*"
-# rm -rf $HOMEDIR/.config/google-chrome*
-
-
-# output "Uninstall Gnome Online Accounts"
-# uninstall "gnome-online-accounts"
-# uninstall "indicator-messages"
-
-
-# output "Uninstall Midori"
-# uninstall "midori-granite"
-# rm -rf $HOMEDIR/.config/midori
-
-
-# output "Uninstall Mode Manager"
-# uninstall "modemmanager"
-
-
-# output "Uninstall Noise"
-# uninstall "noise"
-
-
-# output "Uninstall Pantheon Mail"
-# uninstall "pantheon-mail"
-
-
-# output "Uninstall Pantheon Photos"
-# uninstall "pantheon-photos*" "^pantheon-photos.*"
-
-
-# output "Uninstall Scatch Text Editor"
-# uninstall "scratch-text-editor"
-
-
-# output "Uninstall Screenshot Tool"
-# uninstall "screenshot-tool"
-
-
-# output "Uninstall Simple Scan"
-# uninstall "simple-scan"
+uninstallGoogleChrome
+uninstallGeary
+uninstallMail
+uninstallMusic
+uninstallCalendar
+uninstallCode
+uninstallPhotos
+uninstallScreenshot
 
 
 

@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.29"
+VERSION="2.0.30"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -52,12 +52,11 @@ install() {
 }
 
 uninstall() {
+    output "Uninstall $1-"
     if debInst "$1"; then
         if [ -x "$2" ]; then
-            output "Uninstall $2"
             sudo apt-get -qq autoremove --purge -y "$2"
         else
-            output "Uninstall $1"
             sudo apt-get -qq autoremove --purge -y "$1"
         fi
     fi

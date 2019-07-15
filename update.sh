@@ -6,7 +6,7 @@
 # bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
 #
 
-VERSION="2.0.32"
+VERSION="2.0.33"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -49,7 +49,7 @@ install() {
 
     debInst "$1"
     if [ $? -eq 1 ]; then
-        sudo apt -qq -o=Dpkg::Use-Pty=0 install --allow-remove-essential -y "$1"
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y "$1"
     fi
 }
 
@@ -275,6 +275,10 @@ installVim() {
     install 'vim'
 }
 
+installBacklight() {
+    install 'xbacklight'
+}
+
 # Update Script Running
 output "Update Script Running"
 
@@ -310,10 +314,7 @@ installVSCode
 installGit
 installPython
 installVim
-
-# output "Installing xbacklight"
-# install "xbacklight"
-
+installBacklight
 
 
 

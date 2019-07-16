@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.38"
+VERSION="2.0.39"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -389,7 +389,7 @@ setMute
 cleanOldFiles
 aptUpdate
 
-# uninstallAppCenter
+uninstallAppCenter
 # uninstallSoftwareCenter
 # uninstallUpdateManager
 uninstallAptitude

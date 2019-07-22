@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.39"
+VERSION="2.0.41"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -160,18 +160,6 @@ aptUpdate() {
 # App Center
 uninstallAppCenter() {
     uninstall appcenter
-
-    command -v zeitgeist-daemon &> /dev/null
-    if [ $? -eq 0 ]; then
-        zeitgeist-daemon --quit
-    fi
-
-    uninstall zeitgeist
-    uninstall zeitgeist-core
-    uninstall zeitgeist-datahub
-    uninstall io.elementary.appcenter
-
-    sudo rm -rf {/root,/home/*}/.local/share/zeitgeist
 }
 
 uninstallSoftwareCenter() {
@@ -369,7 +357,11 @@ updateFilesControl() {
 
     # Setting Window Controls
     gsettings set org.pantheon.desktop.gala.appearance button-layout ":minimize,maximize,close"
-    gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUserHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
+
+    gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <':minimize,maximize,close'>}"
+
+    # gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/DialogsUseHeader': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>}"
+
 }
 
 openSurvey() {
@@ -384,27 +376,27 @@ output "Update Script Running"
 version
 setBashrc
 setCustomTheme
-unsetCustomTheme
+
 setMute
 cleanOldFiles
 aptUpdate
 
-uninstallAppCenter
+# uninstallAppCenter
 # uninstallSoftwareCenter
 # uninstallUpdateManager
-uninstallAptitude
+# uninstallAptitude
 uninstallAtom
-uninstallAudience
-uninstallEpiphany
-uninstallFirefox
-uninstallGoogleChrome
-uninstallGeary
-uninstallMail
-uninstallMusic
-uninstallCalendar
-uninstallCode
-uninstallPhotos
-uninstallScreenshot
+# uninstallAudience
+# uninstallEpiphany
+# uninstallFirefox
+# uninstallGoogleChrome
+# uninstallGeary
+# uninstallMail
+# uninstallMusic
+# uninstallCalendar
+# uninstallCode
+# uninstallPhotos
+# uninstallScreenshot
 
 autoRemove
 
@@ -422,6 +414,8 @@ updateDock
 updateBackground
 updateScreensaver
 updateFilesControl
+
+unsetCustomTheme
 
 openSurvey
 

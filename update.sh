@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.46"
+VERSION="2.0.47"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -280,7 +280,8 @@ installVSCode() {
 
     echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list
 
-    sudo apt update
+    sudo apt-get update
+    sudo apt-get update --fix-missing
 
     sudo apt install codium
 }

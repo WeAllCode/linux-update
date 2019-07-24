@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.41"
+VERSION="2.0.42"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -349,6 +349,10 @@ updateFilesControl() {
 
 }
 
+fixRotateBug() {
+    sudo systemctl mask iio-sensor-proxy.service
+}
+
 openSurvey() {
     # Open survey
     xdg-open "http://coderdojochi.com/survey/pre" &>/dev/null
@@ -399,6 +403,8 @@ updateDock
 updateBackground
 updateScreensaver
 updateFilesControl
+
+fixRotateBug
 
 unsetCustomTheme
 

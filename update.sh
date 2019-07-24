@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.43"
+VERSION="2.0.44"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -26,6 +26,8 @@ HOMEDIR="/home/$USER"
 
 # CRONDIR="/etc/cron.d"
 
+DEBIAN_FRONTEND=noninteractive
+
 
 # userrun() {
 #     sudo -H -u $USER bash -c "$1";
@@ -44,12 +46,12 @@ version() {
     output "Version: $VERSION";
 }
 
-install() {
-    output "Install $1"
+# install() {
+#     output "Install $1"
 
-    # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y $1
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-remove-essential -y $1
-}
+#     # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y $1
+#     sudo apt-get install --allow-remove-essential -y $1
+# }
 
 # Reset ~/.bashrc settings
 setBashrc() {
@@ -142,39 +144,48 @@ aptUpdate() {
 
 # App Center
 uninstallAppCenter() {
+    output "Uninstalling appcenter"
     sudo apt-get autoremove --purge -y appcenter
 }
 
 uninstallSoftwareCenter() {
+    output "Uninstalling software-center"
     sudo apt-get autoremove --purge -y software-center
 }
 
 uninstallUpdateManager() {
+    output "Uninstalling update-manager"
     sudo apt-get autoremove --purge -y update-manager
 }
 
 uninstallAptitude() {
+    output "Uninstalling aptitude"
     sudo apt-get autoremove --purge -y aptitude
 }
 
 uninstallAtom() {
+    output "Uninstalling atom"
     sudo apt-get autoremove --purge -y atom
 }
 
 uninstallAudience() {
+    output "Uninstalling audience"
     sudo apt-get autoremove --purge -y audience
 }
 
 uninstallEpiphany() {
+    output "Uninstalling epiphany-browser"
     sudo apt-get autoremove --purge -y epiphany-browser
 }
 
 uninstallFirefox() {
+    output "Uninstalling firefox"
     sudo apt-get autoremove --purge -y firefox
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
 uninstallGoogleChrome() {
+    output "Uninstalling google-chrome"
     sudo apt-get autoremove --purge -y \
         google-chrome \
         google-chrome-stable
@@ -183,36 +194,44 @@ uninstallGoogleChrome() {
 }
 
 uninstallGeary() {
+    output "Uninstalling geary"
     sudo apt-get autoremove --purge -y geary
 }
 
 uninstallMail() {
+    output "Uninstalling pantheon-mail"
     sudo apt-get autoremove --purge -y pantheon-mail
 }
 
 uninstallMusic() {
+    output "Uninstalling noise"
     sudo apt-get autoremove --purge -y noise
 }
 
 uninstallCalendar() {
+    output "Uninstalling maya-calendar"
     sudo apt-get autoremove --purge -y maya-calendar
 }
 
 uninstallCode() {
+    output "Uninstalling io.elementary.code"
     sudo apt-get autoremove --purge -y io.elementary.code
 }
 
 uninstallPhotos() {
+    output "Uninstalling pantheon-photos"
     sudo apt-get autoremove --purge -y pantheon-photos
 }
 
 uninstallScreenshot() {
+    output "Uninstalling screenshot-tool"
     sudo apt-get autoremove --purge -y screenshot-tool
 }
 
 # Cleanup
 autoRemove() {
     output "Cleanup"
+
     # sudo apt-get -qq autoremove -y
     sudo apt-get autoremove -y
     # sudo apt-get -qq autoclean -y
@@ -220,20 +239,24 @@ autoRemove() {
 }
 
 installFirefox() {
-    install 'firefox'
+    output "Installing firefox"
+
+    sudo apt-get install -y firefox
 }
 
 installVSCode() {
+    output "Installing VSCode"
+
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
     # sudo apt-get -qq install apt-transport-https
-    sudo apt-get install apt-transport-https
+    sudo apt-get install -y apt-transport-https
     # sudo apt-get -qq update
     sudo apt-get update
-    # sudo apt-get -qq install code # or code-insiders
-    sudo apt-get install code # or code-insiders
+    # sudo apt-get -qq install -y code # or code-insiders
+    sudo apt-get install -y code # or code-insiders
 
     # Cleanup
     rm "$HOMEDIR/microsoft.gpg"
@@ -256,36 +279,44 @@ installVSCode() {
 }
 
 installGit() {
-    install 'git'
+    output "Installing git"
+
+    sudo apt-get install -y git
 }
 
 installPython() {
-    install 'python3'
-    install "python3-pip"
+    output "Installing python3"
+
+    sudo apt-get install -y python3 python3-pip
 }
 
 installVim() {
-    install 'vim'
+    output "Installing vim"
+
+    sudo apt-get install -y vim
 }
 
 installBacklight() {
-    install 'xbacklight'
+    output "Installing xbacklight"
+
+    sudo apt-get install -y xbacklight
 }
 
 setBrightness() {
     output "Setting screen brightness to 100"
+
     xbacklight -set 100
 }
 
 installPythonPackages() {
     output "Installing Python packages"
+
     pip3 install --upgrade --force-reinstall weallcode_robot
 }
 
 updateDock() {
-    # ---
-    # Setting up the dock
     output "Setting up the dock"
+
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
@@ -374,16 +405,16 @@ aptUpdate
 # uninstallSoftwareCenter
 # uninstallUpdateManager
 # uninstallAptitude
-uninstallAtom
+# uninstallAtom
 # uninstallAudience
-uninstallEpiphany
+# uninstallEpiphany
 uninstallFirefox
 uninstallGoogleChrome
-uninstallGeary
-uninstallMail
-uninstallMusic
-uninstallCalendar
-uninstallCode
+# uninstallGeary
+# uninstallMail
+# uninstallMusic
+# uninstallCalendar
+# uninstallCode
 # uninstallPhotos
 # uninstallScreenshot
 

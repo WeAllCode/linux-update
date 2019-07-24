@@ -47,25 +47,8 @@ version() {
 install() {
     output "Install $1"
 
-    debInst "$1"
-    if [ $? -eq 1 ]; then
-        # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y "$1"
-        sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-remove-essential -y "$1"
-    fi
-}
-
-uninstall() {
-    output "Uninstall $1"
-
-    if debInst "$1"; then
-        if [ -x "$2" ]; then
-            # sudo apt-get -qq autoremove --purge -y "$2"
-            sudo apt-get autoremove --purge -y "$2"
-        else
-            # sudo apt-get -qq autoremove --purge -y "$1"
-            sudo apt-get autoremove --purge -y "$1"
-        fi
-    fi
+    # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y $1
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-remove-essential -y $1
 }
 
 # Reset ~/.bashrc settings
@@ -159,70 +142,72 @@ aptUpdate() {
 
 # App Center
 uninstallAppCenter() {
-    uninstall appcenter
+    sudo apt-get autoremove --purge -y appcenter
 }
 
 uninstallSoftwareCenter() {
-    uninstall "software-center"
+    sudo apt-get autoremove --purge -y software-center
 }
 
 uninstallUpdateManager() {
-    uninstall "update-manager"
+    sudo apt-get autoremove --purge -y update-manager
 }
 
 uninstallAptitude() {
-    uninstall "aptitude"
+    sudo apt-get autoremove --purge -y aptitude
 }
 
 uninstallAtom() {
-    uninstall "atom"
+    sudo apt-get autoremove --purge -y atom
 }
 
 uninstallAudience() {
-    uninstall "audience"
+    sudo apt-get autoremove --purge -y audience
 }
 
 uninstallEpiphany() {
-    uninstall "epiphany-browser"
+    sudo apt-get autoremove --purge -y epiphany-browser
 }
 
 uninstallFirefox() {
-    uninstall "firefox"
+    sudo apt-get autoremove --purge -y firefox
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
 uninstallGoogleChrome() {
-    uninstall "google-chrome"
-    uninstall "google-chrome-stable"
+    sudo apt-get autoremove --purge -y \
+        google-chrome \
+        google-chrome-stable
+
     sudo rm -rf "$HOMEDIR/.config/google-chrome*"
 }
 
 uninstallGeary() {
-    uninstall "geary"
+    sudo apt-get autoremove --purge -y geary
 }
 
 uninstallMail() {
-    uninstall "pantheon-mail"
+    sudo apt-get autoremove --purge -y pantheon-mail
 }
 
 uninstallMusic() {
-    uninstall "noise"
+    sudo apt-get autoremove --purge -y noise
 }
 
 uninstallCalendar() {
-    uninstall "maya-calendar"
+    sudo apt-get autoremove --purge -y maya-calendar
 }
 
 uninstallCode() {
-    uninstall "io.elementary.code"
+    sudo apt-get autoremove --purge -y io.elementary.code
 }
 
 uninstallPhotos() {
-    uninstall "pantheon-photos"
+    sudo apt-get autoremove --purge -y pantheon-photos
 }
 
 uninstallScreenshot() {
-    uninstall "screenshot-tool"
+    sudo apt-get autoremove --purge -y screenshot-tool
 }
 
 # Cleanup

@@ -35,7 +35,7 @@ DEBIAN_FRONTEND=noninteractive
 
 output() {
     printf "\n####################\n# %s\n####################\n" "$1";
-    # userrun "notify-send --urgency=low '$1'";
+    notify-send --urgency=low "$1"
 }
 
 debInst() {
@@ -181,6 +181,7 @@ uninstallEpiphany() {
 uninstallFirefox() {
     output "Uninstalling firefox"
     sudo apt-get autoremove --purge -y firefox
+
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
@@ -230,7 +231,7 @@ uninstallScreenshot() {
 
 uninstallVim() {
     output "Uninstalling vim"
-    sudo apt-get autoremove --purge -y vim-*
+    sudo apt-get autoremove --purge -y "vim-*"
 }
 
 # Cleanup
@@ -252,30 +253,33 @@ installFirefox() {
 installVSCode() {
     output "Installing VSCode"
 
-    # curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
-    # sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
-    # sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+    curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
+    sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
+    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
-    # # sudo apt-get -qq install apt-transport-https
-    # sudo apt-get install -y apt-transport-https
-    # # sudo apt-get -qq update
-    # sudo apt-get update
-    # # sudo apt-get -qq install -y code # or code-insiders
-    # sudo apt-get install -y code # or code-insiders
+    # sudo apt-get -qq install apt-transport-https
+    sudo apt-get install -y apt-transport-https
+    # sudo apt-get -qq update
+    sudo apt-get update
+    # sudo apt-get -qq install -y code # or code-insiders
+    sudo apt-get install -y code # or code-insiders
 
-    # # Cleanup
-    # rm "$HOMEDIR/microsoft.gpg"
+    # Cleanup
+    rm "$HOMEDIR/microsoft.gpg"
 
-    # # Reset Code settings
-    # output "Reset Code settings"
-    # rm -rf "$HOMEDIR/.config/Code"
-    # mkdir -p "$HOMEDIR/.config/Code/User/"
-    # wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-    #       "$URL$HOMEDIR/.config/Code/User/settings.json"
+    # Reset Code settings
+    output "Reset Code settings"
+    rm -rf "$HOMEDIR/.config/Code"
+    mkdir -p "$HOMEDIR/.config/Code/User/"
+    wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
+          "$URL$HOMEDIR/.config/Code/User/settings.json"
 
-    # chown -R $USER:$USER "$HOMEDIR/.config/"
+    chown -R $USER:$USER "$HOMEDIR/.config/"
+}
 
-    # VSCodium
+installVSCodium() {
+    output "Installing VSCodium"
+
     wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
 
     echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list
@@ -431,6 +435,7 @@ autoRemove
 
 installFirefox
 installVSCode
+# installVSCodium
 installGit
 installPython
 installVim

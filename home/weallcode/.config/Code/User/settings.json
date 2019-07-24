@@ -36,6 +36,10 @@
         "**/._*": true,
     },
 
+    // Disable telemetry
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+
     "css.lint.duplicateProperties": "error",
     "css.lint.important": "error",
     "css.lint.zeroUnits": "ignore",
@@ -64,8 +68,6 @@
     "html.format.extraLiners": " ",
     "html.format.indentInnerHtml": false,
     "html.format.wrapLineLength": 0,
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
     "[json]": {
         "editor.tabSize": 4
     },

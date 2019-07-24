@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.44"
+VERSION="2.0.45"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -228,6 +228,11 @@ uninstallScreenshot() {
     sudo apt-get autoremove --purge -y screenshot-tool
 }
 
+uninstallVim() {
+    output "Uninstalling vim"
+    sudo apt-get autoremove --purge -y vim-*
+}
+
 # Cleanup
 autoRemove() {
     output "Cleanup"
@@ -247,35 +252,35 @@ installFirefox() {
 installVSCode() {
     output "Installing VSCode"
 
-    curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
-    sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
-    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+    # curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
+    # sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
+    # sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
-    # sudo apt-get -qq install apt-transport-https
-    sudo apt-get install -y apt-transport-https
-    # sudo apt-get -qq update
-    sudo apt-get update
-    # sudo apt-get -qq install -y code # or code-insiders
-    sudo apt-get install -y code # or code-insiders
+    # # sudo apt-get -qq install apt-transport-https
+    # sudo apt-get install -y apt-transport-https
+    # # sudo apt-get -qq update
+    # sudo apt-get update
+    # # sudo apt-get -qq install -y code # or code-insiders
+    # sudo apt-get install -y code # or code-insiders
 
-    # Cleanup
-    rm "$HOMEDIR/microsoft.gpg"
+    # # Cleanup
+    # rm "$HOMEDIR/microsoft.gpg"
 
-    # Reset Code settings
-    output "Reset Code settings"
-    rm -rf "$HOMEDIR/.config/Code"
-    mkdir -p "$HOMEDIR/.config/Code/User/"
-    wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-          "$URL$HOMEDIR/.config/Code/User/settings.json"
+    # # Reset Code settings
+    # output "Reset Code settings"
+    # rm -rf "$HOMEDIR/.config/Code"
+    # mkdir -p "$HOMEDIR/.config/Code/User/"
+    # wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
+    #       "$URL$HOMEDIR/.config/Code/User/settings.json"
 
-    chown -R $USER:$USER "$HOMEDIR/.config/"
+    # chown -R $USER:$USER "$HOMEDIR/.config/"
 
     # VSCodium
-    # wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
+    wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
 
-    # echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
+    echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
 
-    # install codium
+    install codium
 }
 
 installGit() {

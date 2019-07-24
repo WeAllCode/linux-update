@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.45"
+VERSION="2.0.46"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -276,11 +276,13 @@ installVSCode() {
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 
     # VSCodium
-    wget -qO - "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo apt-key add -
+    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
 
-    echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append "/etc/apt/sources.list"
+    echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list
 
-    install codium
+    sudo apt update
+
+    sudo apt install codium
 }
 
 installGit() {
@@ -415,6 +417,7 @@ aptUpdate
 # uninstallEpiphany
 uninstallFirefox
 uninstallGoogleChrome
+uninstallVim
 # uninstallGeary
 # uninstallMail
 # uninstallMusic

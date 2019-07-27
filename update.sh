@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.60"
+VERSION="2.0.61"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -340,22 +340,22 @@ updateDock() {
 
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
-    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
-          "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+    cd "$HOMEDIR/.config/plank/dock1/launchers/"
 
-    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/code.dockitem" \
-          "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
-
-    wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
-          "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 
     gsettings set net.launchpad.plank.dock.settings zoom-percent 150
     # gsettings set net.launchpad.plank.dock.settings:/ dock-items "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
 
+    sleep 1
     # Restart dock
     killall plank
+
+    cd -
 }
 
 

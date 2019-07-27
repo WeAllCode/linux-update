@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.57"
+VERSION="2.0.58"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -334,7 +334,7 @@ installPythonPackages() {
 updateDock() {
     output "Setting up the dock"
 
-    sudo add-apt-repository ppa:ricotz/docky
+    sudo add-apt-repository -y ppa:ricotz/docky
     sudo apt-get update
     sudo apt install plank
 

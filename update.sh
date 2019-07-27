@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.58"
+VERSION="2.0.59"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -336,7 +336,7 @@ updateDock() {
 
     sudo add-apt-repository -y ppa:ricotz/docky
     sudo apt-get update
-    sudo apt install plank
+    sudo apt install -y plank
 
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 

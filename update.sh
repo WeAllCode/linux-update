@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.55"
+VERSION="2.0.56"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -412,7 +412,7 @@ openSurvey() {
 
 
 # Update Script Running
-notify-send --urgency=high "Update Script Running"
+notify-send --urgency=critical "Update Script Running"
 
 version
 askToContinue

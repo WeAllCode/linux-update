@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.53"
+VERSION="2.0.54"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -171,7 +171,7 @@ uninstallAtom() {
     sudo apt autoremove --purge -y atom
 }
 
-uninstallAudience() {
+uninstallVideos() {
     output "Uninstalling audience"
     sudo apt autoremove --purge -y audience
 }
@@ -332,6 +332,10 @@ installPythonPackages() {
 updateDock() {
     output "Setting up the dock"
 
+    sudo add-apt-repository ppa:ricotz/docky
+    sudo apt-get update
+    sudo apt install plank
+
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
@@ -423,7 +427,7 @@ aptUpdate
 # uninstallUpdateManager
 # uninstallAptitude
 # uninstallAtom
-# uninstallAudience
+uninstallVideos
 uninstallEpiphany
 uninstallFirefox
 uninstallGoogleChrome

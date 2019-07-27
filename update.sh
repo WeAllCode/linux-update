@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.50"
+VERSION="2.0.51"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -51,6 +51,7 @@ askToContinue() {
     echo    # (optional) move to a new line
     if [[ ! $REPLY =~ ^[Yy]$ ]]
     then
+        echo    # (optional) move to a new line
         [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
     fi
 }

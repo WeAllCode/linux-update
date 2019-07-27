@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.61"
+VERSION="2.0.62"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -111,9 +111,6 @@ cleanOldFiles() {
     sudo rm -rf "$HOMEDIR/Public/*"
     sudo rm -rf "$HOMEDIR/Templates/*"
     sudo rm -rf "$HOMEDIR/Videos/*"
-
-    # Remove firefox files
-    sudo rm -rf "$HOMEDIR/.mozilla/"
 }
 
 # Update System
@@ -185,8 +182,14 @@ uninstallEpiphany() {
 
 uninstallFirefox() {
     output "Uninstalling firefox"
+
+    # Kill firefox if running
+    killall firefox
+
+    # Uninstall firefox
     sudo apt autoremove --purge -y firefox
 
+    # Remove mozilla folder
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
@@ -257,6 +260,8 @@ installFirefox() {
 
 installVSCode() {
     output "Installing VSCode"
+
+    killall -9 code
 
     curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"

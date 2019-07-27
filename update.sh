@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.52"
+VERSION="2.0.53"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -121,7 +121,7 @@ aptUpdate() {
     output "Update System"
 
     # sudo apt-get -qq update
-    sudo apt-get update
+    sudo apt update
     # sudo apt -qq autoremove -y
     sudo apt autoremove -y
 
@@ -148,49 +148,49 @@ aptUpdate() {
 # App Center
 uninstallAppCenter() {
     output "Uninstalling appcenter"
-    sudo apt-get autoremove --purge -y appcenter
+    sudo apt autoremove --purge -y appcenter
 }
 
 uninstallSoftwareCenter() {
     output "Uninstalling software-center"
-    sudo apt-get autoremove --purge -y software-center
+    sudo apt autoremove --purge -y software-center
 }
 
 uninstallUpdateManager() {
     output "Uninstalling update-manager"
-    sudo apt-get autoremove --purge -y update-manager
+    sudo apt autoremove --purge -y update-manager
 }
 
 uninstallAptitude() {
     output "Uninstalling aptitude"
-    sudo apt-get autoremove --purge -y aptitude
+    sudo apt autoremove --purge -y aptitude
 }
 
 uninstallAtom() {
     output "Uninstalling atom"
-    sudo apt-get autoremove --purge -y atom
+    sudo apt autoremove --purge -y atom
 }
 
 uninstallAudience() {
     output "Uninstalling audience"
-    sudo apt-get autoremove --purge -y audience
+    sudo apt autoremove --purge -y audience
 }
 
 uninstallEpiphany() {
     output "Uninstalling epiphany-browser"
-    sudo apt-get autoremove --purge -y epiphany-browser
+    sudo apt autoremove --purge -y epiphany-browser
 }
 
 uninstallFirefox() {
     output "Uninstalling firefox"
-    sudo apt-get autoremove --purge -y firefox
+    sudo apt autoremove --purge -y firefox
 
     sudo rm -rf "$HOMEDIR/.mozilla"
 }
 
 uninstallGoogleChrome() {
     output "Uninstalling google-chrome"
-    sudo apt-get autoremove --purge -y \
+    sudo apt autoremove --purge -y \
         google-chrome \
         google-chrome-stable
 
@@ -199,42 +199,42 @@ uninstallGoogleChrome() {
 
 uninstallGeary() {
     output "Uninstalling geary"
-    sudo apt-get autoremove --purge -y geary
+    sudo apt autoremove --purge -y geary
 }
 
 uninstallMail() {
     output "Uninstalling pantheon-mail"
-    sudo apt-get autoremove --purge -y pantheon-mail
+    sudo apt autoremove --purge -y pantheon-mail
 }
 
 uninstallMusic() {
     output "Uninstalling noise"
-    sudo apt-get autoremove --purge -y noise
+    sudo apt autoremove --purge -y noise
 }
 
 uninstallCalendar() {
     output "Uninstalling maya-calendar"
-    sudo apt-get autoremove --purge -y maya-calendar
+    sudo apt autoremove --purge -y maya-calendar
 }
 
 uninstallCode() {
     output "Uninstalling io.elementary.code"
-    sudo apt-get autoremove --purge -y io.elementary.code
+    sudo apt autoremove --purge -y io.elementary.code
 }
 
 uninstallPhotos() {
     output "Uninstalling pantheon-photos"
-    sudo apt-get autoremove --purge -y pantheon-photos
+    sudo apt autoremove --purge -y pantheon-photos
 }
 
 uninstallScreenshot() {
     output "Uninstalling screenshot-tool"
-    sudo apt-get autoremove --purge -y screenshot-tool
+    sudo apt autoremove --purge -y screenshot-tool
 }
 
 uninstallVim() {
     output "Uninstalling vim"
-    sudo apt-get autoremove --purge -y "vim-*"
+    sudo apt autoremove --purge -y "vim-*"
 }
 
 # Cleanup
@@ -242,15 +242,15 @@ autoRemove() {
     output "Cleanup"
 
     # sudo apt-get -qq autoremove -y
-    sudo apt-get autoremove -y
+    sudo apt autoremove -y
     # sudo apt-get -qq autoclean -y
-    sudo apt-get autoclean -y
+    sudo apt autoclean -y
 }
 
 installFirefox() {
     output "Installing firefox"
 
-    sudo apt-get install -y firefox
+    sudo apt install -y firefox
 }
 
 installVSCode() {
@@ -261,11 +261,11 @@ installVSCode() {
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
     # sudo apt-get -qq install apt-transport-https
-    sudo apt-get install -y apt-transport-https
+    sudo apt install -y apt-transport-https
     # sudo apt-get -qq update
-    sudo apt-get update
+    sudo apt update
     # sudo apt-get -qq install -y code # or code-insiders
-    sudo apt-get install -y code # or code-insiders
+    sudo apt install -y code # or code-insiders
 
     # Cleanup
     rm "$HOMEDIR/microsoft.gpg"
@@ -287,8 +287,8 @@ installVSCodium() {
 
     echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list
 
-    sudo apt-get update
-    sudo apt-get update --fix-missing
+    sudo apt update
+    sudo apt update --fix-missing
 
     sudo apt install codium
 }
@@ -296,25 +296,25 @@ installVSCodium() {
 installGit() {
     output "Installing git"
 
-    sudo apt-get install -y git
+    sudo apt install -y git
 }
 
 installPython() {
     output "Installing python3"
 
-    sudo apt-get install -y python3 python3-pip
+    sudo apt install -y python3 python3-pip
 }
 
 installVim() {
     output "Installing vim"
 
-    sudo apt-get install -y vim
+    sudo apt install -y vim
 }
 
 installBacklight() {
     output "Installing xbacklight"
 
-    sudo apt-get install -y xbacklight
+    sudo apt install -y xbacklight
 }
 
 setBrightness() {
@@ -406,13 +406,13 @@ openSurvey() {
 
 
 # Update Script Running
-output "Update Script Running"
+notify-send --urgency=high "Update Script Running"
 
 version
 askToContinue
 
 setBashrc
-setCustomTheme
+# setCustomTheme
 
 setMute
 cleanOldFiles
@@ -430,7 +430,7 @@ uninstallGoogleChrome
 uninstallVim
 # uninstallGeary
 uninstallMail
-# uninstallMusic
+uninstallMusic
 uninstallCalendar
 uninstallCode
 # uninstallPhotos
@@ -456,7 +456,7 @@ updateFilesControl
 
 fixRotateBug
 
-unsetCustomTheme
+# unsetCustomTheme
 
 openSurvey
 

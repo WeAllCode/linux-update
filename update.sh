@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.51"
+VERSION="2.0.52"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -55,13 +55,6 @@ askToContinue() {
         [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
     fi
 }
-
-# install() {
-#     output "Install $1"
-
-#     # sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -o=Dpkg::Use-Pty=0 --allow-remove-essential -y $1
-#     sudo apt-get install --allow-remove-essential -y $1
-# }
 
 # Reset ~/.bashrc settings
 setBashrc() {
@@ -436,10 +429,10 @@ uninstallFirefox
 uninstallGoogleChrome
 uninstallVim
 # uninstallGeary
-# uninstallMail
+uninstallMail
 # uninstallMusic
 uninstallCalendar
-# uninstallCode
+uninstallCode
 # uninstallPhotos
 # uninstallScreenshot
 

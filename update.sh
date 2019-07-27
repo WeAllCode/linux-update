@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.62"
+VERSION="2.0.63"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -353,7 +353,7 @@ updateDock() {
 
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 
-    gsettings set net.launchpad.plank.dock.settings zoom-percent 150
+    gsettings set net.launchpad.plank.dock.settings:/ zoom-percent 150
     # gsettings set net.launchpad.plank.dock.settings:/ dock-items "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
 
     sleep 1

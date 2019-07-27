@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.48"
+VERSION="2.0.49"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -44,6 +44,15 @@ debInst() {
 
 version() {
     output "Version: $VERSION";
+}
+
+askToContinue() {
+    read -p "Do you want to continue? (y/N) " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    then
+        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+    fi
 }
 
 # install() {
@@ -406,6 +415,8 @@ openSurvey() {
 output "Update Script Running"
 
 version
+askToContinue
+
 setBashrc
 setCustomTheme
 

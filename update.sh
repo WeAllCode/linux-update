@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.54"
+VERSION="2.0.55"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -143,6 +143,8 @@ aptUpdate() {
         --allow-remove-essential \
         --allow-change-held-packages \
         dist-upgrade
+
+    sudo apt install software-properties-common
 }
 
 # App Center

@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.59"
+VERSION="2.0.60"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -60,7 +60,7 @@ askToContinue() {
 setBashrc() {
     output "Reset ~/.bashrc settings"
     wget -qLO "$HOMEDIR/.bashrc" \
-          "$URL$HOMEDIR/.bashrc"
+          "$URL/$HOMEDIR/.bashrc"
 
     source "$HOMEDIR/.bashrc"
 }
@@ -277,7 +277,7 @@ installVSCode() {
     rm -rf "$HOMEDIR/.config/Code"
     mkdir -p "$HOMEDIR/.config/Code/User/"
     wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-          "$URL$HOMEDIR/.config/Code/User/settings.json"
+          "$URL/$HOMEDIR/.config/Code/User/settings.json"
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
 }
@@ -341,17 +341,18 @@ updateDock() {
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem" \
-          "$URL$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+          "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
 
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/code.dockitem" \
-          "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+          "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
 
     wget -qLO "$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem" \
-          "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+          "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 
-    gsettings set net.launchpad.plank.dock.settings:/ dock-items "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
+    gsettings set net.launchpad.plank.dock.settings zoom-percent 150
+    # gsettings set net.launchpad.plank.dock.settings:/ dock-items "['io.elementary.files.dockitem', 'code.dockitem', 'firefox.dockitem']"
 
     # Restart dock
     killall plank

@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.47"
+VERSION="2.0.48"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -419,7 +419,7 @@ aptUpdate
 # uninstallAptitude
 # uninstallAtom
 # uninstallAudience
-# uninstallEpiphany
+uninstallEpiphany
 uninstallFirefox
 uninstallGoogleChrome
 uninstallVim

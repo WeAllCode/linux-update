@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.63"
+VERSION="2.0.64"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -26,7 +26,7 @@ HOMEDIR="/home/$USER"
 
 # CRONDIR="/etc/cron.d"
 
-DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND=noninteractive
 
 
 # userrun() {
@@ -132,8 +132,7 @@ aptUpdate() {
     #     --allow-change-held-packages \
     #     dist-upgrade
 
-    sudo DEBIAN_FRONTEND=noninteractive \
-        apt-get \
+    sudo apt-get \
         -o Dpkg::Options::="--force-confnew" \
         -y \
         --allow-downgrades \
@@ -280,9 +279,20 @@ installVSCode() {
     # Reset Code settings
     output "Reset Code settings"
     rm -rf "$HOMEDIR/.config/Code"
-    mkdir -p "$HOMEDIR/.config/Code/User/"
+    mkdir -p "$HOMEDIR/.config/Code/User/globalStorage/"
+
     wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-          "$URL/$HOMEDIR/.config/Code/User/settings.json"
+         "$URL/$HOMEDIR/.config/Code/User/settings.json"
+
+    wget -qLO "$HOMEDIR/.config/Code/User/locale.json" \
+         "$URL/$HOMEDIR/.config/Code/User/locale.json"
+
+    wget -qLO "$HOMEDIR/.config/Code/User/extensions.json" \
+         "$URL/$HOMEDIR/.config/Code/User/extensions.json"
+
+    wget -qLO "$HOMEDIR/.config/Code/User/globalStorage/state.vscdb" \
+         "$URL/$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
+
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
 }

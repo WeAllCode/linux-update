@@ -1,0 +1,7 @@
+{
+  "extensions": [
+    "sleistner.vscode-fileutils",
+    "ms-python.python",
+    "hookyqr.beautify"
+  ]
+}

@@ -6,7 +6,7 @@
 # bash <(curl -fsSL wac.fyi/juno)
 #
 
-VERSION="2.0.64"
+VERSION="2.0.65"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -25,8 +25,6 @@ HOMEDIR="/home/$USER"
 # CONF="$SCRIPT.conf"
 
 # CRONDIR="/etc/cron.d"
-
-export DEBIAN_FRONTEND=noninteractive
 
 
 # userrun() {
@@ -132,7 +130,8 @@ aptUpdate() {
     #     --allow-change-held-packages \
     #     dist-upgrade
 
-    sudo apt-get \
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt-get \
         -o Dpkg::Options::="--force-confnew" \
         -y \
         --allow-downgrades \
@@ -426,6 +425,65 @@ openSurvey() {
     xdg-open "http://coderdojochi.com/survey/pre" &>/dev/null
 }
 
+# addElementaryTweaks() {
+#     output "Adding Elementary Tweaks"
+#     install software-properties-common
+#     add-apt-repository -y ppa:philip.scott/elementary-tweaks
+#     output "Installing elementary tweaks"
+#     install "elementary-tweaks"
+# }
+
+# disableGuestLogin() {
+#     # Disable guest login
+#     output "Disable guest login"
+#     wget -qLO "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
+#           "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
+# }
+
+# fixDragAndDropQuirk() {
+#     # Fix drag and drop quirk
+#     output "Fix drag and drop quirk"
+#     wget -qLO "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
+#           "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
+# }
+
+# installFormatScript() {
+#     # Install cdcformat script
+#     output "Install cdcformat script"
+#     sudo wget -qLO "/usr/sbin/wac-format" \
+#                "$URL/usr/sbin/wac- format"
+#
+#     sudo chmod +x "/usr/sbin/wac-format"
+# }
+
+# installPhoneHomeScript() {
+#     # Installing phonehome config file
+#     if [ ! -f "$CONFDIR/$CONF" ]; then
+#         output "Installing phonehome config file"
+#         wget -qLO "$CONFDIR/$CONF" \
+#              "$URL/$CONFDIR/$CONF"
+#     else
+#         output "Phonehome config file exists"
+#     fi
+#
+#
+#     # Installing phonehome script
+#     output "Installing phonehome script"
+#     wget -qLO $SCRIPTDIR/$SCRIPT \
+#           $URL$SCRIPTDIR/$SCRIPT
+#     chmod +x $SCRIPTDIR/$SCRIPT
+#
+#
+#     # Installing phonehome cron
+#     if [ ! -f "$CRONDIR/$SCRIPT" ]; then
+#         output "Installing phonehome cron"
+#         wget -qLO "$CRONDIR/$SCRIPT" \
+#              "$URL$CRONDIR/$SCRIPT"
+#     else
+#         output "Phonehome cron exists"
+#     fi
+# }
+
 
 # Update Script Running
 notify-send --urgency=critical "Update Script Running"
@@ -481,64 +539,6 @@ fixRotateBug
 # unsetCustomTheme
 
 openSurvey
-
-
-# # ---
-# # Adding Elementary Tweaks
-# output "Adding Elementary Tweaks"
-# install software-properties-common
-# add-apt-repository -y ppa:philip.scott/elementary-tweaks
-# output "Installing elementary tweaks"
-# install "elementary-tweaks"
-
-
-
-
-# # Disable guest login
-# output "Disable guest login"
-# wget -qLO "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
-#       "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
-
-
-# # Fix drag and drop quirk
-# output "Fix drag and drop quirk"
-# wget -qLO "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
-#       "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
-
-
-# # Install cdcformat script
-# output "Install cdcformat script"
-# wget -qLO "/usr/sbin/cdcformat" \
-#       "$URL/usr/sbin/cdcformat"
-# chmod +x "/usr/sbin/cdcformat"
-
-
-# # Installing phonehome config file
-# if [ ! -f "$CONFDIR/$CONF" ]; then
-#     output "Installing phonehome config file"
-#     wget -qLO "$CONFDIR/$CONF" \
-#          "$URL/$CONFDIR/$CONF"
-# else
-#     output "Phonehome config file exists"
-# fi
-
-
-# # Installing phonehome script
-# output "Installing phonehome script"
-# wget -qLO $SCRIPTDIR/$SCRIPT \
-#       $URL$SCRIPTDIR/$SCRIPT
-# chmod +x $SCRIPTDIR/$SCRIPT
-
-
-# # Installing phonehome cron
-# if [ ! -f "$CRONDIR/$SCRIPT" ]; then
-#     output "Installing phonehome cron"
-#     wget -qLO "$CRONDIR/$SCRIPT" \
-#          "$URL$CRONDIR/$SCRIPT"
-# else
-#     output "Phonehome cron exists"
-# fi
-
 
 # Restarting in 1 minute
 # output "Restarting in 1 minute"

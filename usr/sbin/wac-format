@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 DRIVES=$(sudo fdisk -l | grep 'FAT32' | cut -f1 -d' ')
 
 for DRIVE in $DRIVES; do
     echo "Unmounting drive: $DRIVE"
-    sudo umount $DRIVE
+    sudo umount "$DRIVE"
 
     echo "Formatting: $DRIVE"
-    sudo mkfs.vfat -I -F32 -n "USB DRIVE" $DRIVE
+    sudo mkfs.vfat -I -F32 -n "USB DRIVE" "$DRIVE"
 done

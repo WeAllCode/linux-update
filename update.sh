@@ -3,10 +3,14 @@
 #
 # This script updates all We All Code computers.
 #
-# bash <(curl -fsSL wac.fyi/juno)
+# bash <(curl -fsSL wac.fyi/update)
+#
+# or
+#
+# wac-update
 #
 
-VERSION="2.0.65"
+VERSION="2.0.66"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 

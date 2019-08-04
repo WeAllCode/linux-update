@@ -1,7 +1,7 @@
 # linux-update
 
 ```bash
-bash <(curl -fsSL "wac.fyi/juno?$RANDOM")
+bash <(curl -fsSL "wac.fyi/update")
 ```
 
 ## TODO

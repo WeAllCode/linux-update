@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.0.66"
+VERSION="2.0.67"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -490,7 +490,7 @@ openSurvey() {
 
 
 # Update Script Running
-notify-send --urgency=critical "Update Script Running"
+output "Update Script Running"
 
 version
 askToContinue

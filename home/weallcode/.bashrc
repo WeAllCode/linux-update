@@ -101,7 +101,7 @@ alias python='/usr/bin/python3'
 
 # We All Code update shortcut
 wac-update(){
-    sudo sh -c "$(curl -fsSL wac.fyi/update?d=$(date +%s))"
+    bash <(curl -fsSL wac.fyi/update) && exit
 }
 
 if [ -f ~/.bash_aliases ]; then

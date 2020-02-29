@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.0.67"
+VERSION="2.0.68"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -426,7 +426,7 @@ fixRotateBug() {
 
 openSurvey() {
     # Open survey
-    xdg-open "http://coderdojochi.com/survey/pre" &>/dev/null
+    xdg-open "https://wac.fyi/survey" &>/dev/null
 }
 
 # addElementaryTweaks() {

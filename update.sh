@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.0.68"
+VERSION="2.0.70"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 

@@ -497,6 +497,7 @@ askToContinue
 
 setBashrc
 # setCustomTheme
+cleanOldFiles
 
 setMute
 
@@ -528,7 +529,6 @@ installPython
 installVim
 installBacklight
 
-cleanOldFiles
 aptUpdate
 
 setBrightness

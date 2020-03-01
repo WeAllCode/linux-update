@@ -490,7 +490,7 @@ openSurvey() {
 
 
 # Update Script Running
-output "Update Script Running"
+# output "Update Script Running"
 
 version
 askToContinue
@@ -499,8 +499,6 @@ setBashrc
 # setCustomTheme
 
 setMute
-cleanOldFiles
-aptUpdate
 
 # uninstallAppCenter
 # uninstallSoftwareCenter
@@ -529,6 +527,9 @@ installGit
 installPython
 installVim
 installBacklight
+
+cleanOldFiles
+aptUpdate
 
 setBrightness
 installPythonPackages

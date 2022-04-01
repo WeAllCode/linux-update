@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.0.70"
+VERSION="2.1.0"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -30,13 +30,12 @@ HOMEDIR="/home/$USER"
 
 # CRONDIR="/etc/cron.d"
 
-
 # userrun() {
 #     sudo -H -u $USER bash -c "$1";
 # }
 
 output() {
-    printf "\n####################\n# %s\n####################\n" "$1";
+    printf "\n####################\n# %s\n####################\n" "$1"
     notify-send --urgency=low "$1"
 }
 
@@ -45,15 +44,14 @@ debInst() {
 }
 
 version() {
-    output "Version: $VERSION";
+    output "Version: $VERSION"
 }
 
 askToContinue() {
     read -p "Do you want to continue? (y/N) " -n 1 -r
-    echo    # (optional) move to a new line
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
-    then
-        echo    # (optional) move to a new line
+    echo # (optional) move to a new line
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo                                              # (optional) move to a new line
         [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
     fi
 }
@@ -62,11 +60,10 @@ askToContinue() {
 setBashrc() {
     output "Reset ~/.bashrc settings"
     wget -qLO "$HOMEDIR/.bashrc" \
-          "$URL/$HOMEDIR/.bashrc"
+        "$URL/$HOMEDIR/.bashrc"
 
     source "$HOMEDIR/.bashrc"
 }
-
 
 # Set custom theme to indicate update running
 setCustomTheme() {
@@ -75,9 +72,8 @@ setCustomTheme() {
     # Add custom css file to theme
     grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css
 
-    if [ $? -eq 1 ]
-    then
-        echo '@import url("custom.css");' | sudo tee -a /usr/share/themes/elementary/gtk-3.0/gtk.css > /dev/null
+    if [ $? -eq 1 ]; then
+        echo '@import url("custom.css");' | sudo tee -a /usr/share/themes/elementary/gtk-3.0/gtk.css >/dev/null
     fi
 
     sudo wget -qLO "/usr/share/themes/elementary/gtk-3.0/custom.css" \
@@ -85,7 +81,6 @@ setCustomTheme() {
 
     killall wingpanel
 }
-
 
 # Reset theme
 unsetCustomTheme() {
@@ -265,7 +260,7 @@ installVSCode() {
 
     killall -9 code
 
-    curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > "$HOMEDIR/microsoft.gpg"
+    curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor >"$HOMEDIR/microsoft.gpg"
     sudo install -o root -g root -m 644 "$HOMEDIR/microsoft.gpg" "/etc/apt/trusted.gpg.d/"
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
@@ -285,17 +280,16 @@ installVSCode() {
     mkdir -p "$HOMEDIR/.config/Code/User/globalStorage/"
 
     wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
-         "$URL/$HOMEDIR/.config/Code/User/settings.json"
+        "$URL/$HOMEDIR/.config/Code/User/settings.json"
 
     wget -qLO "$HOMEDIR/.config/Code/User/locale.json" \
-         "$URL/$HOMEDIR/.config/Code/User/locale.json"
+        "$URL/$HOMEDIR/.config/Code/User/locale.json"
 
     wget -qLO "$HOMEDIR/.config/Code/User/extensions.json" \
-         "$URL/$HOMEDIR/.config/Code/User/extensions.json"
+        "$URL/$HOMEDIR/.config/Code/User/extensions.json"
 
     wget -qLO "$HOMEDIR/.config/Code/User/globalStorage/state.vscdb" \
-         "$URL/$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
-
+        "$URL/$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
 }
@@ -358,7 +352,7 @@ updateDock() {
 
     rm $HOMEDIR/.config/plank/dock1/launchers/*.dockitem
 
-    cd "$HOMEDIR/.config/plank/dock1/launchers/"
+    cd "$HOMEDIR/.config/plank/dock1/launchers/" || exit
 
     wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
     wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
@@ -373,22 +367,20 @@ updateDock() {
     # Restart dock
     killall plank
 
-    cd -
+    cd - || exit
 }
-
 
 # Changing desktop background
 updateBackground() {
     output "Changing desktop background"
     sudo wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
-               "$URL/usr/share/backgrounds/weallcode-background.png"
+        "$URL/usr/share/backgrounds/weallcode-background.png"
 
     sudo mv "/usr/share/backgrounds/elementaryos-default" \
-            "/usr/share/backgrounds/elementaryos-default-bak"
-
+        "/usr/share/backgrounds/elementaryos-default-bak"
 
     sudo ln -s "/usr/share/backgrounds/weallcode-background.png" \
-               "/usr/share/backgrounds/elementaryos-default"
+        "/usr/share/backgrounds/elementaryos-default"
 
     gsettings set "org.gnome.desktop.background" "picture-uri" "file:///usr/share/backgrounds/weallcode-background.png"
     gsettings set "org.gnome.desktop.background" "picture-options" "zoom"
@@ -488,7 +480,6 @@ openSurvey() {
 #     fi
 # }
 
-
 # Update Script Running
 # output "Update Script Running"
 
@@ -548,4 +539,3 @@ openSurvey
 # Restarting in 1 minute
 # output "Restarting in 1 minute"
 # shutdown -r 1
-

@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.1.4"
+VERSION="2.1.5"
 
 GIT_BRANCH="master"
 
@@ -96,7 +96,7 @@ unsetCustomTheme() {
 # Set sound volume to 0
 setMute() {
     output "Set sound volume to 0"
-    amixer "$QUIET" -D pulse sset Master 0
+    amixer -q -D pulse sset Master 0
 }
 
 # Cleanup files

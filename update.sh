@@ -10,13 +10,11 @@
 # wac-update
 #
 
-VERSION="2.1.3.a"
+VERSION="2.1.4"
 
 GIT_BRANCH="master"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/$GIT_BRANCH"
-# echo $URL
-# exit
 
 # Set username
 # USER=$(whoami)
@@ -65,13 +63,10 @@ askToContinue() {
 
 # Reset ~/.bashrc settings
 setBashrc() {
-    echo "$URL/$HOMEDIR/.bashrc"
-
-    output "Reset ~/.bashrc settings"
-    wget "$QUIET" -L -O "$HOMEDIR/.bashrc" "$URL/$HOMEDIR/.bashrc"
+    output "Reset '$HOMEDIR/.bashrc' settings"
+    wget "$QUIET" -L -O "$HOMEDIR/.bashrc" "$URL$HOMEDIR/.bashrc"
 
     source "$HOMEDIR/.bashrc"
-    exit
 }
 
 # Set custom theme to indicate update running
@@ -86,7 +81,7 @@ setCustomTheme() {
     fi
 
     sudo wget "$QUIET" -L -O "/usr/share/themes/elementary/gtk-3.0/custom.css" \
-        "$URL/usr/share/themes/elementary/gtk-3.0/custom.css"
+        "$URLusr/share/themes/elementary/gtk-3.0/custom.css"
 
     killall wingpanel
 }
@@ -289,16 +284,16 @@ installVSCode() {
     mkdir -p "$HOMEDIR/.config/Code/User/globalStorage/"
 
     wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/settings.json" \
-        "$URL/$HOMEDIR/.config/Code/User/settings.json"
+        "$URL$HOMEDIR/.config/Code/User/settings.json"
 
     wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/locale.json" \
-        "$URL/$HOMEDIR/.config/Code/User/locale.json"
+        "$URL$HOMEDIR/.config/Code/User/locale.json"
 
     wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/extensions.json" \
-        "$URL/$HOMEDIR/.config/Code/User/extensions.json"
+        "$URL$HOMEDIR/.config/Code/User/extensions.json"
 
     wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/globalStorage/state.vscdb" \
-        "$URL/$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
+        "$URL$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
 }
@@ -363,9 +358,9 @@ updateDock() {
 
     cd "$HOMEDIR/.config/plank/dock1/launchers/" || exit
 
-    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
-    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
-    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+    wget "$QUIET" "$URL$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+    wget "$QUIET" "$URL$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+    wget "$QUIET" "$URL$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 
@@ -383,7 +378,7 @@ updateDock() {
 updateBackground() {
     output "Changing desktop background"
     sudo wget "$QUIET" -L -O "/usr/share/backgrounds/weallcode-background.png" \
-        "$URL/usr/share/backgrounds/weallcode-background.png"
+        "$URLusr/share/backgrounds/weallcode-background.png"
 
     sudo mv "/usr/share/backgrounds/elementaryos-default" \
         "/usr/share/backgrounds/elementaryos-default-bak"
@@ -442,21 +437,21 @@ openSurvey() {
 #     # Disable guest login
 #     output "Disable guest login"
 #     wget "$QUIET" -L -O "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
-#           "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
+#           "$URLusr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
 # }
 
 # fixDragAndDropQuirk() {
 #     # Fix drag and drop quirk
 #     output "Fix drag and drop quirk"
 #     wget "$QUIET" -L -O "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
-#           "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
+#           "$URLusr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 # }
 
 # installFormatScript() {
 #     # Install cdcformat script
 #     output "Install cdcformat script"
 #     sudo wget "$QUIET" -L -O "/usr/sbin/wac-format" \
-#                "$URL/usr/sbin/wac- format"
+#                "$URLusr/sbin/wac- format"
 #
 #     sudo chmod +x "/usr/sbin/wac-format"
 # }
@@ -466,7 +461,7 @@ openSurvey() {
 #     if [ ! -f "$CONFDIR/$CONF" ]; then
 #         output "Installing phonehome config file"
 #         wget "$QUIET" -L -O "$CONFDIR/$CONF" \
-#              "$URL/$CONFDIR/$CONF"
+#              "$URL$CONFDIR/$CONF"
 #     else
 #         output "Phonehome config file exists"
 #     fi

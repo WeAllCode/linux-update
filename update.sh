@@ -22,6 +22,8 @@ USER='weallcode'
 # Set home
 HOMEDIR="/home/$USER"
 
+QUIET="-q"
+
 # SCRIPTDIR="/etc/init.d"
 # SCRIPT="weallcode-phonehome"
 
@@ -40,7 +42,7 @@ output() {
 }
 
 debInst() {
-    dpkg-query -Wf'${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
+    dpkg-query -Wf'${Status}' "$1" 2>/dev/null | grep "$QUIET" "install ok installed"
 }
 
 version() {
@@ -59,7 +61,7 @@ askToContinue() {
 # Reset ~/.bashrc settings
 setBashrc() {
     output "Reset ~/.bashrc settings"
-    wget -qLO "$HOMEDIR/.bashrc" \
+    wget "$QUIET" -L -O "$HOMEDIR/.bashrc" \
         "$URL/$HOMEDIR/.bashrc"
 
     source "$HOMEDIR/.bashrc"
@@ -70,13 +72,13 @@ setCustomTheme() {
     output "Set custom theme to indicate update running"
 
     # Add custom css file to theme
-    grep -q "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css
+    grep "$QUIET" "custom.css" /usr/share/themes/elementary/gtk-3.0/gtk.css
 
     if [ $? -eq 1 ]; then
         echo '@import url("custom.css");' | sudo tee -a /usr/share/themes/elementary/gtk-3.0/gtk.css >/dev/null
     fi
 
-    sudo wget -qLO "/usr/share/themes/elementary/gtk-3.0/custom.css" \
+    sudo wget "$QUIET" -L -O "/usr/share/themes/elementary/gtk-3.0/custom.css" \
         "$URL/usr/share/themes/elementary/gtk-3.0/custom.css"
 
     killall wingpanel
@@ -92,7 +94,7 @@ unsetCustomTheme() {
 # Set sound volume to 0
 setMute() {
     output "Set sound volume to 0"
-    amixer -q -D pulse sset Master 0
+    amixer "$QUIET" -D pulse sset Master 0
 }
 
 # Cleanup files
@@ -279,16 +281,16 @@ installVSCode() {
     rm -rf "$HOMEDIR/.config/Code"
     mkdir -p "$HOMEDIR/.config/Code/User/globalStorage/"
 
-    wget -qLO "$HOMEDIR/.config/Code/User/settings.json" \
+    wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/settings.json" \
         "$URL/$HOMEDIR/.config/Code/User/settings.json"
 
-    wget -qLO "$HOMEDIR/.config/Code/User/locale.json" \
+    wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/locale.json" \
         "$URL/$HOMEDIR/.config/Code/User/locale.json"
 
-    wget -qLO "$HOMEDIR/.config/Code/User/extensions.json" \
+    wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/extensions.json" \
         "$URL/$HOMEDIR/.config/Code/User/extensions.json"
 
-    wget -qLO "$HOMEDIR/.config/Code/User/globalStorage/state.vscdb" \
+    wget "$QUIET" -L -O "$HOMEDIR/.config/Code/User/globalStorage/state.vscdb" \
         "$URL/$HOMEDIR/.config/Code/User/globalStorage/state.vscdb"
 
     chown -R $USER:$USER "$HOMEDIR/.config/"
@@ -373,7 +375,7 @@ updateDock() {
 # Changing desktop background
 updateBackground() {
     output "Changing desktop background"
-    sudo wget -qLO "/usr/share/backgrounds/weallcode-background.png" \
+    sudo wget "$QUIET" -L -O "/usr/share/backgrounds/weallcode-background.png" \
         "$URL/usr/share/backgrounds/weallcode-background.png"
 
     sudo mv "/usr/share/backgrounds/elementaryos-default" \
@@ -432,21 +434,21 @@ openSurvey() {
 # disableGuestLogin() {
 #     # Disable guest login
 #     output "Disable guest login"
-#     wget -qLO "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
+#     wget "$QUIET" -L -O "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
 #           "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
 # }
 
 # fixDragAndDropQuirk() {
 #     # Fix drag and drop quirk
 #     output "Fix drag and drop quirk"
-#     wget -qLO "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
+#     wget "$QUIET" -L -O "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
 #           "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 # }
 
 # installFormatScript() {
 #     # Install cdcformat script
 #     output "Install cdcformat script"
-#     sudo wget -qLO "/usr/sbin/wac-format" \
+#     sudo wget "$QUIET" -L -O "/usr/sbin/wac-format" \
 #                "$URL/usr/sbin/wac- format"
 #
 #     sudo chmod +x "/usr/sbin/wac-format"
@@ -456,7 +458,7 @@ openSurvey() {
 #     # Installing phonehome config file
 #     if [ ! -f "$CONFDIR/$CONF" ]; then
 #         output "Installing phonehome config file"
-#         wget -qLO "$CONFDIR/$CONF" \
+#         wget "$QUIET" -L -O "$CONFDIR/$CONF" \
 #              "$URL/$CONFDIR/$CONF"
 #     else
 #         output "Phonehome config file exists"
@@ -465,7 +467,7 @@ openSurvey() {
 #
 #     # Installing phonehome script
 #     output "Installing phonehome script"
-#     wget -qLO $SCRIPTDIR/$SCRIPT \
+#     wget "$QUIET" -L -O $SCRIPTDIR/$SCRIPT \
 #           $URL$SCRIPTDIR/$SCRIPT
 #     chmod +x $SCRIPTDIR/$SCRIPT
 #
@@ -473,7 +475,7 @@ openSurvey() {
 #     # Installing phonehome cron
 #     if [ ! -f "$CRONDIR/$SCRIPT" ]; then
 #         output "Installing phonehome cron"
-#         wget -qLO "$CRONDIR/$SCRIPT" \
+#         wget "$QUIET" -L -O "$CRONDIR/$SCRIPT" \
 #              "$URL$CRONDIR/$SCRIPT"
 #     else
 #         output "Phonehome cron exists"

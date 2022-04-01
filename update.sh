@@ -15,8 +15,8 @@ VERSION="2.1.3.a"
 GIT_BRANCH="master"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/$GIT_BRANCH"
-echo $URL
-exit
+# echo $URL
+# exit
 
 # Set username
 # USER=$(whoami)
@@ -65,11 +65,13 @@ askToContinue() {
 
 # Reset ~/.bashrc settings
 setBashrc() {
+    echo "$URL/$HOMEDIR/.bashrc"
+
     output "Reset ~/.bashrc settings"
-    wget "$QUIET" -L -O "$HOMEDIR/.bashrc" \
-        "$URL/$HOMEDIR/.bashrc"
+    wget "$QUIET" -L -O "$HOMEDIR/.bashrc" "$URL/$HOMEDIR/.bashrc"
 
     source "$HOMEDIR/.bashrc"
+    exit
 }
 
 # Set custom theme to indicate update running

@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.1.5"
+VERSION="2.1.6"
 
 GIT_BRANCH="master"
 
@@ -81,7 +81,7 @@ setCustomTheme() {
     fi
 
     sudo wget "$QUIET" -L -O "/usr/share/themes/elementary/gtk-3.0/custom.css" \
-        "$URLusr/share/themes/elementary/gtk-3.0/custom.css"
+        "$URL/usr/share/themes/elementary/gtk-3.0/custom.css"
 
     killall wingpanel
 }
@@ -378,7 +378,7 @@ updateDock() {
 updateBackground() {
     output "Changing desktop background"
     sudo wget "$QUIET" -L -O "/usr/share/backgrounds/weallcode-background.png" \
-        "$URLusr/share/backgrounds/weallcode-background.png"
+        "$URL/usr/share/backgrounds/weallcode-background.png"
 
     sudo mv "/usr/share/backgrounds/elementaryos-default" \
         "/usr/share/backgrounds/elementaryos-default-bak"
@@ -437,21 +437,21 @@ openSurvey() {
 #     # Disable guest login
 #     output "Disable guest login"
 #     wget "$QUIET" -L -O "/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf" \
-#           "$URLusr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
+#           "$URL/usr/share/lightdm/lightdm.conf.d/40-pantheon-greeter.conf"
 # }
 
 # fixDragAndDropQuirk() {
 #     # Fix drag and drop quirk
 #     output "Fix drag and drop quirk"
 #     wget "$QUIET" -L -O "/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf" \
-#           "$URLusr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
+#           "$URL/usr/share/X11/xorg.conf.d/60-drag-and-drop-quirk.conf"
 # }
 
 # installFormatScript() {
 #     # Install cdcformat script
 #     output "Install cdcformat script"
 #     sudo wget "$QUIET" -L -O "/usr/sbin/wac-format" \
-#                "$URLusr/sbin/wac- format"
+#                "$URL/usr/sbin/wac- format"
 #
 #     sudo chmod +x "/usr/sbin/wac-format"
 # }

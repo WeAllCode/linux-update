@@ -10,7 +10,7 @@
 # wac-update
 #
 
-VERSION="2.1.1"
+VERSION="2.1.2"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
 
@@ -22,7 +22,8 @@ USER='weallcode'
 # Set home
 HOMEDIR="/home/$USER"
 
-QUIET="-q"
+# QUIET="-q"
+QUIET=""
 
 # SCRIPTDIR="/etc/init.d"
 # SCRIPT="weallcode-phonehome"
@@ -299,7 +300,7 @@ installVSCode() {
 installVSCodium() {
     output "Installing VSCodium"
 
-    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
+    wget "$QUIET" -O - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add -
 
     echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list
 
@@ -356,9 +357,9 @@ updateDock() {
 
     cd "$HOMEDIR/.config/plank/dock1/launchers/" || exit
 
-    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
-    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
-    wget -q "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
+    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/io.elementary.files.dockitem"
+    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/code.dockitem"
+    wget "$QUIET" "$URL/$HOMEDIR/.config/plank/dock1/launchers/firefox.dockitem"
 
     # chown -R $USER:$USER "$HOMEDIR/.config/"
 

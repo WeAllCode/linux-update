@@ -10,9 +10,11 @@
 # wac-update
 #
 
-VERSION="2.1.2"
+VERSION="2.1.3"
 
-URL="https://raw.githubusercontent.com/WeAllCode/linux-update/juno"
+GIT_BRANCH="master"
+
+URL="https://raw.githubusercontent.com/WeAllCode/linux-update/$GIT_BRANCH"
 
 # Set username
 # USER=$(whoami)

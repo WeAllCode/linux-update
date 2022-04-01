@@ -10,11 +10,13 @@
 # wac-update
 #
 
-VERSION="2.1.3"
+VERSION="2.1.3.a"
 
 GIT_BRANCH="master"
 
 URL="https://raw.githubusercontent.com/WeAllCode/linux-update/$GIT_BRANCH"
+echo $URL
+exit
 
 # Set username
 # USER=$(whoami)
